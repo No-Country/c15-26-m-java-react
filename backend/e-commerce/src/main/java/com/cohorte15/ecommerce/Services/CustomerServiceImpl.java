@@ -22,6 +22,11 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
     }
 
     @Override
+    public Long getLastInsertedCustomerId() {
+        return customerRepository.getLastInsertedCustomerId();
+    }
+
+    @Override
     public Customer loginCustomer(String email, String password) {
         return customerRepository.loginCustomer(email, password);
     }

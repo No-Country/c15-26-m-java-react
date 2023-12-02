@@ -24,13 +24,13 @@ public class Product extends BaseEntidad{
     @Column(name = "price", length = 50, nullable = false)
     private int price;
 
-    @Column(name = "description", length = 50, nullable = false)
+    @Column(name = "description", length = 255, nullable = false)
     private String description;
 
     @Column(name = "discount", length = 50, nullable = false)
     private double discount;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
     @Builder.Default
     private Brand brand = new Brand();

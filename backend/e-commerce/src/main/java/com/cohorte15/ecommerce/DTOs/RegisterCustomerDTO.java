@@ -12,5 +12,5 @@ public class RegisterCustomerDTO {
 
     private String message;
 
-    private String user;
+    private CustomerDTO user;
 }
