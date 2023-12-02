@@ -1,5 +1,6 @@
 package com.cohorte15.ecommerce.Controllers;
 
+import com.cohorte15.ecommerce.DTOs.CustomerDTO;
 import com.cohorte15.ecommerce.DTOs.LoginCustomerDTO;
 import com.cohorte15.ecommerce.DTOs.RegisterCustomerDTO;
 import com.cohorte15.ecommerce.Entities.Customer;
@@ -28,11 +29,23 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
 
             customerService.registerCustomer(name, surname, email, password, address, phone);
 
+            Long user_id = customerService.getLastInsertedCustomerId();
+
+            CustomerDTO customerDTO = new CustomerDTO();
+
+            customerDTO.setId(user_id);
+            customerDTO.setName(name);
+            customerDTO.setSurname(surname);
+            customerDTO.setEmail(email);
+            customerDTO.setAddress(address);
+            customerDTO.setPhone(phone);
+
+
             RegisterCustomerDTO registerCustomerDTO = new RegisterCustomerDTO();
 
             registerCustomerDTO.setState("OK");
             registerCustomerDTO.setMessage("Customer registered successfully.");
-            registerCustomerDTO.setUser(customer.getName() + " " + customer.getSurname());
+            registerCustomerDTO.setUser(customerDTO);
 
             return ResponseEntity.status(201).body(registerCustomerDTO);
         } catch (Exception e) {
@@ -41,7 +54,7 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
 
             registerCustomerDTO.setState("ERROR");
             registerCustomerDTO.setMessage("Customer not registered.");
-            registerCustomerDTO.setUser("");
+            registerCustomerDTO.setUser(null);
 
             return ResponseEntity.status(400).body(registerCustomerDTO);
         }
@@ -55,11 +68,21 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
 
             Customer customerLogin = customerService.loginCustomer(email, password);
 
+            CustomerDTO customerDTO = new CustomerDTO();
+
+            customerDTO.setId(customerLogin.getId());
+            customerDTO.setName(customerLogin.getName());
+            customerDTO.setSurname(customerLogin.getSurname());
+            customerDTO.setEmail(customerLogin.getEmail());
+            customerDTO.setAddress(customerLogin.getAddress());
+            customerDTO.setPhone(customerLogin.getPhone());
+
+
             RegisterCustomerDTO registerCustomerDTO = new RegisterCustomerDTO();
 
             registerCustomerDTO.setState("OK");
             registerCustomerDTO.setMessage("Customer logged in successfully.");
-            registerCustomerDTO.setUser(customerLogin.getName() + " " + customerLogin.getSurname());
+            registerCustomerDTO.setUser(customerDTO);
 
             return ResponseEntity.status(201).body(registerCustomerDTO);
         } catch (Exception e) {
@@ -68,7 +91,7 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
 
             registerCustomerDTO.setState("ERROR");
             registerCustomerDTO.setMessage("Customer not logged in.");
-            registerCustomerDTO.setUser("");
+            registerCustomerDTO.setUser(null);
 
             return ResponseEntity.status(400).body(registerCustomerDTO);
         }

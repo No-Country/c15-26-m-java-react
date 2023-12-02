@@ -1,6 +1,5 @@
 package com.cohorte15.ecommerce.Repositories;
 
-import com.cohorte15.ecommerce.DTOs.RegisterCustomerDTO;
 import com.cohorte15.ecommerce.Entities.Customer;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,6 +20,9 @@ public interface CustomerRepository extends BaseRepository<Customer, Long> {
             @Param("password")String password,
             @Param("address")String address,
             @Param("phone")long phone);
+
+    @Query(value = "SELECT LAST_INSERT_ID() AS id", nativeQuery = true)
+    Long getLastInsertedCustomerId();
 
     @Query(value = "SELECT * FROM customer WHERE email = :email AND password = :password", nativeQuery = true)
     Customer loginCustomer(
