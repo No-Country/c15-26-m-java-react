@@ -15,6 +15,9 @@ public class OrderDetail extends BaseEntidad{
     @Column(name = "product_quantity", length = 50, nullable = false)
     private int product_quantity;
 
+    @Column(name = "price", length = 50, nullable = false)
+    private int price;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @Builder.Default
