@@ -40,7 +40,7 @@ public class Order extends BaseEntidad{
     @Column(name =  "cvv", length = 50, nullable = false)
     private String cvv;
 
-    @Column(name =  "date", length = 50, nullable = false)
+    @Column(name =  "order_date", length = 50, nullable = false)
     private Date order_date;
 
     @Column(name =  "shipment_date", length = 50, nullable = false)
@@ -51,13 +51,5 @@ public class Order extends BaseEntidad{
 
     @Column(name =  "zip_code", length = 50, nullable = false)
     private String zip_code;
-
-
-
-
-
-
-
-
 
 }
