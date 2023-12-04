@@ -13,11 +13,7 @@ import java.io.Serializable;
 @CrossOrigin(origins = "*", methods = {RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 public interface BaseController <E extends BaseEntidad, ID extends Serializable> {
 
-    public ResponseEntity<?> getAll();
-
     public ResponseEntity<?> getAll(Pageable pageable);
-
-    public ResponseEntity<?> getOne(@PathVariable ID id);
 
     public ResponseEntity<?> save(@RequestBody E entity);
 
