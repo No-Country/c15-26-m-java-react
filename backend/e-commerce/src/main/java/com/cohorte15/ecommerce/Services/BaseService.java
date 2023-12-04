@@ -11,8 +11,6 @@ import java.util.List;
 @Service
 public interface BaseService <E extends BaseEntidad, ID extends Serializable> {
 
-    //Metodo para traer todas las personas(instancias de una entidad) de la BD (GET)
-    public List<E> findAll() throws Exception;
 
     public Page<E> findAll(Pageable pageable) throws Exception;
 
