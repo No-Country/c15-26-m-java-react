@@ -102,4 +102,46 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
         return productRepository.getImages(id);
     }
 
+    @Override
+    public List<ProductDTO> getProductsByBrandId(Long id) {
+
+        List<Object[]> productList = productRepository.getProductsByBrandId(id);
+
+        List<ProductDTO> productDTOList = productList.stream()
+                .map(this::mapToObject)
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < productList.size(); i++) {
+            Long productId = (Long) productList.get(i)[0];
+            List<Object[]> imageRows = productRepository.getImages(productId);
+            List<String> imageUrls = imageRows.stream()
+                    .map(row -> row[0].toString())
+                    .collect(Collectors.toList());
+            productDTOList.get(i).setImages(imageUrls.toArray(new String[0]));
+        }
+
+        return productDTOList;
+    }
+
+    @Override
+    public List<ProductDTO> getProductsByBrandName(String name) {
+
+        List<Object[]> productList = productRepository.getProductsByBrandName(name);
+
+        List<ProductDTO> productDTOList = productList.stream()
+                .map(this::mapToObject)
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < productList.size(); i++) {
+            Long productId = (Long) productList.get(i)[0];
+            List<Object[]> imageRows = productRepository.getImages(productId);
+            List<String> imageUrls = imageRows.stream()
+                    .map(row -> row[0].toString())
+                    .collect(Collectors.toList());
+            productDTOList.get(i).setImages(imageUrls.toArray(new String[0]));
+        }
+
+        return productDTOList;
+    }
+
 }

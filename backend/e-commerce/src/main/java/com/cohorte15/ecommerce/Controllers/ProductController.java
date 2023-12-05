@@ -42,4 +42,22 @@ public class ProductController extends BaseControllerImpl<Product, ProductServic
         }
     }
 
+    @GetMapping("/brandId/{id}")
+    public ResponseEntity<?> getProductsByBrand(@PathVariable Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByBrandId(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/brandName/{name}")
+    public ResponseEntity<?> getProductsByBrand(@PathVariable String name) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByBrandName(name));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }
