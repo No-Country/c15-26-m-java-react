@@ -1,6 +1,7 @@
 package com.cohorte15.ecommerce.Services;
 
 import com.cohorte15.ecommerce.DTOs.ProductDTO;
+import com.cohorte15.ecommerce.DTOs.ProductReduceDTO;
 import com.cohorte15.ecommerce.Entities.Product;
 import com.cohorte15.ecommerce.Repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,25 +57,21 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
     }
 
     @Override
-    public ProductDTO getProduct(Long id) {
+    public ProductReduceDTO getProduct(Long id) {
 
         List<Object[]> productList = productRepository.getProduct(id);
 
-        List<ProductDTO> productDTOList = productList.stream()
-                .map(this::mapToObject)
-                .collect(Collectors.toList());
+        ProductReduceDTO productReduceDTO = new ProductReduceDTO();
 
-        for (int i = 0; i < productList.size(); i++) {
-            Long productId = (Long) productList.get(i)[0];
-            List<Object[]> imageRows = productRepository.getImages(productId);
-            List<String> imageUrls = imageRows.stream()
-                    .map(row -> row[0].toString())
-                    .collect(Collectors.toList());
-            productDTOList.get(i).setImages(imageUrls.toArray(new String[0]));
-        }
+        productReduceDTO.setName((String) productList.get(0)[1]);
+        productReduceDTO.setBrand((String) productList.get(0)[3]);
+        productReduceDTO.setModel((String) productList.get(0)[4]);
 
-        return productDTOList.get(0);
+        return productReduceDTO;
     }
+
+
+
 
     @Override
     public List<ProductDTO> getProductsByCategory(Long id) {

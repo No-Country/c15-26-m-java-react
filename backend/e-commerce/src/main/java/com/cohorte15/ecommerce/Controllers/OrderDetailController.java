@@ -2,6 +2,7 @@ package com.cohorte15.ecommerce.Controllers;
 
 import com.cohorte15.ecommerce.DTOs.OrderDetailDTO;
 import com.cohorte15.ecommerce.DTOs.SaveOrderDetailDTO;
+import com.cohorte15.ecommerce.Entities.OrderDetail;
 import com.cohorte15.ecommerce.Services.OrderDetailService;
 import com.cohorte15.ecommerce.Services.OrderDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "api/v1/orderDetail")
-public class OrderDetailController {
+public class OrderDetailController extends BaseControllerImpl<OrderDetail, OrderDetailServiceImpl> {
 
     @Autowired
     private OrderDetailServiceImpl orderDetailService;
@@ -52,6 +53,16 @@ public class OrderDetailController {
             }
 
             return ResponseEntity.ok("{\"message\":\"OrderDetail saved\"}");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("{\"error\":\"Error. Please try again later.\"}");
+        }
+    }
+
+    @DeleteMapping("/delete/{order_detail_id}")
+    public ResponseEntity<?> deleteOrderDetailById(@PathVariable("order_detail_id") Long order_detail_id) {
+        try {
+            orderDetailService.deleteOrderDetailById(order_detail_id);
+            return ResponseEntity.ok("Order detail id: " + order_detail_id + " deleted");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("{\"error\":\"Error. Please try again later.\"}");
         }

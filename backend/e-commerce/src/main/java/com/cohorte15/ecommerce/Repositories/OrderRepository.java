@@ -15,10 +15,10 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO `order` (completed, order_date, customer_id, address, city, country, credit_card_number, credit_card_type, cvv, shipment_date, state, zip_code) " +
-            "VALUES (:completed, :order_date, :customer_id, :address, :city, :country, :credit_card_number, :credit_card_type, :cvv, :shipment_date, :state, :zip_code)", nativeQuery = true)
+    @Query(value = "INSERT INTO `order` (pending, order_date, customer_id, address, city, country, credit_card_number, credit_card_type, cvv, shipment_date, state, zip_code) " +
+            "VALUES (:pending, :order_date, :customer_id, :address, :city, :country, :credit_card_number, :credit_card_type, :cvv, :shipment_date, :state, :zip_code)", nativeQuery = true)
     void create(
-            @Param("completed")boolean completed,
+            @Param("pending")boolean pending,
             @Param("order_date") Date order_date,
             @Param("customer_id")int customer_id,
             @Param("address")String address,
@@ -30,6 +30,12 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
             @Param("shipment_date")Date shipment_date,
             @Param("state")String state,
             @Param("zip_code")String zip_code);
+
+    // Delete order by id
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM `order` WHERE id = :order_id", nativeQuery = true)
+    void deleteOrderById(@Param("order_id")Long order_id);
 
     @Query(value = "SELECT LAST_INSERT_ID() AS order_id", nativeQuery = true)
     Long getLastInsertedCustomerId();

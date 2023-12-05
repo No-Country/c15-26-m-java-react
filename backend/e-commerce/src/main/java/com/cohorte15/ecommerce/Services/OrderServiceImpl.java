@@ -1,10 +1,10 @@
 package com.cohorte15.ecommerce.Services;
 
 import com.cohorte15.ecommerce.DTOs.OrderAloneDTO;
-import com.cohorte15.ecommerce.DTOs.OrderDetailWithProductDTO;
+import com.cohorte15.ecommerce.DTOs.OrderReducedDTO;
 import com.cohorte15.ecommerce.DTOs.OrderWithDetailsDTO;
+import com.cohorte15.ecommerce.DTOs.OrderWithDetailsReducedDTO;
 import com.cohorte15.ecommerce.Entities.Order;
-import com.cohorte15.ecommerce.Repositories.OrderDetailRepository;
 import com.cohorte15.ecommerce.Repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +28,13 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
     }
 
     @Override
-    public void create(boolean completed, Date order_date, int customer_id, String address, String city, String country, String credit_card_number, String credit_card_type, String cvv, Date shipment_date, String state, String zip_code) {
-        orderRepository.create(completed, order_date, customer_id, address, city, country, credit_card_number, credit_card_type, cvv, shipment_date, state, zip_code);
+    public void create(boolean pending, Date order_date, int customer_id, String address, String city, String country, String credit_card_number, String credit_card_type, String cvv, Date shipment_date, String state, String zip_code) {
+        orderRepository.create(pending, order_date, customer_id, address, city, country, credit_card_number, credit_card_type, cvv, shipment_date, state, zip_code);
+    }
+
+    @Override
+    public void deleteOrderById(Long order_id) {
+        orderRepository.deleteOrderById(order_id);
     }
 
     @Override
@@ -38,17 +43,27 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
     }
 
     @Override
-    public List<OrderWithDetailsDTO> getOrdersByCustomerId(Long customer_id) {
+    public List<OrderWithDetailsReducedDTO> getOrdersByCustomerId(Long customer_id) {
 
-        List<OrderWithDetailsDTO> ordersWithDetailsDTO = new ArrayList<>();
+        List<OrderWithDetailsReducedDTO> ordersWithDetailsDTO = new ArrayList<>();
 
         for (int i = 0; i < orderRepository.getOrdersIdByCustomerId(customer_id).length; i++) {
 
-            OrderWithDetailsDTO orderWithDetailDTO = new OrderWithDetailsDTO();
-
-            orderWithDetailDTO.setOrder_id(orderRepository.getOrdersIdByCustomerId(customer_id)[i]);
+            OrderWithDetailsReducedDTO orderWithDetailDTO = new OrderWithDetailsReducedDTO();
 
             Long order_id = orderRepository.getOrdersIdByCustomerId(customer_id)[i];
+
+            OrderReducedDTO orderReducedDTO = new OrderReducedDTO();
+
+            orderReducedDTO.setOrder_id(order_id);
+
+            List<Object[]> order = orderRepository.getOrderById(order_id);
+
+            orderReducedDTO.setPending(Boolean.parseBoolean(order.get(0)[1].toString()));
+            orderReducedDTO.setOrder_date(Date.valueOf(order.get(0)[2].toString()));
+            orderReducedDTO.setShipment_date(Date.valueOf(order.get(0)[7].toString()));
+
+            orderWithDetailDTO.setOrder(orderReducedDTO);
 
             orderWithDetailDTO.setOrder_details(orderDetailService.getOrderDetailsByOrderIdWithProduct(order_id));
 

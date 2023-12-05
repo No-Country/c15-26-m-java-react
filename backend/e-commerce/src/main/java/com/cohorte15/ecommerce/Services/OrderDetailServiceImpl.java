@@ -31,6 +31,11 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail, Long> i
     }
 
     @Override
+    public void deleteOrderDetailById(Long order_detail_id) {
+        orderDetailRepository.deleteOrderDetailById(order_detail_id);
+    }
+
+    @Override
     public List<OrderDetailWithProductDTO> getOrderDetailsByOrderIdWithProduct(Long order_id) {
         List<Object[]> orderDetails = orderDetailRepository.getOrderDetailsByOrderId(order_id);
 

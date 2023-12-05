@@ -8,9 +8,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-public class OrderWithDetailsDTO {
+public class OrderWithDetailsReducedDTO {
 
-    private OrderAloneDTO order;
+    private OrderReducedDTO order;
 
     private List<OrderDetailWithProductDTO> order_details;
 }
