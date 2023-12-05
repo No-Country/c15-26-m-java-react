@@ -9,7 +9,22 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends BaseRepository<Product, Long> {
 
-    @Query(value = "SELECT p.id AS product_id, p.product_name AS name, c.category_name AS category, b.brand_name AS brand, p.model, p.price, p.discount, p.description FROM product p INNER JOIN brand b ON p.brand_id = b.id INNER JOIN category c ON p.category_id = c.id", nativeQuery = true)
+    @Query(value = "SELECT \n" +
+            "    p.id AS product_id, \n" +
+            "    p.product_name AS name, \n" +
+            "    c.category_name AS category, \n" +
+            "    b.brand_name AS brand, \n" +
+            "    p.model, \n" +
+            "    p.price, \n" +
+            "    p.discount, \n" +
+            "    p.description \n" +
+            "FROM \n" +
+            "    product p \n" +
+            "    INNER JOIN brand b ON p.brand_id = b.id \n" +
+            "    INNER JOIN category c ON p.category_id = c.id\n" +
+            "ORDER BY \n" +
+            "    p.discount DESC\n" +
+            "LIMIT 8;\n", nativeQuery = true)
     List<Object[]> getAllProducts();
 
 

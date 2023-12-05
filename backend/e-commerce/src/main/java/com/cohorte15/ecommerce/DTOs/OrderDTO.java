@@ -16,7 +16,7 @@ public class OrderDTO {
 
     private String city;
 
-    private boolean completed;
+    private boolean pending;
 
     private String country;
 
