@@ -1,6 +1,7 @@
 package com.cohorte15.ecommerce.Services;
 
 import com.cohorte15.ecommerce.DTOs.OrderDetailDTO;
+import com.cohorte15.ecommerce.DTOs.OrderDetailWithProductDTO;
 import com.cohorte15.ecommerce.Entities.OrderDetail;
 import com.cohorte15.ecommerce.Repositories.OrderDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail, Long> i
 
     @Autowired
     private final OrderDetailRepository orderDetailRepository;
+
+    @Autowired
+    private ProductServiceImpl productService;
 
     public OrderDetailServiceImpl(OrderDetailRepository orderDetailRepository) {
         super(orderDetailRepository);
@@ -42,6 +46,27 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail, Long> i
 
             orderDetailsDTO.add(orderDetailDTO);
         }
+        return orderDetailsDTO;
+    }
+
+    @Override
+    public List<OrderDetailWithProductDTO> getOrderDetailsByOrderIdWithProduct(Long order_id) {
+        List<Object[]> orderDetails = orderDetailRepository.getOrderDetailsByOrderId(order_id);
+
+        List<OrderDetailWithProductDTO> orderDetailsDTO = new ArrayList<>();
+
+        for (int i = 0; i < orderDetails.size(); i++) {
+            OrderDetailWithProductDTO orderDetailDTO = new OrderDetailWithProductDTO();
+
+            orderDetailDTO.setOrder_detail_id((Long) orderDetails.get(i)[0]);
+            orderDetailDTO.setPrice((int) orderDetails.get(i)[1]);
+            orderDetailDTO.setProduct_quantity((int) orderDetails.get(i)[2]);
+
+            orderDetailDTO.setProduct(productService.getProduct((Long) orderDetails.get(i)[3]));
+
+            orderDetailsDTO.add(orderDetailDTO);
+        }
+
         return orderDetailsDTO;
     }
 }
