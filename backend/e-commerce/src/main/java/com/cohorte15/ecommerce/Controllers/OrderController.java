@@ -84,4 +84,14 @@ public class OrderController extends BaseControllerImpl<Order, OrderServiceImpl>
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PutMapping("/updatePending/{id}")
+    public ResponseEntity<?> updateOrderStatus(@PathVariable("id") Long id) {
+        try {
+            orderService.updateOrderStatus(id);
+            return ResponseEntity.ok("Order id: " + id + " updated to pending = false");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

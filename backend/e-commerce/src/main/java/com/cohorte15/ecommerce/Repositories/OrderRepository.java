@@ -37,6 +37,11 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
     @Query(value = "DELETE FROM `order` WHERE id = :order_id", nativeQuery = true)
     void deleteOrderById(@Param("order_id")Long order_id);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE `order` SET pending = false WHERE id = :order_id", nativeQuery = true)
+    void updateOrderStatus(@Param("order_id")Long order_id);
+
     @Query(value = "SELECT LAST_INSERT_ID() AS order_id", nativeQuery = true)
     Long getLastInsertedCustomerId();
 
