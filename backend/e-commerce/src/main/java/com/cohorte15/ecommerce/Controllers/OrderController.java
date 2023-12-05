@@ -29,7 +29,7 @@ public class OrderController extends BaseControllerImpl<Order, OrderServiceImpl>
     @PostMapping("/create")
     public ResponseEntity<?> createOrder(@RequestBody OrderDTO orderDTO) {
         try {
-            boolean completed = orderDTO.isCompleted();
+            boolean pending = orderDTO.isPending();
             Date order_date = orderDTO.getOrder_date();
             int customer_id = orderDTO.getCustomer_id();
             String address = orderDTO.getAddress();
@@ -42,13 +42,13 @@ public class OrderController extends BaseControllerImpl<Order, OrderServiceImpl>
             String state = orderDTO.getState();
             String zip_code = orderDTO.getZip_code();
 
-            orderService.create(completed, order_date, customer_id, address, city, country, credit_card_number, credit_card_type, cvv, shipment_date, state, zip_code);
+            orderService.create(pending, order_date, customer_id, address, city, country, credit_card_number, credit_card_type, cvv, shipment_date, state, zip_code);
 
             OrderDTO responseOrderDTO = OrderDTO.builder()
                     .order_id(orderService.getLastInsertedOrderId())
                     .address(address)
                     .city(city)
-                    .completed(completed)
+                    .pending(pending)
                     .country(country)
                     .credit_card_number(credit_card_number)
                     .credit_card_type(credit_card_type)

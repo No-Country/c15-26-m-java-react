@@ -9,5 +9,5 @@ public interface OrderDetailService extends BaseService<OrderDetail, Long>{
 
     void saveOrderDetail(int product_quantity, int price, Long order_id, Long product_id);
 
-    List<Object[]> getOrderDetailsByOrderId(Long order_id);
+    List<OrderDetailDTO> getOrderDetailsByOrderId(Long order_id);
 }

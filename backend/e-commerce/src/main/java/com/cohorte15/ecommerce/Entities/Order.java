@@ -20,8 +20,8 @@ public class Order extends BaseEntidad{
     @Column(name =  "city", length = 50, nullable = false)
     private String city;
 
-    @Column(name =  "completed", length = 50, nullable = false)
-    private boolean completed;
+    @Column(name =  "pending", length = 50, nullable = false)
+    private boolean pending;
 
     @Column(name =  "country", length = 50, nullable = false)
     private String country;

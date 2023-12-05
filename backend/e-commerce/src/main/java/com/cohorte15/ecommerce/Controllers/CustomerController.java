@@ -24,10 +24,9 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
             String surname = customer.getSurname();
             String email = customer.getEmail();
             String password = customer.getPassword();
-            String address = customer.getAddress();
             long phone = customer.getPhone();
 
-            customerService.registerCustomer(name, surname, email, password, address, phone);
+            customerService.registerCustomer(name, surname, email, password, phone);
 
             Long user_id = customerService.getLastInsertedCustomerId();
 
@@ -37,7 +36,6 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
             customerDTO.setName(name);
             customerDTO.setSurname(surname);
             customerDTO.setEmail(email);
-            customerDTO.setAddress(address);
             customerDTO.setPhone(phone);
 
 
@@ -74,7 +72,6 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
             customerDTO.setName(customerLogin.getName());
             customerDTO.setSurname(customerLogin.getSurname());
             customerDTO.setEmail(customerLogin.getEmail());
-            customerDTO.setAddress(customerLogin.getAddress());
             customerDTO.setPhone(customerLogin.getPhone());
 
 

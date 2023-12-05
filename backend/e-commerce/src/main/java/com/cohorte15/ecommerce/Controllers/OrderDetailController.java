@@ -22,26 +22,9 @@ public class OrderDetailController {
     @GetMapping("/{order_id}")
     public ResponseEntity<?> getOrderDetailsByOrderId(@PathVariable("order_id") Long order_id) {
         try {
-            List<Object[]> orderDetails = orderDetailService.getOrderDetailsByOrderId(order_id);
 
-            if (orderDetails.isEmpty()) {
-                return ResponseEntity.badRequest().body("{\"error\":\"OrderDetail not found.\"}");
-            }
 
-            List<OrderDetailDTO> orderDetailsDTO = new ArrayList<>();
-
-            for (int i = 0; i < orderDetails.size(); i++) {
-                OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
-
-                orderDetailDTO.setId((Long) orderDetails.get(i)[0]);
-                orderDetailDTO.setPrice((int) orderDetails.get(i)[1]);
-                orderDetailDTO.setProduct_quantity((int) orderDetails.get(i)[2]);
-                orderDetailDTO.setProduct_id((Long) orderDetails.get(i)[3]);
-
-                orderDetailsDTO.add(orderDetailDTO);
-            }
-
-            return ResponseEntity.ok(orderDetailsDTO);
+            return ResponseEntity.ok(orderDetailService.getOrderDetailsByOrderId(order_id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
