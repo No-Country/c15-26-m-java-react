@@ -12,5 +12,5 @@ public class OrderWithDetailsDTO {
 
     private Long order_id;
 
-    private List<OrderDetailWithProductDTO> orderDetails;
+    private List<OrderDetailWithProductDTO> order_details;
 }
