@@ -71,7 +71,17 @@ public class OrderController extends BaseControllerImpl<Order, OrderServiceImpl>
 
             return ResponseEntity.ok(responseOrderDTO);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("{\"error\":\"Error. Please try again later.\"}");
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteOrderById(@PathVariable("id") Long id) {
+        try {
+            orderService.deleteOrderById(id);
+            return ResponseEntity.ok("Order id: " + id + " deleted");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

@@ -22,6 +22,12 @@ public interface OrderDetailRepository extends BaseRepository<OrderDetail, Long>
             @Param("order_id")Long order_id,
             @Param("product_id")Long product_id);
 
+    // Delete order detail by id
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM order_detail WHERE id = :order_detail_id", nativeQuery = true)
+    void deleteOrderDetailById(@Param("order_detail_id")Long order_detail_id);
+
     // Get all order details by order id
     @Query(value = "SELECT id, price, product_quantity, product_id FROM order_detail WHERE order_id = :order_id", nativeQuery = true)
     List<Object[]> getOrderDetailsByOrderId(@Param("order_id")Long order_id);

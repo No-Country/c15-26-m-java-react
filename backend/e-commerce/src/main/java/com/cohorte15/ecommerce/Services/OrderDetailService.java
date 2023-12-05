@@ -10,6 +10,8 @@ public interface OrderDetailService extends BaseService<OrderDetail, Long>{
 
     void saveOrderDetail(int product_quantity, int price, Long order_id, Long product_id);
 
+    void deleteOrderDetailById(Long order_detail_id);
+
     List<OrderDetailWithProductDTO> getOrderDetailsByOrderIdWithProduct(Long order_id);
 
     OrderDetailWithProductDTO getOrderDetailById(Long order_detail_id);

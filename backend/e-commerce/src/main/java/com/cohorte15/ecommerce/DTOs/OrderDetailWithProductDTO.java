@@ -14,5 +14,5 @@ public class OrderDetailWithProductDTO {
 
     private int price;
 
-    private ProductDTO product;
+    private ProductReduceDTO product;
 }
