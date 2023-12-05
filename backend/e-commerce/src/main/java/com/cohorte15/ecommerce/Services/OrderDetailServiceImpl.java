@@ -31,25 +31,6 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail, Long> i
     }
 
     @Override
-    public List<OrderDetailDTO> getOrderDetailsByOrderId(Long order_id) {
-        List<Object[]> orderDetails = orderDetailRepository.getOrderDetailsByOrderId(order_id);
-
-        List<OrderDetailDTO> orderDetailsDTO = new ArrayList<>();
-
-        for (int i = 0; i < orderDetails.size(); i++) {
-            OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
-
-            orderDetailDTO.setId((Long) orderDetails.get(i)[0]);
-            orderDetailDTO.setPrice((int) orderDetails.get(i)[1]);
-            orderDetailDTO.setProduct_quantity((int) orderDetails.get(i)[2]);
-            orderDetailDTO.setProduct_id((Long) orderDetails.get(i)[3]);
-
-            orderDetailsDTO.add(orderDetailDTO);
-        }
-        return orderDetailsDTO;
-    }
-
-    @Override
     public List<OrderDetailWithProductDTO> getOrderDetailsByOrderIdWithProduct(Long order_id) {
         List<Object[]> orderDetails = orderDetailRepository.getOrderDetailsByOrderId(order_id);
 
@@ -68,5 +49,20 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail, Long> i
         }
 
         return orderDetailsDTO;
+    }
+
+    @Override
+    public OrderDetailWithProductDTO getOrderDetailById(Long order_detail_id) {
+        List<Object[]> orderDetail = orderDetailRepository.getOrderDetailById(order_detail_id);
+
+        OrderDetailWithProductDTO orderDetailDTO = new OrderDetailWithProductDTO();
+
+        orderDetailDTO.setOrder_detail_id((Long) orderDetail.get(0)[0]);
+        orderDetailDTO.setPrice((int) orderDetail.get(0)[1]);
+        orderDetailDTO.setProduct_quantity((int) orderDetail.get(0)[2]);
+
+        orderDetailDTO.setProduct(productService.getProduct((Long) orderDetail.get(0)[3]));
+
+        return orderDetailDTO;
     }
 }

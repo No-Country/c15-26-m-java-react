@@ -19,12 +19,19 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailServiceImpl orderDetailService;
 
-    @GetMapping("/{order_id}")
+    @GetMapping("/{order_detail_id}")
+    public ResponseEntity<?> getOrderDetail(@PathVariable("order_detail_id") Long order_detail_id) {
+        try {
+            return ResponseEntity.ok(orderDetailService.getOrderDetailById(order_detail_id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/order/{order_id}")
     public ResponseEntity<?> getOrderDetailsByOrderId(@PathVariable("order_id") Long order_id) {
         try {
-
-
-            return ResponseEntity.ok(orderDetailService.getOrderDetailsByOrderId(order_id));
+            return ResponseEntity.ok(orderDetailService.getOrderDetailsByOrderIdWithProduct(order_id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

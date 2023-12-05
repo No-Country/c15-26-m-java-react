@@ -26,4 +26,8 @@ public interface OrderDetailRepository extends BaseRepository<OrderDetail, Long>
     @Query(value = "SELECT id, price, product_quantity, product_id FROM order_detail WHERE order_id = :order_id", nativeQuery = true)
     List<Object[]> getOrderDetailsByOrderId(@Param("order_id")Long order_id);
 
+    // Get order detail by id
+    @Query(value = "SELECT id, price, product_quantity, product_id FROM order_detail WHERE id = :order_detail_id", nativeQuery = true)
+    List<Object[]> getOrderDetailById(@Param("order_detail_id")Long order_detail_id);
+
 }
