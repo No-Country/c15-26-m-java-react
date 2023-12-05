@@ -7,8 +7,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CustomerRepository extends BaseRepository<Customer, Long> {
+
+    // Get all customers
+    @Query(value = "SELECT * FROM customer", nativeQuery = true)
+    List<Customer> getAllCustomers();
+
+    @Query(value = "SELECT * FROM customer WHERE id = :id", nativeQuery = true)
+    Customer getCustomerById(@Param("id") Long id);
 
     @Modifying
     @Transactional

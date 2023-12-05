@@ -17,6 +17,24 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
     @Autowired
     private CustomerServiceImpl customerService;
 
+    @GetMapping("")
+    public ResponseEntity<?> getAllCustomers() {
+        try {
+            return ResponseEntity.status(200).body(customerService.getAllCustomers());
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getCustomerById(@PathVariable(value = "id") Long id) {
+        try {
+            return ResponseEntity.status(200).body(customerService.getCustomerById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> registerCustomer(@RequestBody Customer customer) {
         try {
