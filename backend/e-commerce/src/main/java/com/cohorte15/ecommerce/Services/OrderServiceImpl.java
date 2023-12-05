@@ -1,17 +1,25 @@
 package com.cohorte15.ecommerce.Services;
 
+import com.cohorte15.ecommerce.DTOs.OrderDetailWithProductDTO;
+import com.cohorte15.ecommerce.DTOs.OrderWithDetailsDTO;
 import com.cohorte15.ecommerce.Entities.Order;
+import com.cohorte15.ecommerce.Repositories.OrderDetailRepository;
 import com.cohorte15.ecommerce.Repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements OrderService {
 
     @Autowired
     private final OrderRepository orderRepository;
+
+    @Autowired
+    private OrderDetailServiceImpl orderDetailService;
 
     public OrderServiceImpl(OrderRepository orderRepository) {
         super(orderRepository);
@@ -29,8 +37,24 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
     }
 
     @Override
-    public Long[] getOrdersIdByCustomerId(Long customer_id) {
-        return orderRepository.getOrdersIdByCustomerId(customer_id);
+    public List<OrderWithDetailsDTO> getOrdersByCustomerId(Long customer_id) {
+
+        List<OrderWithDetailsDTO> ordersWithDetailsDTO = new ArrayList<>();
+
+        for (int i = 0; i < orderRepository.getOrdersIdByCustomerId(customer_id).length; i++) {
+
+            OrderWithDetailsDTO orderWithDetailDTO = new OrderWithDetailsDTO();
+
+            orderWithDetailDTO.setOrder_id(orderRepository.getOrdersIdByCustomerId(customer_id)[i]);
+
+            Long order_id = orderRepository.getOrdersIdByCustomerId(customer_id)[i];
+
+            orderWithDetailDTO.setOrderDetails(orderDetailService.getOrderDetailsByOrderIdWithProduct(order_id));
+
+            ordersWithDetailsDTO.add(orderWithDetailDTO);
+        }
+
+        return ordersWithDetailsDTO;
     }
 
 }

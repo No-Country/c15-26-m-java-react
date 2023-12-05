@@ -17,10 +17,10 @@ public class OrderController extends BaseControllerImpl<Order, OrderServiceImpl>
     @Autowired
     private OrderServiceImpl orderService;
 
-    @GetMapping("/getOrdersFromCustomer/{customer_id}")
+    @GetMapping("/customer/{customer_id}")
     public ResponseEntity<?> getOrdersByCustomerId(@PathVariable("customer_id") Long customer_id) {
         try {
-            return ResponseEntity.ok(orderService.getOrdersIdByCustomerId(customer_id));
+            return ResponseEntity.ok(orderService.getOrdersByCustomerId(customer_id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

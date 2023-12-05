@@ -1,8 +1,10 @@
 package com.cohorte15.ecommerce.Services;
 
+import com.cohorte15.ecommerce.DTOs.OrderWithDetailsDTO;
 import com.cohorte15.ecommerce.Entities.Order;
 
 import java.sql.Date;
+import java.util.List;
 
 public interface OrderService extends BaseService<Order, Long> {
 
@@ -10,5 +12,5 @@ public interface OrderService extends BaseService<Order, Long> {
 
     Long getLastInsertedOrderId();
 
-    Long[] getOrdersIdByCustomerId(Long customer_id);
+    List<OrderWithDetailsDTO> getOrdersByCustomerId(Long customer_id);
 }
