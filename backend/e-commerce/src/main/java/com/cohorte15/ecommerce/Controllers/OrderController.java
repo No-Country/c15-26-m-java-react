@@ -17,6 +17,15 @@ public class OrderController extends BaseControllerImpl<Order, OrderServiceImpl>
     @Autowired
     private OrderServiceImpl orderService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOrder(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(orderService.getOrder(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @GetMapping("/customer/{customer_id}")
     public ResponseEntity<?> getOrdersByCustomerId(@PathVariable("customer_id") Long customer_id) {
         try {

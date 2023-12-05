@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
+import java.util.List;
 
 @Repository
 public interface OrderRepository extends BaseRepository<Order, Long>{
@@ -36,4 +37,23 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
     // Get all orders_id by customer id
     @Query(value = "SELECT id FROM `order` WHERE customer_id = :customer_id", nativeQuery = true)
     Long[] getOrdersIdByCustomerId(@Param("customer_id")Long customer_id);
+
+    // Get order by id
+    @Query(value = "SELECT " +
+            "id, " +
+            "pending, " +
+            "order_date, " +
+            "customer_id, " +
+            "address, " +
+            "city, " +
+            "country, " +
+            //"credit_card_number, " +
+            //"credit_card_type, " +
+            //"cvv, " +
+            "shipment_date, " +
+            "state, " +
+            "zip_code " +
+            "FROM `order` " +
+            "WHERE id = :order_id", nativeQuery = true)
+    List<Object[]> getOrderById(@Param("order_id")Long order_id);
 }

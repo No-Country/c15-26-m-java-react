@@ -1,5 +1,6 @@
 package com.cohorte15.ecommerce.Services;
 
+import com.cohorte15.ecommerce.DTOs.OrderAloneDTO;
 import com.cohorte15.ecommerce.DTOs.OrderWithDetailsDTO;
 import com.cohorte15.ecommerce.Entities.Order;
 
@@ -13,4 +14,6 @@ public interface OrderService extends BaseService<Order, Long> {
     Long getLastInsertedOrderId();
 
     List<OrderWithDetailsDTO> getOrdersByCustomerId(Long customer_id);
+
+    OrderAloneDTO getOrder(Long order_id);
 }
