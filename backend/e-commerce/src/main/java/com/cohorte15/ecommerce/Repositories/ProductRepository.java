@@ -27,6 +27,24 @@ public interface ProductRepository extends BaseRepository<Product, Long> {
             "LIMIT 8;\n", nativeQuery = true)
     List<Object[]> getAllProducts();
 
+    // Search product by name
+    @Query(value = "SELECT \n" +
+            "    p.id AS product_id, \n" +
+            "    p.product_name AS name, \n" +
+            "    c.category_name AS category, \n" +
+            "    b.brand_name AS brand, \n" +
+            "    p.model, \n" +
+            "    p.price, \n" +
+            "    p.discount, \n" +
+            "    p.description \n" +
+            "FROM \n" +
+            "    product p \n" +
+            "    INNER JOIN brand b ON p.brand_id = b.id \n" +
+            "    INNER JOIN category c ON p.category_id = c.id\n" +
+            "WHERE\n" +
+            "    p.product_name LIKE :name ;", nativeQuery = true)
+    List<Object[]> getProductsBySearch(String name);
+
     @Query(value = "SELECT \n" +
             "    p.id AS product_id, \n" +
             "    p.product_name AS name, \n" +
