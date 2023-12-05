@@ -1,16 +1,11 @@
 package com.cohorte15.ecommerce.Controllers;
 
-import com.cohorte15.ecommerce.DTOs.ProductDTO;
-import com.cohorte15.ecommerce.Entities.Image;
 import com.cohorte15.ecommerce.Entities.Product;
 import com.cohorte15.ecommerce.Services.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -29,7 +24,22 @@ public class ProductController extends BaseControllerImpl<Product, ProductServic
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProduct(@PathVariable Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(productService.getProduct(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
-
+    @GetMapping("/category/{id}")
+    public ResponseEntity<?> getProductsByCategory(@PathVariable Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByCategory(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
 }
