@@ -13,6 +13,9 @@ public interface OrderService extends BaseService<Order, Long> {
     void create(boolean pending, Date order_date, int customer_id, String address, String city, String country, String credit_card_number, String credit_card_type, String cvv, Date shipment_date, String state, String zip_code);
 
     void deleteOrderById(Long order_id);
+
+    void updateOrderStatus(Long order_id);
+
     Long getLastInsertedOrderId();
 
     List<OrderWithDetailsReducedDTO> getOrdersByCustomerId(Long customer_id);

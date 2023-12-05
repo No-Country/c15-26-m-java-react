@@ -38,6 +38,11 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
     }
 
     @Override
+    public void updateOrderStatus(Long order_id) {
+        orderRepository.updateOrderStatus(order_id);
+    }
+
+    @Override
     public Long getLastInsertedOrderId() {
         return orderRepository.getLastInsertedCustomerId();
     }
