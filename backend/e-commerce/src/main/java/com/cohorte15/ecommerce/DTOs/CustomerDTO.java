@@ -14,8 +14,6 @@ public class CustomerDTO {
 
     private String surname;
 
-    private String address;
-
     private String email;
 
     private long phone;
