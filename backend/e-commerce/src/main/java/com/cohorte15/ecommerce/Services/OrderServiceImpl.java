@@ -1,9 +1,6 @@
 package com.cohorte15.ecommerce.Services;
 
-import com.cohorte15.ecommerce.DTOs.OrderAloneDTO;
-import com.cohorte15.ecommerce.DTOs.OrderReducedDTO;
-import com.cohorte15.ecommerce.DTOs.OrderWithDetailsDTO;
-import com.cohorte15.ecommerce.DTOs.OrderWithDetailsReducedDTO;
+import com.cohorte15.ecommerce.DTOs.*;
 import com.cohorte15.ecommerce.Entities.Order;
 import com.cohorte15.ecommerce.Repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +25,52 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
     }
 
     @Override
-    public void create(boolean pending, Date order_date, int customer_id, String address, String city, String country, String credit_card_number, String credit_card_type, String cvv, Date shipment_date, String state, String zip_code) {
-        orderRepository.create(pending, order_date, customer_id, address, city, country, credit_card_number, credit_card_type, cvv, shipment_date, state, zip_code);
-    }
+    public OrderDTO create(OrderDTO orderDTO) {
+
+            boolean pending = orderDTO.isPending();
+            Date order_date = orderDTO.getOrder_date();
+            int customer_id = orderDTO.getCustomer_id();
+            String address = orderDTO.getAddress();
+            String city = orderDTO.getCity();
+            String country = orderDTO.getCountry();
+            String credit_card_number = orderDTO.getCredit_card_number();
+            String credit_card_type = orderDTO.getCredit_card_type();
+            String cvv = orderDTO.getCvv();
+            Date shipment_date = orderDTO.getShipment_date();
+            String state = orderDTO.getState();
+            String zip_code = orderDTO.getZip_code();
+
+            orderRepository.create(
+                    pending,
+                    order_date,
+                    customer_id,
+                    address, city,
+                    country,
+                    credit_card_number,
+                    credit_card_type,
+                    cvv,
+                    shipment_date,
+                    state,
+                    zip_code);
+
+            OrderDTO responseOrderDTO = OrderDTO.builder()
+                    .order_id(orderRepository.getLastInsertedOrderId())
+                    .address(address)
+                    .city(city)
+                    .pending(pending)
+                    .country(country)
+                    .credit_card_number(credit_card_number)
+                    .credit_card_type(credit_card_type)
+                    .customer_id(customer_id)
+                    .cvv(cvv)
+                    .order_date(order_date)
+                    .shipment_date(shipment_date)
+                    .state(state)
+                    .zip_code(zip_code)
+                    .build();
+
+            return responseOrderDTO;
+       }
 
     @Override
     public void deleteOrderById(Long order_id) {
@@ -44,7 +84,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 
     @Override
     public Long getLastInsertedOrderId() {
-        return orderRepository.getLastInsertedCustomerId();
+        return orderRepository.getLastInsertedOrderId();
     }
 
     @Override
