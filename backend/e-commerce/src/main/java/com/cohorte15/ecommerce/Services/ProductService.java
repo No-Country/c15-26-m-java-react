@@ -12,7 +12,9 @@ public interface ProductService extends BaseService<Product, Long> {
 
     List<ProductDTO> getProductsBySearch(String name);
 
-    ProductReduceDTO getProduct(Long id);
+    ProductReduceDTO getProductReduced(Long id);
+
+    ProductDTO getProduct(Long id);
 
     List<ProductDTO> getProductsByCategory(Long id);
 

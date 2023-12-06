@@ -78,7 +78,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
     }
 
     @Override
-    public ProductReduceDTO getProduct(Long id) {
+    public ProductReduceDTO getProductReduced(Long id) {
 
         List<Object[]> productList = productRepository.getProduct(id);
 
@@ -91,7 +91,32 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
         return productReduceDTO;
     }
 
+    @Override
+    public ProductDTO getProduct(Long id) {
 
+        List<Object[]> productList = productRepository.getProduct(id);
+
+        ProductDTO productDTO = new ProductDTO();
+
+        productDTO.setId((Long) productList.get(0)[0]);
+        productDTO.setName((String) productList.get(0)[1]);
+        productDTO.setCategory((String) productList.get(0)[2]);
+        productDTO.setBrand((String) productList.get(0)[3]);
+        productDTO.setModel((String) productList.get(0)[4]);
+        productDTO.setPrice((int) productList.get(0)[5]);
+        productDTO.setDiscount((double) productList.get(0)[6]);
+        productDTO.setDescription((String) productList.get(0)[7]);
+
+        List<Object[]> imageRows = productRepository.getImages(id);
+
+        List<String> imageUrls = imageRows.stream()
+                .map(row -> row[0].toString())
+                .collect(Collectors.toList());
+
+        productDTO.setImages(imageUrls.toArray(new String[0]));
+
+        return productDTO;
+    }
 
 
     @Override

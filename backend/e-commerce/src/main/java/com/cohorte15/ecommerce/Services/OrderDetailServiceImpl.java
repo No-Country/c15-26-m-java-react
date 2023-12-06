@@ -48,7 +48,7 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail, Long> i
             orderDetailDTO.setPrice((int) orderDetails.get(i)[1]);
             orderDetailDTO.setProduct_quantity((int) orderDetails.get(i)[2]);
 
-            orderDetailDTO.setProduct(productService.getProduct((Long) orderDetails.get(i)[3]));
+            orderDetailDTO.setProduct(productService.getProductReduced((Long) orderDetails.get(i)[3]));
 
             orderDetailsDTO.add(orderDetailDTO);
         }
@@ -66,7 +66,7 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetail, Long> i
         orderDetailDTO.setPrice((int) orderDetail.get(0)[1]);
         orderDetailDTO.setProduct_quantity((int) orderDetail.get(0)[2]);
 
-        orderDetailDTO.setProduct(productService.getProduct((Long) orderDetail.get(0)[3]));
+        orderDetailDTO.setProduct(productService.getProductReduced((Long) orderDetail.get(0)[3]));
 
         return orderDetailDTO;
     }
