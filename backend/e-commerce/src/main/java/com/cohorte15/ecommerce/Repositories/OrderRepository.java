@@ -43,7 +43,7 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
     void updateOrderStatus(@Param("order_id")Long order_id);
 
     @Query(value = "SELECT LAST_INSERT_ID() AS order_id", nativeQuery = true)
-    Long getLastInsertedCustomerId();
+    Long getLastInsertedOrderId();
 
     // Get all orders_id by customer id
     @Query(value = "SELECT id FROM `order` WHERE customer_id = :customer_id", nativeQuery = true)
