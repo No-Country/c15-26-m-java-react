@@ -44,6 +44,16 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
             String password = customer.getPassword();
             long phone = customer.getPhone();
 
+            if (customerService.getCustomerByEmail(email) != null) {
+                RegisterCustomerDTO registerCustomerDTO = new RegisterCustomerDTO();
+
+                registerCustomerDTO.setState("ERROR");
+                registerCustomerDTO.setMessage("Email already registered.");
+                registerCustomerDTO.setUser(null);
+
+                return ResponseEntity.status(400).body(registerCustomerDTO);
+            }
+
             customerService.registerCustomer(name, surname, email, password, phone);
 
             Long user_id = customerService.getLastInsertedCustomerId();

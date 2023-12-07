@@ -57,6 +57,21 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
     }
 
     @Override
+    public CustomerDTO getCustomerByEmail(String email) {
+        Customer customer = customerRepository.getCustomerByEmail(email);
+
+        CustomerDTO customerDTO = new CustomerDTO();
+
+        customerDTO.setId(customer.getId());
+        customerDTO.setName(customer.getName());
+        customerDTO.setSurname(customer.getSurname());
+        customerDTO.setEmail(customer.getEmail());
+        customerDTO.setPhone(customer.getPhone());
+
+        return customerDTO;
+    }
+
+    @Override
     public void registerCustomer(String name, String surname, String email, String password, long phone) {
         customerRepository.registerCustomer(name, surname, email, password, phone);
     }

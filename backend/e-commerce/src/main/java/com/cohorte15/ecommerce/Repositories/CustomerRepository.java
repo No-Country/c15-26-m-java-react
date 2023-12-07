@@ -19,6 +19,10 @@ public interface CustomerRepository extends BaseRepository<Customer, Long> {
     @Query(value = "SELECT * FROM customer WHERE id = :id", nativeQuery = true)
     Customer getCustomerById(@Param("id") Long id);
 
+    // Get customer by email
+    @Query(value = "SELECT * FROM customer WHERE email = :email", nativeQuery = true)
+    Customer getCustomerByEmail(@Param("email") String email);
+
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO customer (name, surname, email, password, phone) VALUES (:name, :surname, :email, :password, :phone)", nativeQuery = true)
