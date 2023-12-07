@@ -16,7 +16,7 @@ public interface ProductService extends BaseService<Product, Long> {
 
     ProductDTO getProduct(Long id);
 
-    List<ProductDTO> getProductsByCategory(Long id);
+    List<ProductDTO> getProductsByCategory(String id);
 
     List<Object[]> getImages(Long id);
 

@@ -34,7 +34,7 @@ public class ProductController extends BaseControllerImpl<Product, ProductServic
     }
 
     @GetMapping("/category/{id}")
-    public ResponseEntity<?> getProductsByCategory(@PathVariable Long id) {
+    public ResponseEntity<?> getProductsByCategory(@PathVariable String id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByCategory(id));
         } catch (Exception e) {

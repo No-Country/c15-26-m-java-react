@@ -2,6 +2,7 @@ package com.cohorte15.ecommerce.Repositories;
 
 import com.cohorte15.ecommerce.Entities.Product;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -76,8 +77,8 @@ public interface ProductRepository extends BaseRepository<Product, Long> {
             "    INNER JOIN brand b ON p.brand_id = b.id \n" +
             "    INNER JOIN category c ON p.category_id = c.id\n" +
             "WHERE\n" +
-            "    p.category_id = :id ;", nativeQuery = true)
-    List<Object[]> getProductsByCategory(Long id);
+            "    CAST(p.category_id AS CHAR) LIKE :id%", nativeQuery = true)
+    List<Object[]> getProductsByCategory(@Param("id") String id);
 
 
     // Get the images of a product

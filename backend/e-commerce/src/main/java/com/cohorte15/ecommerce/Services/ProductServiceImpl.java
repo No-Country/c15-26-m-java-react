@@ -120,7 +120,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
 
 
     @Override
-    public List<ProductDTO> getProductsByCategory(Long id) {
+    public List<ProductDTO> getProductsByCategory(String id) {
 
         List<Object[]> productList = productRepository.getProductsByCategory(id);
 
