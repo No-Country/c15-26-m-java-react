@@ -43,7 +43,8 @@ const CartDetail = () => {
           </tr>
         </thead>
         <tbody>
-          {cart.map((item) => (
+          { cart.length > 0 ?
+             cart.map((item) => (
             <CartLine
               key={item.id}
               id={item.id}
@@ -53,7 +54,11 @@ const CartDetail = () => {
               setTotalCart={setTotalCart}
               calcTotalCart={calcTotalCart}
             />
-          ))}
+          )):
+          <tr>
+            <td className="text-center h-10 font-bold" colSpan="5">NO HAY PRODUCTOS EN SU CARRITO</td>
+          </tr>
+        }
         </tbody>
         <tfoot>
           <tr className="p-4 bg-blue-400 h-10">

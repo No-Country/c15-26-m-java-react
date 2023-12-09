@@ -1,61 +1,24 @@
 import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../MyContext";
 import { Link, Navigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../config";
 
 const OrderList = () => {
   const { customer } = useContext(MyContext);
   const { customerId } = useParams();
   const [historial, setHistorial] = useState([]);
 
-  const historialAPI = [
-    {
-      order: {
-        orderId: 1,
-        date: "2023-12-04",
-        pending: true,
-        shipmentDate: "2023-12-07",
-      },
-      orderDetails: [
-        {
-          id: 1,
-          productQuantity: 1,
-          price: 287051,
-        },
-        {
-          id: 2,
-          productQuantity: 2,
-          price: 337706,
-        },
-      ],
-    },
-    {
-      order: {
-        orderId: 2,
-        date: "2023-12-05",
-        pending: false,
-        shipmentDate: "2023-12-05",
-      },
-      orderDetails: [
-        {
-          id: 1,
-          productQuantity: 3,
-          price: 15877,
-        },
-        {
-          id: 2,
-          productQuantity: 2,
-          price: 3377,
-        },
-        {
-          id: 3,
-          productQuantity: 1,
-          price: 87966,
-        },
-      ],
-    },
-  ];
   useEffect(() => {
-    setHistorial(historialAPI);
+    const endPoint = API_URL + `order/customer/${customerId}`;
+    axios
+      .get(endPoint)
+      .then((response) => setHistorial(response.data))
+      .catch((error) => {
+        alert("Ocurrió un error");
+        console.log(error);
+      });
+
   }, [customerId]);
 
   return (
@@ -78,23 +41,40 @@ const OrderList = () => {
               </tr>
             </thead>
             <tbody>
-              {historial.map((order) => {
-                let totalOrder=0;
-                let qtyOrder=order.orderDetails.length;
-                order.orderDetails.map(line => {
-                 totalOrder+=line.productQuantity*line.price;
-                } )
+              { historial.length > 0 ?
+              historial.map((order) => {
+                let totalOrder = 0;
+                let qtyOrder = order.order_details.length;
+                order.order_details.map((line) => {
+                  totalOrder += line.product_quantity * line.price;
+                });
                 return (
-                  <tr className={order.order.pending ? "bg-red-100 font-medium w-[150px] text-center" : "w-[150px] text-center"} key={order.order.orderId}>
-                    <td className="w-[150px]"><Link to={`/order/${order.order.orderId}`}> {order.order.orderId}</Link></td>
-                    <td className="w-[150px]">{order.order.date}</td>
+                  <tr
+                    className={
+                      order.order.pending
+                        ? "bg-red-100 font-medium w-[150px] text-center"
+                        : "w-[150px] text-center"
+                    }
+                    key={order.order.order_id}
+                  >
+                    <td className="w-[150px]">
+                      <Link to={`/order/${order.order.order_id}`}>
+                        {" "}
+                        {order.order.order_id}
+                      </Link>
+                    </td>
+                    <td className="w-[150px]">{order.order.order_date}</td>
                     <td className="w-[150px]">{qtyOrder}</td>
                     <td className="w-[150px]">{totalOrder}</td>
-                    <td className="w-[150px]">{order.order.shipmentDate}</td>
-                    <td className="w-[150px]">{order.order.pending ? "En proceso" : "Completado"}</td>
+                    <td className="w-[150px]">{order.order.shipment_date}</td>
+                    <td className="w-[150px]">
+                      {order.order.pending ? "En proceso" : "Completado"}
+                    </td>
                   </tr>
                 );
-              })}
+              }) :
+              <tr><td className="text-center h-10 font-bold" colSpan="6">NO SE REGISTRAN PEDIDOS</td></tr>
+              }
             </tbody>
           </table>
         </div>

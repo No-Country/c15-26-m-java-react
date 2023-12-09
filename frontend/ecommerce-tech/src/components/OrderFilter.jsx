@@ -3,26 +3,6 @@ import { MyContext } from "../MyContext";
 
 const OrderFilter = () => {
   const { priceOrderAsc, updatePriceOrderAsc } = useContext(MyContext);
-  //   const [casilla2, setCasilla2] = useState(false);
-
-  const handleCasilla1Change = () => {
-    updatePriceOrderAsc(true);
-    console.log("asc");
-    // setCasilla2(false)
-  };
-
-  const handleCasilla2Change = () => {
-    // setCasilla2(true);
-    updatePriceOrderAsc(false);
-    console.log("desc");
-  };
-
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     // Aquí puedes manejar la lógica cuando el formulario se envía
-  //     console.log('Casilla 1:', casilla1);
-  //     // console.log('Casilla 2:', casilla2);
-  //   };
 
   return (
     <div className="flex w-[190px] p-4 flex-col place-content-center">
@@ -33,7 +13,9 @@ const OrderFilter = () => {
             <input
               type="radio"
               checked={priceOrderAsc}
-              onChange={handleCasilla1Change}
+              onChange={() => {
+                updatePriceOrderAsc(true);
+              }}
             />
             De menor a mayor
           </label>
@@ -43,7 +25,9 @@ const OrderFilter = () => {
             <input
               type="radio"
               checked={!priceOrderAsc}
-              onChange={handleCasilla2Change}
+              onChange={() => {
+                updatePriceOrderAsc(false);
+              }}
             />
             De mayor a menor
           </label>
