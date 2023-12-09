@@ -3,19 +3,13 @@ import { useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { MyContext } from "../MyContext";
+import axios from "axios";
+import { API_URL } from "../config";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const { customer, updateCustomer } = useContext(MyContext);
 
-  const userAPI = {
-    id: 1,
-    name: "Carlos",
-    surname: "Espósito",
-    address: "Reg.12 de Infantería",
-    phone: "4892384",
-    email: "elcharlybeto@hotmail.com",
-  };
 
   const initialValues = {
     email: "",
@@ -36,11 +30,19 @@ const LoginForm = () => {
   });
 
   const onSubmit = () => {
-    // Aquí puedes realizar la lógica para enviar los datos del usuario al servidor
-    console.log(values);
-    localStorage.setItem("customer", JSON.stringify(userAPI));
-    updateCustomer(JSON.parse(localStorage.getItem("customer")));
-    navigate("/");
+    const endPoint = API_URL + "customer/login";
+
+    axios
+      .post(endPoint, values)
+      .then((res) => {
+        localStorage.setItem("customer", JSON.stringify(res.data.user));
+        updateCustomer(JSON.parse(localStorage.getItem("customer")));
+        navigate("/");
+      })
+      .catch((error) => {
+        alert("ocurrió un error");
+        console.log(error);
+      });
   };
 
   const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
@@ -105,8 +107,16 @@ const LoginForm = () => {
               </div>
 
               <div className="mt-4 flex items-center justify-between">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Iniciar Sesión</button>
-                <button className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" onClick={resetPassword()}>
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Iniciar Sesión
+                </button>
+                <button
+                  className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                  onClick={resetPassword()}
+                >
                   ¿Olvidaste tu contraseña?
                 </button>
               </div>

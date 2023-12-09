@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { MyContext } from "../MyContext";
 
 export const LookUpBar = () => {
-  const navigate = useNavigate();
+ const {updateSearch}=useContext(MyContext);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -13,8 +14,7 @@ export const LookUpBar = () => {
       alert("Tienes que ingresar al menos 4 caracteres!");
     } else {
       e.target.keyword.value = "";
-      console.log(keyword);
-      // navigate(`/resultados?keyword=${keyword}`);
+      updateSearch(keyword)
     }
   };
 
