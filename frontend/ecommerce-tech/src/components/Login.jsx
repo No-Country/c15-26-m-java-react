@@ -2,12 +2,10 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="w-[200px]">
-      <div className="flex w-[250px] place-content-around items-center gap-2">
-        <Link  className="text-blue-900 p-2 rounded transition-all hover:text-slate-200 hover:bg-blue-950" to={"/register"}>Registrarse</Link>
-        <Link className="text-blue-900 p-2 rounded transition-all hover:text-slate-200 hover:bg-blue-950" to={"/login"}>Iniciar Sesión</Link>
+      <div className="flex w-[420px] place-content-around items-center gap-2">
+        <Link className="text-purple-900 px-8 h-8 text-center rounded-2xl border border-purple-900 transition-all hover:text-slate-200 hover:bg-purple-900" to={"/login"}>Ingresa con tu cuenta</Link>
+        <Link  className="text-purple-900 px-8 h-8 text-center rounded-2xl border border-purple-900 transition-all hover:text-slate-200 hover:bg-purple-900" to={"/register"}>¡Regístrate aquí!</Link>
       </div>
-    </div>
   );
 };
 

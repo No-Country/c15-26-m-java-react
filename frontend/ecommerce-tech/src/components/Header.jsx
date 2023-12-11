@@ -14,23 +14,28 @@ const Header = () => {
     navigate("/");
   };
   return (
-    <header className=" bg-slate-400 h-20  pt-8 pb-8 flex place-content-between items-center p-3 ">
+    <header className=" bg-transparent h-24 flex flex-col  p-3 ">
+      <div className="flex place-content-around items-center  bg-white">
+        <div className="ml-8 h-10 leading-10 text-xl w-10">
+          NOMBRE
+        </div>
+        <LookUpBar />
+        {customer.id !== 0 ? <LoggedMenu /> : <Login />}
+        <CartIcon />
+      </div>
       <nav>
-        <ul className="flex place-content-around w-[150px] gap-2 ml-4 ">
+        <ul className="flex place-content-around w-[150px] gap-2 ml-10 ">
           <li
             onClick={goToHome}
-            className="text-blue-900 p-2 rounded transition-all hover:text-slate-200 hover:bg-blue-950"
+            className="text-purple-900   transition-all hover:font-bold "
           >
-            {/* <Link to={`/`}>Home</Link> */} Home
+            Home
           </li>
-          <li className="text-blue-900 p-2 rounded transition-all hover:text-slate-200 hover:bg-blue-950">
+          <li className="text-purple-900   transition-all hover:font-bold">
             <Link to={`/cart`}>Cart</Link>
           </li>
         </ul>
       </nav>
-      <LookUpBar />
-      {customer.id !== 0 ? <LoggedMenu /> : <Login />}
-      <CartIcon />
     </header>
   );
 };

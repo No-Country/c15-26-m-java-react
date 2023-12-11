@@ -6,13 +6,13 @@ const Root = () => {
 
 
   return (
-    <>
+    < div className="bg-slate-200">
       <Header />
       <div className="flex flex-grow place-content-center min-h-screen">
         <Outlet />
         </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
