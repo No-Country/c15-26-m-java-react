@@ -34,7 +34,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
             Long productId = (Long) productList.get(i)[0];
             List<Object[]> imageRows = productRepository.getImages(productId);
             List<String> imageUrls = imageRows.stream()
-                    .map(row -> row[0].toString())
+                    .map(row -> row[1].toString())
                     .collect(Collectors.toList());
             productDTOList.get(i).setImages(imageUrls.toArray(new String[0]));
         }
@@ -55,7 +55,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
             Long productId = (Long) productList.get(i)[0];
             List<Object[]> imageRows = productRepository.getImages(productId);
             List<String> imageUrls = imageRows.stream()
-                    .map(row -> row[0].toString())
+                    .map(row -> row[1].toString())
                     .collect(Collectors.toList());
             productDTOList.get(i).setImages(imageUrls.toArray(new String[0]));
         }
@@ -110,7 +110,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
         List<Object[]> imageRows = productRepository.getImages(id);
 
         List<String> imageUrls = imageRows.stream()
-                .map(row -> row[0].toString())
+                .map(row -> row[1].toString())
                 .collect(Collectors.toList());
 
         productDTO.setImages(imageUrls.toArray(new String[0]));
@@ -132,7 +132,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
             Long productId = (Long) productList.get(i)[0];
             List<Object[]> imageRows = productRepository.getImages(productId);
             List<String> imageUrls = imageRows.stream()
-                    .map(row -> row[0].toString())
+                    .map(row -> row[1].toString())
                     .collect(Collectors.toList());
             productDTOList.get(i).setImages(imageUrls.toArray(new String[0]));
         }
@@ -158,7 +158,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
             Long productId = (Long) productList.get(i)[0];
             List<Object[]> imageRows = productRepository.getImages(productId);
             List<String> imageUrls = imageRows.stream()
-                    .map(row -> row[0].toString())
+                    .map(row -> row[1].toString())
                     .collect(Collectors.toList());
             productDTOList.get(i).setImages(imageUrls.toArray(new String[0]));
         }
@@ -179,7 +179,7 @@ public class ProductServiceImpl extends BaseServiceImpl<Product, Long> implement
             Long productId = (Long) productList.get(i)[0];
             List<Object[]> imageRows = productRepository.getImages(productId);
             List<String> imageUrls = imageRows.stream()
-                    .map(row -> row[0].toString())
+                    .map(row -> row[1].toString())
                     .collect(Collectors.toList());
             productDTOList.get(i).setImages(imageUrls.toArray(new String[0]));
         }
