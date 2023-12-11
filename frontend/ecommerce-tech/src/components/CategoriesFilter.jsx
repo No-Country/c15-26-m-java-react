@@ -10,7 +10,7 @@ const CategoriesFilter = () => {
     selectedBrands,
     updateSelectedBrands,
     updateLastFilterType,
-    lastFilterType
+    lastFilterType,
   } = useContext(MyContext);
 
   const [subcategories, setSubcategories] = useState([]);
@@ -22,7 +22,7 @@ const CategoriesFilter = () => {
     } else {
       removeCategory(newCategory);
     }
-    updateLastFilterType("category")
+    updateLastFilterType("category");
   };
 
   const addCategory = (newCategory) => {
@@ -53,13 +53,12 @@ const CategoriesFilter = () => {
   const isSelected = (category) => selectedCategories.includes(category);
 
   const handleBrandChange = (e) => {
-   
     if (e.target.checked) {
       addBrand(e.target.value);
     } else {
       removeBrand(e.target.value);
     }
-    updateLastFilterType("brand")
+    updateLastFilterType("brand");
   };
 
   const addBrand = (brand) => {
@@ -74,19 +73,29 @@ const CategoriesFilter = () => {
   return (
     <div className="flex flex-col place-content-center">
       <div className="w-[190px] p-1 flex flex-col place-content-center flex-wrap">
-        <label>Categoría:</label>
+        <label className="font-bold mb-2">Categorías</label>
         {selectedCategories.length !== 0 &&
-          selectedCategories.map((filter) => (
-            <div onClick={() => removeCategory(filter)} key={filter}>
-              {filter < 10
-                ? categories[filter].name
-                : categories[Math.trunc(filter / 10)].name +
-                  " > " +
-                  categories[Math.trunc(filter / 10)].subcategories[
-                    (filter % 10) - 1
-                  ].name}
-            </div>
-          ))}
+          selectedCategories.map(
+            (filter) =>
+              filter !== 0 && (
+                <div
+                  className="font-bold flex place-content-between p-1 cursor-pointer bg-slate-400"
+                  onClick={() => removeCategory(filter)}
+                  key={filter}
+                >
+                 <span>
+                  {filter < 10
+                    ? categories[filter].name
+                    : categories[Math.trunc(filter / 10)].name +
+                      " > " +
+                      categories[Math.trunc(filter / 10)].subcategories[
+                        (filter % 10) - 1
+                      ].name}
+                  </span>
+                  <span>X</span>
+                </div>
+              )
+          )}
 
         {categories.map((category) => {
           if (category.id !== 0) {
@@ -98,7 +107,9 @@ const CategoriesFilter = () => {
                   checked={isSelected(category.id)}
                   onChange={handleCategoryChange}
                 />
-                <label htmlFor={category.name}>{category.name}</label>
+                <label className="text-sm ml-2" htmlFor={category.name}>
+                  {category.name}
+                </label>
               </div>
             );
           }
@@ -106,7 +117,7 @@ const CategoriesFilter = () => {
 
         {subcategories.length > 0 && (
           <>
-            <label>Subcategoría:</label>
+            <label className="font-bold mt-3 mb-2">Subcategorías</label>
             {subcategories.map((subcategory) => (
               <div key={subcategory.id}>
                 <input
@@ -115,22 +126,26 @@ const CategoriesFilter = () => {
                   checked={isSelected(subcategory.id)}
                   onChange={handleCategoryChange}
                 />
-                <label htmlFor={subcategory.name}>{subcategory.name}</label>
+                <label className="text-sm ml-2" htmlFor={subcategory.name}>
+                  {subcategory.name}
+                </label>
               </div>
             ))}
           </>
         )}
 
-        <h2>Marcas</h2>
+        <h2 className="font-bold mt-3 mb-2">Marcas</h2>
         {brands?.map((brand) => (
           <div key={brand}>
             <input
               type="checkbox"
               value={brand}
-              checked={lastFilterType=== "category" ? false : isChecked(brand)}
+              checked={lastFilterType === "category" ? false : isChecked(brand)}
               onChange={handleBrandChange}
             />
-            <label htmlFor={brand}>{brand}</label>
+            <label className="text-sm ml-2" htmlFor={brand}>
+              {brand}
+            </label>
           </div>
         ))}
       </div>

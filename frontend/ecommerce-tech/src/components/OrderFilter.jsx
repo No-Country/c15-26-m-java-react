@@ -6,29 +6,31 @@ const OrderFilter = () => {
 
   return (
     <div className="flex w-[190px] p-4 flex-col place-content-center">
-      <h2 className="mb-4">Ordenar por precio</h2>
+      <h2 className="mb-4 font-bold">Ordenar por precio</h2>
       <form>
         <div>
-          <label>
-            <input
+        <input
               type="radio"
               checked={priceOrderAsc}
               onChange={() => {
                 updatePriceOrderAsc(true);
               }}
             />
+          <label className="text-sm ml-2">
+           
             De menor a mayor
           </label>
         </div>
         <div>
-          <label>
-            <input
+        <input
               type="radio"
               checked={!priceOrderAsc}
               onChange={() => {
                 updatePriceOrderAsc(false);
               }}
             />
+          <label className="text-sm ml-2">
+            
             De mayor a menor
           </label>
         </div>
