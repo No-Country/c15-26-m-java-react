@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MyContext } from "../MyContext";
 import noImage from "../assets/noimage.png";
 
-const ItemCard = ({ id, name, brand, model, price, discount, image }) => {
+const ItemCard = ({ id, name, brand, model, price, discount, images }) => {
   const promo = Math.ceil(price * (1 - discount));
   const percent = discount * 100;
   const { cart, updateCart, qtyCart, updateQtyCart } = useContext(MyContext);
@@ -36,7 +36,10 @@ const ItemCard = ({ id, name, brand, model, price, discount, image }) => {
   return (
     <div className="w-[250px] p-4 border shadow border-gray-500 rounded">
       <div className="m-1 p-1 ">
-        <img src={image?.length > 0 ? image[0] : noImage} alt="productImage" />
+        <img
+          src={images?.length > 0 ? images[0] : noImage}
+          alt="productImage"
+        />
       </div>
       <div className="p-2">
         <h2 className="font-bold text-stone-600 text-justify">{name}</h2>

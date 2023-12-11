@@ -7,13 +7,19 @@ import { API_URL } from "../config";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
+
   const {
     selectedCategories,
     priceOrderAsc,
     search,
     updateBrands,
     selectedBrands,
+    lastFilterType,
   } = useContext(MyContext);
+
+  const productFiltered = [
+    ...items.filter((item) => selectedBrands.includes(item.brand)),
+  ];
 
   const finalPrice = (item) => item.price * (1 - item.discount);
 
@@ -84,20 +90,17 @@ const ItemList = () => {
   }, [priceOrderAsc]);
 
   useEffect(() => {
-    let brandList = [];
-    items.map((item) => {
-      if (!brandList.includes(item.brand)) {
-        brandList.push(item.brand);
-      }
-    });
-    updateBrands([...brandList]);
+    if (lastFilterType === "category") {
+      let brandList = [];
+      items.map((item) => {
+        if (!brandList.includes(item.brand)) {
+          brandList.push(item.brand);
+        }
+      });
+      updateBrands([...brandList]);
+    }
   }, [items]);
 
-  useEffect(() => {
-    selectedBrands.map((brand) => {
-      setItems(items.filter((item) => item.brand === brand));
-    });
-  }, [selectedBrands]);
 
   return (
     <main className="flex flex-grow min-h-screen">
@@ -112,20 +115,38 @@ const ItemList = () => {
           {priceOrderAsc ? "de menor a mayor" : "de mayor a menor"}
         </h2>
         <div className="p-2.5 flex flex-wrap gap-3 place-content-center">
-          {items?.map((i) => {
-            return (
-              <ItemCard
-                key={i.id}
-                id={i.id}
-                name={i.name}
-                brand={i.brand}
-                model={i.model}
-                price={i.price}
-                discount={i.discount}
-                image={i.image}
-              />
-            );
-          })}
+          {lastFilterType === "category" &&
+            items?.map((i) => {
+              return (
+                <ItemCard
+                  key={i.id}
+                  id={i.id}
+                  name={i.name}
+                  brand={i.brand}
+                  model={i.model}
+                  price={i.price}
+                  discount={i.discount}
+                  images={i.images}
+                />
+              );
+            })}
+          {lastFilterType === "brand" &&
+            productFiltered?.map((i) => {
+              return (
+                <ItemCard
+                  key={i.id}
+                  id={i.id}
+                  name={i.name}
+                  brand={i.brand}
+                  model={i.model}
+                  price={i.price}
+                  discount={i.discount}
+                  images={i.images}
+                />
+              );
+            })}
+            { items.length === 0 || productFiltered.length === 0 &&
+            <div>Oops! Revise sus filtros</div>}
         </div>
       </section>
     </main>

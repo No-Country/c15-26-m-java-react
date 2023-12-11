@@ -12,8 +12,7 @@ const ItemDetail = () => {
 
   const { id } = useParams();
 
-  const { cart, updateCart, qtyCart, updateQtyCart} =
-    useContext(MyContext);
+  const { cart, updateCart, qtyCart, updateQtyCart } = useContext(MyContext);
   const promo = Math.ceil(item.price * (1 - item.discount));
   const percent = item.discount * 100;
 
@@ -61,7 +60,7 @@ const ItemDetail = () => {
         <div className="flex items-center">
           <div className="m-1 p-1 w-[150px]">
             <img
-              src={item?.image?.length > 0 ? item?.image[0] : noImage}
+              src={item?.images?.length > 0 ? item?.images[0] : noImage}
               alt="productImage"
             />
           </div>
