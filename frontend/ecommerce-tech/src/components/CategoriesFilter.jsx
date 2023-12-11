@@ -3,8 +3,15 @@ import { MyContext } from "../MyContext";
 import { categories } from "../config";
 
 const CategoriesFilter = () => {
-  const { selectedCategories, updateselectedCategories, brands, selectedBrands, updateSelectedBrands } =
-    useContext(MyContext);
+  const {
+    selectedCategories,
+    updateselectedCategories,
+    brands,
+    selectedBrands,
+    updateSelectedBrands,
+    updateLastFilterType,
+    lastFilterType
+  } = useContext(MyContext);
 
   const [subcategories, setSubcategories] = useState([]);
 
@@ -15,6 +22,7 @@ const CategoriesFilter = () => {
     } else {
       removeCategory(newCategory);
     }
+    updateLastFilterType("category")
   };
 
   const addCategory = (newCategory) => {
@@ -37,29 +45,32 @@ const CategoriesFilter = () => {
   };
 
   const removeCategory = (category) => {
-   updateselectedCategories( selectedCategories.filter(cat => cat!= category))
+    updateselectedCategories(
+      selectedCategories.filter((cat) => cat != category)
+    );
   };
 
   const isSelected = (category) => selectedCategories.includes(category);
 
   const handleBrandChange = (e) => {
-    if(e.target.checked){
-      addBrand(e.target.value)
-    }else{
-      removeBrand(e.target.value)
+   
+    if (e.target.checked) {
+      addBrand(e.target.value);
+    } else {
+      removeBrand(e.target.value);
     }
-  }
+    updateLastFilterType("brand")
+  };
 
   const addBrand = (brand) => {
-    updateSelectedBrands([...selectedBrands, brand])
-  }
+    updateSelectedBrands([...selectedBrands, brand]);
+  };
   const removeBrand = (brand) => {
-    updateSelectedBrands( selectedBrands.filter(bra => bra!= brand))
-  }
+    updateSelectedBrands(selectedBrands.filter((bra) => bra != brand));
+  };
 
-  const isChecked = (brand) => selectedBrands.includes(brand)
+  const isChecked = (brand) => selectedBrands.includes(brand);
 
-  
   return (
     <div className="flex flex-col place-content-center">
       <div className="w-[190px] p-1 flex flex-col place-content-center flex-wrap">
@@ -109,22 +120,20 @@ const CategoriesFilter = () => {
             ))}
           </>
         )}
-      
-      <h2>Marcas</h2>
-         {brands?.map((brand) => (
-              <div key={brand}>
-                <input
-                  type="checkbox"
-                  value={brand}
-                  checked={isChecked(brand)}
-                  onChange={handleBrandChange}
-                />
-                <label htmlFor={brand}>{brand}</label>
-              </div>
-            ))}
-      
+
+        <h2>Marcas</h2>
+        {brands?.map((brand) => (
+          <div key={brand}>
+            <input
+              type="checkbox"
+              value={brand}
+              checked={lastFilterType=== "category" ? false : isChecked(brand)}
+              onChange={handleBrandChange}
+            />
+            <label htmlFor={brand}>{brand}</label>
+          </div>
+        ))}
       </div>
-      
     </div>
   );
 };

@@ -53,6 +53,11 @@ const MyContextProvider = ({ children }) => {
   const updateSelectedBrands = (newValue) => {
     setSelectedBrands(newValue);
   };
+
+  const [lastFilterType, setLastFilterType] = useState("category")
+  const updateLastFilterType = (newValue) => {
+    setLastFilterType(newValue);
+  };
   return (
     <MyContext.Provider
       value={{
@@ -71,7 +76,9 @@ const MyContextProvider = ({ children }) => {
         brands,
         updateBrands,
         selectedBrands,
-        updateSelectedBrands
+        updateSelectedBrands,
+        lastFilterType,
+        updateLastFilterType
       }}
     >
       {children}
