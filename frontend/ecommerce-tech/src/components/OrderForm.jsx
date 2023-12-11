@@ -23,7 +23,7 @@ const OrderForm = () => {
   const initialValues = {
     customer_id: customer?.id ? customer.id : 0,
     order_date: formatDate(new Date()),
-    completed: false,
+    pending: true,
     shipment_date: formatDate(new Date()),
     address: "",
     city: "",

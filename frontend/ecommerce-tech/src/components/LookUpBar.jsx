@@ -20,23 +20,24 @@ export const LookUpBar = () => {
 
   return (
     <form
-      className="flex flex-wrap p-4 place-content-around h-14 w-[530px] items-center border border-black"
+      className="flex flex-wrap p-4 place-content-around h-14 w-[530px] rounded-xl items-center"
       onSubmit={submitHandler}
     >
-      <label className=" mx-2 border border-black">
+      <label className=" mx-2 border rounded">
+      <input
+            type="submit"
+            value={"🔍"}
+            className="ml-2 mr-4"
+          />
         <input
-          className="w-[370px] p-1 pl-2 text-s"
+          className="w-[370px] pl-2 h-8 rounded text-s"
           type="text"
-          placeholder="Escribe una palabra clave..."
+          placeholder="Busca los mejores productos"
           name="keyword"
           autoComplete="off"
         />
       </label>
-      <input
-        type="submit"
-        className="w-[80px] bg-slate-700  text-white"
-        value="Buscar"
-      />
+      
     </form>
   );
 };
