@@ -4,6 +4,7 @@ import ItemCard from "./ItemCard";
 import Filters from "./Filters";
 import axios from "axios";
 import { API_URL } from "../config";
+import { Spinner } from "@material-tailwind/react";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -101,7 +102,6 @@ const ItemList = () => {
     }
   }, [items]);
 
-
   return (
     <main className="flex flex-grow min-h-screen">
       <Filters />
@@ -137,8 +137,11 @@ const ItemList = () => {
                 />
               );
             })}
-            { (items.length === 0 && productFiltered.length) === 0 &&
-            <div>Oops! NO HAY PRODUCTOS DISPONIBLES</div>}
+          {items.length === 0 && productFiltered.length === 0 && (
+            <div className="flex place-content-center items-center min-h-screen">
+              <Spinner className="h-60 w-60 text-purple-900/50" />
+            </div>
+          )}
         </div>
       </section>
     </main>

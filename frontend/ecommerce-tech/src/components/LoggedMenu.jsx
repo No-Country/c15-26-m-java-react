@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { MyContext } from "../MyContext";
 
 const LoggedMenu = () => {
@@ -9,6 +9,14 @@ const LoggedMenu = () => {
     localStorage.setItem("customer", '{"id": 0}');
     updateCustomer(JSON.parse('{"id": 0}'));
   };
+
+  const getClassName = ({ isActive }) => {
+    if (isActive) {
+      return "text-purple-900 font-bold ";
+    }else{
+      return "text-purple-900   transition-all hover:font-bold "
+    }
+  }
   return (
     <div className="flex flex-col">
       <span className="text-center font-medium "
@@ -19,13 +27,13 @@ const LoggedMenu = () => {
 
       <nav className={visible ? "" : "hidden"}>
         <ul className="flex gap-2 ">
-          <li className="text-blue-900 p-1 rounded transition-all hover:text-slate-200 hover:bg-blue-950">
-            <Link to="/profile">Perfil</Link>
+          <li >
+            <NavLink className={getClassName} to="/profile">Perfil</NavLink>
           </li>
-          <li className="text-blue-900 p-1 rounded transition-all hover:text-slate-200 hover:bg-blue-950">
-            <Link to={`/orders/${customer.id}`}>Historial de Compras</Link>
+          <li>
+            <NavLink className={getClassName} to={`/orders/${customer.id}`}>Historial de Compras</NavLink>
           </li>
-          <li className="text-blue-900 p-1 rounded transition-all hover:text-slate-200 hover:bg-blue-950">
+          <li className="text-purple-900   transition-all hover:font-bold ">
             <button onClick={() => logout()}>Cerrar sesión</button>
           </li>
         </ul>
