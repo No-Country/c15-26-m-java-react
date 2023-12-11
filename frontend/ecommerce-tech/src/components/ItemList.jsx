@@ -3,102 +3,110 @@ import { MyContext } from "../MyContext";
 import ItemCard from "./ItemCard";
 import Filters from "./Filters";
 import axios from "axios";
+import { API_URL } from "../config";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
-  const { selectedCategory, priceOrderAsc } = useContext(MyContext);
+  const {
+    selectedCategories,
+    priceOrderAsc,
+    search,
+    updateBrands,
+    selectedBrands,
+  } = useContext(MyContext);
 
-  let itemsAPI = [
-    {
-      id: "0",
-      name: "Monitor Hp X27 27 Pulgadas 165hz Fhd Ips Gaming 2v6b2aa Color Negro",
-      category: "1",
-      brandt: "HP",
-      model: "2v6b2aa",
-      price: 337706,
-      discount: 0,
-      description: `Pantalla Full HD de 27" para imágenes nítidas y colores vibrantes
-          Frecuencia de actualización de 165 Hz y tiempo de respuesta de 1 ms para fluidez en juegos
-          Tecnologías FreeSync Premium y AdaptiveSync para evitar tearing y stuttering
-          Pantalla antirreflejo y reducción de luz azul para mayor comodidad visual
-          Reclinable y compatible con montaje VESA para ajustar a tu comodidad
-          Conexiones HDMI 2.0, DisplayPort 1.4 y Jack 3.5 mm para conectar tus dispositivos`,
-      image:
-        "https://http2.mlstatic.com/D_NQ_NP_785737-MLU72854726656_112023-O.webp",
-    },
-    {
-      id: "1",
-      name: "Monitor Hp X27 27 Pulgadas 165hz Fhd Ips Gaming 2v6b2aa Color Negro",
-      category: "1",
-      brandt: "HP",
-      model: "2v6b2aa",
-      price: 337706,
-      discount: 0.15,
-      description: `Pantalla Full HD de 27" para imágenes nítidas y colores vibrantes
-          Frecuencia de actualización de 165 Hz y tiempo de respuesta de 1 ms para fluidez en juegos
-          Tecnologías FreeSync Premium y AdaptiveSync para evitar tearing y stuttering
-          Pantalla antirreflejo y reducción de luz azul para mayor comodidad visual
-          Reclinable y compatible con montaje VESA para ajustar a tu comodidad
-          Conexiones HDMI 2.0, DisplayPort 1.4 y Jack 3.5 mm para conectar tus dispositivos`,
-      image:
-        "https://http2.mlstatic.com/D_NQ_NP_785737-MLU72854726656_112023-O.webp",
-    },
-    {
-      id: "2",
-      name: "Monitor Hp X27 27 Pulgadas 165hz Fhd Ips Gaming 2v6b2aa Color Negro",
-      category: "1",
-      brandt: "HP",
-      model: "2v6b2aa",
-      price: 337706,
-      discount: 0,
-      description: `Pantalla Full HD de 27" para imágenes nítidas y colores vibrantes
-          Frecuencia de actualización de 165 Hz y tiempo de respuesta de 1 ms para fluidez en juegos
-          Tecnologías FreeSync Premium y AdaptiveSync para evitar tearing y stuttering
-          Pantalla antirreflejo y reducción de luz azul para mayor comodidad visual
-          Reclinable y compatible con montaje VESA para ajustar a tu comodidad
-          Conexiones HDMI 2.0, DisplayPort 1.4 y Jack 3.5 mm para conectar tus dispositivos`,
-      image:
-        "https://http2.mlstatic.com/D_NQ_NP_785737-MLU72854726656_112023-O.webp",
-    },
-    {
-      id: "3",
-      name: "Monitor Hp X27 27 Pulgadas 165hz Fhd Ips Gaming 2v6b2aa Color Negro",
-      category: "1",
-      brandt: "HP",
-      model: "2v6b2aa",
-      price: 337706,
-      discount: 0,
-      description: `Pantalla Full HD de 27" para imágenes nítidas y colores vibrantes
-          Frecuencia de actualización de 165 Hz y tiempo de respuesta de 1 ms para fluidez en juegos
-          Tecnologías FreeSync Premium y AdaptiveSync para evitar tearing y stuttering
-          Pantalla antirreflejo y reducción de luz azul para mayor comodidad visual
-          Reclinable y compatible con montaje VESA para ajustar a tu comodidad
-          Conexiones HDMI 2.0, DisplayPort 1.4 y Jack 3.5 mm para conectar tus dispositivos`,
-      image:
-        "https://http2.mlstatic.com/D_NQ_NP_785737-MLU72854726656_112023-O.webp",
-    },
-  ];
+  const finalPrice = (item) => item.price * (1 - item.discount);
 
   useEffect(() => {
-    setItems(itemsAPI);
+    if (JSON.stringify(selectedCategories) !== JSON.stringify([0])) {
+      selectedCategories.map((category) => {
+        if (category == 0) {
+          setItems([]);
+        } else {
+          if (selectedCategories.length === 1) {
+            setItems([]);
+          }
+          const endPoint = API_URL + `product/category/${category}`;
+          axios
+            .get(endPoint)
+            .then((response) => {
+              const newItems = response.data;
 
-    // const endPoint = "https://e-commerce-7i7l.onrender.com/api/v1/product/all";
-    // axios
-    //   .get(endPoint)
-    //   .then((response) => {
-    //     setItems(response.data);
-    //     console.log(items);
-    //   })
-    //   .catch((error) => alert("Hubo errores, intenta más tarde..."));
-  }, [selectedCategory, priceOrderAsc]);
+              setItems((prev) => [...new Set(prev.concat(newItems))]);
+            })
+            .catch((error) => {
+              alert("Hubo errores, intenta más tarde...");
+              console.log(error);
+            });
+        }
+      });
+    } else {
+      const endPoint = API_URL + `product`;
+      axios
+        .get(endPoint)
+        .then((response) => {
+          setItems(response.data);
+        })
+        .catch((error) => {
+          alert("Hubo errores, intenta más tarde...");
+          console.log(error);
+        });
+    }
+
+    setItems((prev) => [...prev.sort((a, b) => finalPrice(a) - finalPrice(b))]);
+  }, [selectedCategories]);
+
+  useEffect(() => {
+    if (search !== "") {
+      const endPoint = API_URL + `product/search/${search}`;
+      axios
+        .get(endPoint)
+        .then((response) => {
+          setItems(response.data);
+        })
+        .catch((error) => {
+          alert("Hubo errores, intenta más tarde...");
+          console.log(error);
+        });
+    }
+  }, [search]);
+
+  useEffect(() => {
+    if (priceOrderAsc) {
+      setItems((prev) => [
+        ...prev.sort((a, b) => finalPrice(a) - finalPrice(b)),
+      ]);
+    } else {
+      setItems((prev) => [
+        ...prev.sort((a, b) => finalPrice(b) - finalPrice(a)),
+      ]);
+    }
+  }, [priceOrderAsc]);
+
+  useEffect(() => {
+    let brandList = [];
+    items.map((item) => {
+      if (!brandList.includes(item.brand)) {
+        brandList.push(item.brand);
+      }
+    });
+    updateBrands([...brandList]);
+  }, [items]);
+
+  useEffect(() => {
+    selectedBrands.map((brand) => {
+      setItems(items.filter((item) => item.brand === brand));
+    });
+  }, [selectedBrands]);
 
   return (
     <main className="flex flex-grow min-h-screen">
       <Filters />
       <section className=" bg-orange-300 w-[400px] p-3 flex-grow place-content-center border  border-black items-center">
-        <h2
-          className={selectedCategory ? "text-sm" : "hidden"}
-        >{`Categoría: ${selectedCategory}`}</h2>
+        {selectedCategories !== 0 && (
+          <h2 className="text-sm">{`Categoría ${selectedCategories}`}</h2>
+        )}
+
         <h2 className="text-sm">
           Ordenados por Precio:{" "}
           {priceOrderAsc ? "de menor a mayor" : "de mayor a menor"}
@@ -110,7 +118,7 @@ const ItemList = () => {
                 key={i.id}
                 id={i.id}
                 name={i.name}
-                brandt={i.brandt}
+                brand={i.brand}
                 model={i.model}
                 price={i.price}
                 discount={i.discount}
