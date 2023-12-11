@@ -14,8 +14,8 @@ const Header = () => {
     navigate("/");
   };
   return (
-    <header className=" bg-transparent h-24 flex flex-col  p-3 ">
-      <div className="flex place-content-around items-center  bg-white">
+    <header className=" bg-transparent h-32 flex flex-col  p-3 ">
+      <div className="flex place-content-around items-center h-24 bg-white">
         <div className="ml-8 h-10 leading-10 text-xl w-10">
           NOMBRE
         </div>

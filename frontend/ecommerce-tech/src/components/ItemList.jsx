@@ -105,16 +105,8 @@ const ItemList = () => {
   return (
     <main className="flex flex-grow min-h-screen">
       <Filters />
-      <section className=" bg-orange-300 w-[400px] p-3 flex-grow place-content-center border  border-black items-center">
-        {selectedCategories !== 0 && (
-          <h2 className="text-sm">{`Categoría ${selectedCategories}`}</h2>
-        )}
-
-        <h2 className="text-sm">
-          Ordenados por Precio:{" "}
-          {priceOrderAsc ? "de menor a mayor" : "de mayor a menor"}
-        </h2>
-        <div className="p-2.5 flex flex-wrap gap-3 place-content-center">
+      <section className=" bg-transparent w-[400px] p-3 flex-grow place-content-center items-center">
+        <div className="p-2.5 flex flex-wrap gap-4 place-content-center">
           {lastFilterType === "category" &&
             items?.map((i) => {
               return (
@@ -145,8 +137,8 @@ const ItemList = () => {
                 />
               );
             })}
-            { items.length === 0 || productFiltered.length === 0 &&
-            <div>Oops! Revise sus filtros</div>}
+            { (items.length === 0 && productFiltered.length) === 0 &&
+            <div>Oops! NO HAY PRODUCTOS DISPONIBLES</div>}
         </div>
       </section>
     </main>
