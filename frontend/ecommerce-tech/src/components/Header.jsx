@@ -15,28 +15,34 @@ const Header = () => {
   };
   const getClassName = ({ isActive }) => {
     if (isActive) {
-      return "text-purple-900 font-bold ";
+      return "text-blue-600 font-bold ";
     }else{
-      return "text-purple-900   transition-all hover:font-bold "
+      return "text-blue-600   transition-all hover:font-bold "
     }
   }
   return (
-    <header className=" bg-transparent h-32 flex flex-col  p-3 ">
+    <header className=" bg-transparent  h-28 flex flex-col  p-3 ">
       <div className="flex place-content-around items-center h-24 bg-white">
-        <div className="ml-8 h-10 leading-10 text-xl w-10">NOMBRE</div>
+        <div className="ml-8 h-10 leading-10 text-xl w-10">STORE</div>
         <LookUpBar />
         {customer.id !== 0 ? <LoggedMenu /> : <Login />}
         <CartIcon />
       </div>
       <nav>
-        <ul className="flex place-content-around w-[150px] gap-2 ml-10 ">
+        <ul className="flex place-content-around w-1/2 gap-2 ml-10 ">
           <li
             onClick={goToHome}
           >
-            <NavLink to={`/`}className={getClassName}>Home</NavLink>
+            <NavLink to={`/`}className={getClassName}>Ofertas</NavLink>
           </li>
           <li >
-            <NavLink className={getClassName} to={`/cart`}>Carrito</NavLink>
+            <NavLink className={getClassName} >Categorías de productos</NavLink>
+          </li>
+          <li >
+            <NavLink className={getClassName} >Soporte</NavLink>
+          </li>
+          <li >
+            <NavLink className={getClassName} >Seguimiento de productos</NavLink>
           </li>
         </ul>
       </nav>

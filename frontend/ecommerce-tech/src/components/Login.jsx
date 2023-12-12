@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 
 const getClassName = ({ isActive }) => {
   if (isActive) {
-    return "text-slate-200 bg-purple-900 px-8 h-8 text-center rounded-2xl border border-slate-900";
+    return "text-white bg-blue-600 px-8 h-8 text-center rounded-2xl border border-blue-600";
   }else{
-    return "text-purple-900 px-8 h-8 text-center rounded-2xl border border-purple-900 transition-all hover:text-slate-200 hover:bg-purple-900"
+    return "text-blue-600 px-8 h-8 text-center rounded-2xl border border-blue-600 transition-all hover:text-white hover:bg-blue-600 hover:shadow"
   }
 }
 
