@@ -12,9 +12,9 @@ const LoggedMenu = () => {
 
   const getClassName = ({ isActive }) => {
     if (isActive) {
-      return "text-purple-900 font-bold ";
+      return "text-blue-600 font-bold ";
     }else{
-      return "text-purple-900   transition-all hover:font-bold "
+      return "text-blue-600   transition-all hover:font-bold "
     }
   }
   return (
@@ -33,7 +33,7 @@ const LoggedMenu = () => {
           <li>
             <NavLink className={getClassName} to={`/orders/${customer.id}`}>Historial de Compras</NavLink>
           </li>
-          <li className="text-purple-900   transition-all hover:font-bold ">
+          <li className="text-blue-600   transition-all hover:font-bold ">
             <button onClick={() => logout()}>Cerrar sesión</button>
           </li>
         </ul>

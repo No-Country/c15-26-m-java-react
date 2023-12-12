@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { MyContext } from "../MyContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import noImage from "../assets/noimage.png";
 import { API_URL } from "../config";
@@ -13,6 +13,8 @@ const ItemDetail = () => {
   const { id } = useParams();
 
   const { cart, updateCart, qtyCart, updateQtyCart } = useContext(MyContext);
+  const navigate = useNavigate();
+
   const promo = Math.ceil(item.price * (1 - item.discount));
   const percent = item.discount * 100;
 
@@ -43,6 +45,11 @@ const ItemDetail = () => {
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
+  const buyNow = () => {
+    addToCart();
+    navigate('/cart')
+  }
+
   useEffect(() => {
     const endPoint = API_URL + `product/${id}`;
     axios
@@ -55,23 +62,23 @@ const ItemDetail = () => {
   }, [id]);
 
   return (
-    <section className=" bg-yellow-300 w-[400px] flex flex-grow place-content-center border border-black items-center">
-      <div className="w-[350px] m-4 p-4 border shadow bg-slate-100 border-gray-500 rounded">
-        <div className="flex items-center">
-          <div className="m-1 p-1 w-[150px]">
+    <section className=" bg-transparent flex flex-grow place-content-center border border-black items-center">
+      <div className="w-[1077px] h-[531px] m-4 p-4 border shadow bg-slate-100 border-gray-500 rounded">
+        <div className="flex items-center gap-3">
+          <div className="m-1 p-1 w-[520px] place-content-center border border-red-900">
             <img
               src={item?.images?.length > 0 ? item?.images[0] : noImage}
               alt="productImage"
             />
           </div>
-          <div className="p-2 w-[150px]">
+          <div className="p-2 w-[520px] border border-black">
             <h2 className="font-bold text-stone-600 text-justify">
               {item.name}
             </h2>
             <h3 className="font-bold">{item.brand}</h3>
             <h4 className="italic">{item.model}</h4>
-          </div>
-        </div>
+            <div className="p-4 text-sm">{item.description}</div>
+          
         <div className="flex h-[100px] place-content-center flex-wrap p-2">
           <div className="flex gap-2 items-center mb-2">
             <span
@@ -101,7 +108,7 @@ const ItemDetail = () => {
             </span>
           </div>
         </div>
-        <div className="p-4 text-sm">{item.description}</div>
+       
 
         <div className="flex place-content-center">
           <div className="w-[175px] h-[36px] border border-black flex place-content-center items-center">
@@ -124,13 +131,27 @@ const ItemDetail = () => {
             </span>
           </div>
         </div>
-        <div className="flex m-4 pr-2 justify-around">
-          <button
-            className="h-10 p-2 text-center rounded-lg bg-red-400"
-            onClick={() => addToCart()}
-          >
-            Comprar
-          </button>
+
+        <div className="flex flex-col m-4 gap-2">
+        <div className="flex justify-around">
+            <button
+              className="h-10 p-2 w-4/5 text-center rounded-lg border border-blue-600 text-blue-600 font-bold hover:bg-blue-600 hover:text-white"
+              onClick={() => addToCart()}
+            >
+              Agregar unidad al carrito
+            </button>
+          </div>
+          <div className="flex  justify-around">
+            <button
+              className="h-10 p-2 w-4/5 text-center rounded-lg border border-blue-600 text-blue-600 font-bold hover:bg-blue-600 hover:text-white"
+              onClick={() => buyNow()}
+            >
+              Comprar ahora
+            </button>
+          </div>
+        </div>
+
+        </div>
         </div>
       </div>
     </section>

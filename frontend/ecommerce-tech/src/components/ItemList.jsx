@@ -5,6 +5,7 @@ import Filters from "./Filters";
 import axios from "axios";
 import { API_URL } from "../config";
 import { Spinner } from "@material-tailwind/react";
+import OrderFilter from "./OrderFilter";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -103,47 +104,54 @@ const ItemList = () => {
   }, [items]);
 
   return (
-    <main className="flex flex-grow min-h-screen">
-      <Filters />
-      <section className=" bg-transparent w-[400px] p-3 flex-grow place-content-center items-center">
-        <div className="p-2.5 flex flex-wrap gap-4 place-content-center">
-          {lastFilterType === "category" &&
-            items?.map((i) => {
-              return (
-                <ItemCard
-                  key={i.id}
-                  id={i.id}
-                  name={i.name}
-                  brand={i.brand}
-                  model={i.model}
-                  price={i.price}
-                  discount={i.discount}
-                  images={i.images}
-                />
-              );
-            })}
-          {lastFilterType === "brand" &&
-            productFiltered?.map((i) => {
-              return (
-                <ItemCard
-                  key={i.id}
-                  id={i.id}
-                  name={i.name}
-                  brand={i.brand}
-                  model={i.model}
-                  price={i.price}
-                  discount={i.discount}
-                  images={i.images}
-                />
-              );
-            })}
-          {items.length === 0 && productFiltered.length === 0 && (
-            <div className="flex place-content-center items-center min-h-screen">
-              <Spinner className="h-60 w-60 text-purple-900/50" />
-            </div>
-          )}
+    <main className="flex flex-grow place-content-center min-h-screen">
+     <div className="w-[227px] h-[1018px] mt-16">
+       <Filters />
+     </div>
+      <div className="flex flex-col  w-[994px] ">
+        <div className="flex justify-end">
+          <OrderFilter />
         </div>
-      </section>
+        <section className=" bg-transparent flex-grow place-content-center items-center">
+          <div className="p-2.5 flex flex-wrap gap-4 place-content-center">
+            {lastFilterType === "category" &&
+              items?.map((i) => {
+                return (
+                  <ItemCard
+                    key={i.id}
+                    id={i.id}
+                    name={i.name}
+                    brand={i.brand}
+                    model={i.model}
+                    price={i.price}
+                    discount={i.discount}
+                    images={i.images}
+                  />
+                );
+              })}
+            {lastFilterType === "brand" &&
+              productFiltered?.map((i) => {
+                return (
+                  <ItemCard
+                    key={i.id}
+                    id={i.id}
+                    name={i.name}
+                    brand={i.brand}
+                    model={i.model}
+                    price={i.price}
+                    discount={i.discount}
+                    images={i.images}
+                  />
+                );
+              })}
+            {items.length === 0 && productFiltered.length === 0 && (
+              <div className="flex place-content-center items-center min-h-screen">
+                <Spinner className="h-60 w-60 text-purple-900/50" />
+              </div>
+            )}
+          </div>
+        </section>
+      </div>
     </main>
   );
 };

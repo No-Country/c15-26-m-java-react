@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { MyContext } from "../MyContext";
 import { categories } from "../config";
+import { Checkbox } from "@material-tailwind/react";
 
 const CategoriesFilter = () => {
   const {
@@ -73,26 +74,26 @@ const CategoriesFilter = () => {
   return (
     <div className="flex flex-col place-content-center">
       <div className="w-[190px] p-1 flex flex-col place-content-center flex-wrap">
-        <label className="font-bold mb-2">Categorías</label>
+        <label className="font-bold ml-4 mb-2 ">Categorías</label>
         {selectedCategories.length !== 0 &&
           selectedCategories.map(
             (filter) =>
               filter !== 0 && (
                 <div
-                  className="font-bold flex place-content-between p-1 cursor-pointer bg-slate-400"
+                  className="font-bold flex place-content-between px-3 ml-2 mb-1 rounded-full cursor-pointer bg-blue-200"
                   onClick={() => removeCategory(filter)}
                   key={filter}
                 >
-                 <span>
-                  {filter < 10
-                    ? categories[filter].name
-                    : categories[Math.trunc(filter / 10)].name +
-                      " > " +
-                      categories[Math.trunc(filter / 10)].subcategories[
-                        (filter % 10) - 1
-                      ].name}
+                  <span>
+                    {filter < 10
+                      ? categories[filter].name
+                      : categories[Math.trunc(filter / 10)].name +
+                        " > " +
+                        categories[Math.trunc(filter / 10)].subcategories[
+                          (filter % 10) - 1
+                        ].name}
                   </span>
-                  <span>X</span>
+                  <span className="text-blue-900">X</span>
                 </div>
               )
           )}
@@ -100,14 +101,18 @@ const CategoriesFilter = () => {
         {categories.map((category) => {
           if (category.id !== 0) {
             return (
-              <div key={category.id}>
-                <input
-                  type="checkbox"
+              <div
+                key={category.id}
+                className="w-[210px] h-9 px-1 flex items-center"
+              >
+                <Checkbox
+                  className="h-7 w-7 "
+                  color="blue"
                   value={category.id}
                   checked={isSelected(category.id)}
                   onChange={handleCategoryChange}
                 />
-                <label className="text-sm ml-2" htmlFor={category.name}>
+                <label className={isSelected(category.id) ? "text-sm ml-2 text-blue-600" :"text-sm ml-2"} htmlFor={category.name}>
                   {category.name}
                 </label>
               </div>
@@ -117,11 +122,12 @@ const CategoriesFilter = () => {
 
         {subcategories.length > 0 && (
           <>
-            <label className="font-bold mt-3 mb-2">Subcategorías</label>
+            <label className="font-bold ml-4 my-2">Subcategorías</label>
             {subcategories.map((subcategory) => (
-              <div key={subcategory.id}>
-                <input
-                  type="checkbox"
+              <div key={subcategory.id} className="w-[210px] h-9 px-1 flex items-center">
+                <Checkbox
+                 className="h-7 w-7 "
+                 color="blue"
                   value={subcategory.id}
                   checked={isSelected(subcategory.id)}
                   onChange={handleCategoryChange}
@@ -134,11 +140,12 @@ const CategoriesFilter = () => {
           </>
         )}
 
-        <h2 className="font-bold mt-3 mb-2">Marcas</h2>
+        <h2 className="font-bold ml-4 my-2">Marcas</h2>
         {brands?.map((brand) => (
-          <div key={brand}>
-            <input
-              type="checkbox"
+          <div key={brand} className="w-[210px] h-9 px-1 flex items-center">
+            <Checkbox
+             className="h-7 w-7 "
+             color="blue"
               value={brand}
               checked={lastFilterType === "category" ? false : isChecked(brand)}
               onChange={handleBrandChange}
