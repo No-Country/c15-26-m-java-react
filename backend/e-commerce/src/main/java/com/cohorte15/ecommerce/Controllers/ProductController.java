@@ -63,6 +63,9 @@ public class ProductController extends BaseControllerImpl<Product, ProductServic
     @GetMapping("/search/{name}")
     public ResponseEntity<?> getProductsBySearch(@PathVariable String name) {
         try {
+            if (productService.getProductsBySearch("%" + name + "%").size() == 0) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron productos con el nombre " + name);
+            }
             return ResponseEntity.status(HttpStatus.OK).body(productService.getProductsBySearch("%" + name + "%"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
