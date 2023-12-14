@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { MyContext } from "../MyContext";
 import axios from "axios";
@@ -9,7 +9,6 @@ import { API_URL } from "../config";
 const LoginForm = () => {
   const navigate = useNavigate();
   const { customer, updateCustomer } = useContext(MyContext);
-
 
   const initialValues = {
     email: "",
@@ -58,70 +57,78 @@ const LoginForm = () => {
       {customer.id !== 0 ? (
         <Navigate to={"/"} />
       ) : (
-        <div className="flex w-[500px] place-content-center mt-8">
-          <div className="w-full ">
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        <div className="flex flex-col w-[412px] h-[546px]  gap-3 px-4 bg-white rounded">
+          <h1 className="mt-7 text-2xl w-[372px] h-[28px] font-semibold ">
+            Iniciar Sesión
+          </h1>
+
+          <form
+            onSubmit={handleSubmit}
+          >
+            <div className="w-[380px] h-[104px] p-1">
+              <label
+                className="text-gray-800 text-sm font-semibold"
+                htmlFor="name"
+              >
+                Email:
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {touched.email && errors.email ? (
+                <div className="text-gray-800 text-sm">{errors.email}</div>
+              ) : null}
+            </div>
+
+            <div className="w-[380px] h-[104px] p-1">
+              <label
+                className="text-gray-800 text-sm font-semibold"
+                htmlFor="name"
+              >
+                Contraseña:
+              </label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {touched.password && errors.password ? (
+                <div className="text-gray-800 text-sm">{errors.password}</div>
+              ) : null}
+            </div>
+
+            <div
+              className="w-[367px] h-[14px] p-1 text-sm text-center underline text-blue-700 hover:text-blue-800"
+              onClick={resetPassword()}
             >
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700  font-bold mb-2"
-                  htmlFor="name"
-                >
-                  Correo electrónico:
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {touched.email && errors.email ? (
-                  <div className="text-red-500  italic">{errors.email}</div>
-                ) : null}
-              </div>
+              Olvidé mi contraseña
+            </div>
 
-              <div>
-                <label
-                  className="block text-gray-700  font-bold mb-2"
-                  htmlFor="name"
-                >
-                  Contraseña:
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {touched.password && errors.password ? (
-                  <div className="text-red-500  italic">{errors.password}</div>
-                ) : null}
-              </div>
-
-              <div className="mt-4 flex items-center justify-between">
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  type="submit"
-                >
-                  Iniciar Sesión
-                </button>
-                <button
-                  className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                  onClick={resetPassword()}
-                >
-                  ¿Olvidaste tu contraseña?
-                </button>
-              </div>
-            </form>
-          </div>
+            <div className="mt-4 flex items-center">
+              <button
+                className="w-[360px] h-[42px] bg-blue-700 text-white font-bold py-2 px-4 rounded mt-16 ml-3 hover:bg-white hover:text-blue-700 hover:border-blue-700  hover:border  focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Iniciar Sesión
+              </button>
+            </div>
+            <div
+              className="w-[367px] h-[14px] p-1 mt-16 text-sm text-center underline text-blue-700  hover:text-blue-800"
+              onClick={()=>navigate("/register")}
+            >
+              ¿No tienes una cuenta? ¡Créala aquí!
+            </div>
+          </form>
         </div>
       )}
     </>

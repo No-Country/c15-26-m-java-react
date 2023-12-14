@@ -14,6 +14,7 @@ const ItemList = () => {
     selectedCategories,
     priceOrderAsc,
     search,
+    updateSearch,
     updateBrands,
     selectedBrands,
     lastFilterType,
@@ -73,7 +74,8 @@ const ItemList = () => {
           setItems(response.data);
         })
         .catch((error) => {
-          alert("Hubo errores, intenta más tarde...");
+          if(error.message === "Request failed with status code 404")
+          alert(`No se encontraron productos con el término de búsqueda: ${search}`);
           console.log(error);
         });
     }
@@ -92,6 +94,7 @@ const ItemList = () => {
   }, [priceOrderAsc]);
 
   useEffect(() => {
+    if (search !== "") updateSearch("");
     if (lastFilterType === "category") {
       let brandList = [];
       items.map((item) => {
@@ -105,9 +108,9 @@ const ItemList = () => {
 
   return (
     <main className="flex flex-grow place-content-center min-h-screen">
-     <div className="w-[227px] h-[1018px] mt-16">
-       <Filters />
-     </div>
+      <div className="w-[227px] h-[1018px] mt-16">
+        <Filters />
+      </div>
       <div className="flex flex-col  w-[994px] ">
         <div className="flex justify-end">
           <OrderFilter />
