@@ -4,6 +4,7 @@ import { MyContext } from "../MyContext";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import noImage from "../assets/noimage.png";
+import addProductIcon from "../assets/Shopping Card Add.svg";
 import { API_URL } from "../config";
 
 const ItemDetail = () => {
@@ -47,8 +48,8 @@ const ItemDetail = () => {
 
   const buyNow = () => {
     addToCart();
-    navigate('/cart')
-  }
+    navigate("/cart");
+  };
 
   useEffect(() => {
     const endPoint = API_URL + `product/${id}`;
@@ -62,24 +63,31 @@ const ItemDetail = () => {
   }, [id]);
 
   return (
-    <section className=" bg-transparent flex flex-grow place-content-center border border-black items-center">
-      <div className="w-[1077px] h-[531px] m-4 p-4 border shadow bg-slate-100 border-gray-500 rounded">
-        <div className="flex items-center gap-3">
-          <div className="m-1 p-1 w-[520px] place-content-center border border-red-900">
-            <img
-              src={item?.images?.length > 0 ? item?.images[0] : noImage}
-              alt="productImage"
-            />
-          </div>
-          <div className="p-2 w-[520px] border border-black">
-            <h2 className="font-bold text-stone-600 text-justify">
+    <section className="flex flex-grow place-content-center">
+      <div className=" w-[1200px] flex flex-wrap items-center gap-4">
+        <div className=" w-[774px] h-[531px] bg-white rounded-xl">
+          <img
+            src={item?.images?.length > 0 ? item?.images[0] : noImage}
+            alt="productImage"
+            className="h-full w-full object-contain object-center"
+          />
+        </div>
+
+        <div className=" w-[409px] h-[531px] bg-white flex flex-col items-center rounded-xl px-6">
+          <div className="h-[400px]">
+            <div className="font-semibold text-gray-800 w-[365px] h-[18px] text-xl mt-8 mb-4">
               {item.name}
-            </h2>
-            <h3 className="font-bold">{item.brand}</h3>
-            <h4 className="italic">{item.model}</h4>
-            <div className="p-4 text-sm">{item.description}</div>
-          
-        <div className="flex h-[100px] place-content-center flex-wrap p-2">
+            </div>
+            <div className="font-bold text-4xl text-gray-800 mb-8 w-[365px] h-[18px]">
+              {item.brand}
+            </div>
+            <div className="mb-4 w-[365px] h-[18px] text-xs">{item.model}</div>
+            <div className="mb-4 w-[365px] h-[18px] text-xs">
+              {item.description}
+            </div>
+          </div>
+
+          {/* <div className="flex h-[100px] place-content-center flex-wrap p-2">
           <div className="flex gap-2 items-center mb-2">
             <span
               className={
@@ -130,29 +138,33 @@ const ItemDetail = () => {
               {qty > 1 ? "unidades" : "unidad"}
             </span>
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex flex-col m-4 gap-2">
-        <div className="flex justify-around">
-            <button
-              className="h-10 p-2 w-4/5 text-center rounded-lg border border-blue-600 text-blue-600 font-bold hover:bg-blue-600 hover:text-white"
+          <div className=" h-[110px] w-[380px]">
+            <div
+              className="h-[42px] w-[360px] p-1 m-2 flex  place-content-center rounded-lg border border-blue-600 text-xl font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
               onClick={() => addToCart()}
             >
-              Agregar unidad al carrito
-            </button>
-          </div>
-          <div className="flex  justify-around">
-            <button
-              className="h-10 p-2 w-4/5 text-center rounded-lg border border-blue-600 text-blue-600 font-bold hover:bg-blue-600 hover:text-white"
+              <img
+                className="h-6 w-6 mr-2 "
+                src={addProductIcon}
+                alt="agregar"
+              />
+              <div className="w-[248px] h-[21px]">
+                Agregar unidad al carrito
+              </div>
+            </div>
+
+            <div
+              className="h-[42px] w-[360px] p-1 m-2 flex  place-content-center rounded-lg border border-blue-600 text-xl font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
               onClick={() => buyNow()}
             >
               Comprar ahora
-            </button>
+            </div>
           </div>
         </div>
 
-        </div>
-        </div>
+        <div className="w-[774px] h-[1200px] bg-white rounded-xl"></div>
       </div>
     </section>
   );

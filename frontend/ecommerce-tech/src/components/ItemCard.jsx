@@ -6,7 +6,6 @@ const ItemCard = ({ id, name, brand, model, price, discount, images }) => {
   const promo = Math.ceil(price * (1 - discount));
 
   const goToDetail = (id) => {
-    console.log(id);
     navigate(`item/${id}`);
   };
 
@@ -30,7 +29,7 @@ const ItemCard = ({ id, name, brand, model, price, discount, images }) => {
 
       <div
         className={
-          discount != 0 ? "text-left  text-gray-800 font-bold" : "hidden"
+          discount != 0 ? "text-left  text-blue-600 font-bold" : "hidden"
         }
       >
         <div>{`$ ` + new Intl.NumberFormat().format(promo)}</div>

@@ -5,6 +5,8 @@ import Login from "./Login.jsx";
 import LoggedMenu from "./LoggedMenu.jsx";
 import { LookUpBar } from "./LookUpBar.jsx";
 import CartIcon from "./CartIcon.jsx";
+import logo from '../assets/Logo.svg'
+import iso from '../assets/Isotype.svg'
 
 const Header = () => {
   const { customer, updateselectedCategories } = useContext(MyContext);
@@ -22,8 +24,13 @@ const Header = () => {
   }
   return (
     <header className=" bg-transparent  h-28 flex flex-col  p-3 ">
-      <div className="flex place-content-around items-center h-24 bg-white">
-        <div className="ml-8 h-10 leading-10 text-xl w-10">STORE</div>
+      <div className="flex place-content-evenly items-center h-24 bg-white">
+
+        <div className="flex cursor-pointer" onClick={goToHome}>
+          <div className="h-[46px] w-[46px]"><img src={iso}/></div>
+          <div className="h-10 w-[191px]"><img src={logo}/></div>
+        </div>
+
         <LookUpBar />
         {customer.id !== 0 ? <LoggedMenu /> : <Login />}
         <CartIcon />

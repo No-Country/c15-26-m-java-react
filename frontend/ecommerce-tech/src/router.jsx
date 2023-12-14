@@ -5,11 +5,11 @@ import ItemList from "./components/ItemList.jsx";
 import LoginForm from "./components/LoginForm.jsx";
 import OrderForm from "./components/OrderForm.jsx";
 import RegisterForm from "./components/RegisterForm.jsx";
-import Cart from "./routes/Cart.jsx";
 import Root from "./routes/Root.jsx";
 import OrderDetail from "./components/OrderDetail.jsx";
 import OrderList from "./components/OrderList.jsx";
 import CustomerProfile from "./components/CustomerProfile.jsx";
+import Cart from "./components/Cart.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,12 +37,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
-        children: [
-          {
-            path: "checkout",
-            element: <OrderForm />,
-          },
-        ],
+      },
+      {
+        path: "checkout",
+        element: <OrderForm />,
       },
       {
         path: "order/:id",

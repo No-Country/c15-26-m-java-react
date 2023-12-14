@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { MyContext } from "../MyContext";
 import { categories } from "../config";
 import { Checkbox } from "@material-tailwind/react";
+import downarrow from "../assets/iconamoon_arrow-down-2-thin.svg";
+import uparrow from "../assets/iconamoon_arrow-up-2-thin.svg";
 
 const CategoriesFilter = () => {
   const {
@@ -15,6 +17,10 @@ const CategoriesFilter = () => {
   } = useContext(MyContext);
 
   const [subcategories, setSubcategories] = useState([]);
+  const [contractCat, setContractCat] = useState(false)
+  const [contractSubCat, setContractSubCat] = useState(false)
+  const [contractBrand, setContractBrand] = useState(false)
+  
 
   const handleCategoryChange = (e) => {
     const newCategory = parseInt(e.target.value);
@@ -71,11 +77,22 @@ const CategoriesFilter = () => {
 
   const isChecked = (brand) => selectedBrands.includes(brand);
 
+  const hideOrShowCategories = () => {
+    setContractCat(prev =>!prev)
+  }
+  const hideOrShowSubCategories = () => {
+    setContractSubCat(prev =>!prev)
+  }
+  const hideOrShowBrands = () => {
+    setContractBrand(prev =>!prev)
+  }
   return (
     <div className="flex flex-col place-content-center">
       <div className="w-[190px] p-1 flex flex-col place-content-center flex-wrap">
-        <label className="font-bold ml-4 mb-2 ">Categorías</label>
-        {selectedCategories.length !== 0 &&
+        <label className="font-bold ml-4 mb-2 w-[190px] flex place-content-between ">
+          Categorías <img onClick={hideOrShowCategories} src={contractCat ? downarrow : uparrow} alt="expande" />
+        </label>
+        { selectedCategories.length !== 0 && 
           selectedCategories.map(
             (filter) =>
               filter !== 0 && (
@@ -98,7 +115,7 @@ const CategoriesFilter = () => {
               )
           )}
 
-        {categories.map((category) => {
+        {  !contractCat && categories.map((category) => {
           if (category.id !== 0) {
             return (
               <div
@@ -112,7 +129,14 @@ const CategoriesFilter = () => {
                   checked={isSelected(category.id)}
                   onChange={handleCategoryChange}
                 />
-                <label className={isSelected(category.id) ? "text-sm ml-2 text-blue-600" :"text-sm ml-2"} htmlFor={category.name}>
+                <label
+                  className={
+                    isSelected(category.id)
+                      ? "text-sm ml-2 text-blue-600"
+                      : "text-sm ml-2"
+                  }
+                  htmlFor={category.name}
+                >
                   {category.name}
                 </label>
               </div>
@@ -122,12 +146,15 @@ const CategoriesFilter = () => {
 
         {subcategories.length > 0 && (
           <>
-            <label className="font-bold ml-4 my-2">Subcategorías</label>
-            {subcategories.map((subcategory) => (
-              <div key={subcategory.id} className="w-[210px] h-9 px-1 flex items-center">
+            <label className="font-bold ml-4 my-2 w-[190px] flex place-content-between ">Subcategorías <img onClick={hideOrShowSubCategories} src={contractSubCat ? downarrow : uparrow} alt="expande" /></label>
+            {!contractSubCat &&  subcategories.map((subcategory) => (
+              <div
+                key={subcategory.id}
+                className="w-[210px] h-9 px-1 flex items-center"
+              >
                 <Checkbox
-                 className="h-7 w-7 "
-                 color="blue"
+                  className="h-7 w-7 "
+                  color="blue"
                   value={subcategory.id}
                   checked={isSelected(subcategory.id)}
                   onChange={handleCategoryChange}
@@ -140,12 +167,12 @@ const CategoriesFilter = () => {
           </>
         )}
 
-        <h2 className="font-bold ml-4 my-2">Marcas</h2>
-        {brands?.map((brand) => (
+        <label className="font-bold ml-4 my-2 w-[190px] flex place-content-between ">Marcas <img onClick={hideOrShowBrands} src={contractBrand ? downarrow : uparrow} alt="expande" /></label>
+        {!contractBrand &&  brands?.map((brand) => (
           <div key={brand} className="w-[210px] h-9 px-1 flex items-center">
             <Checkbox
-             className="h-7 w-7 "
-             color="blue"
+              className="h-7 w-7 "
+              color="blue"
               value={brand}
               checked={lastFilterType === "category" ? false : isChecked(brand)}
               onChange={handleBrandChange}
