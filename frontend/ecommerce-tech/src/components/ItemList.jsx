@@ -149,7 +149,7 @@ const ItemList = () => {
               })}
             {items.length === 0 && productFiltered.length === 0 && (
               <div className="flex place-content-center items-center min-h-screen">
-                <Spinner className="h-60 w-60 text-purple-900/50" />
+                <Spinner className="h-60 w-60 text-blue-600" />
               </div>
             )}
           </div>

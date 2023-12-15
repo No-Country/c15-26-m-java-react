@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MyContext } from "../MyContext.jsx";
-import Login from "./Login.jsx";
+import LoginMenu from "./LoginMenu.jsx";
 import LoggedMenu from "./LoggedMenu.jsx";
 import { LookUpBar } from "./LookUpBar.jsx";
 import CartIcon from "./CartIcon.jsx";
@@ -23,7 +23,7 @@ const Header = () => {
     }
   }
   return (
-    <header className=" bg-transparent  h-28 flex flex-col  p-3 ">
+    <header className=" bg-transparent  h-28 flex flex-col ">
       <div className="flex place-content-evenly items-center h-24 bg-white">
 
         <div className="flex cursor-pointer" onClick={goToHome}>
@@ -32,7 +32,7 @@ const Header = () => {
         </div>
 
         <LookUpBar />
-        {customer.id !== 0 ? <LoggedMenu /> : <Login />}
+        {customer.id !== 0 ? <LoggedMenu /> : <LoginMenu />}
         <CartIcon />
       </div>
       <nav>

@@ -3,7 +3,7 @@ import Error from "./components/Error.jsx";
 import ItemDetail from "./components/ItemDetail.jsx";
 import ItemList from "./components/ItemList.jsx";
 import LoginForm from "./components/LoginForm.jsx";
-import OrderForm from "./components/OrderForm.jsx";
+import CheckOut from "./components/CheckOut.jsx";
 import RegisterForm from "./components/RegisterForm.jsx";
 import Root from "./routes/Root.jsx";
 import OrderDetail from "./components/OrderDetail.jsx";
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: "checkout",
-        element: <OrderForm />,
+        element: <CheckOut />,
       },
       {
         path: "order/:id",

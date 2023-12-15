@@ -9,19 +9,15 @@ import { API_URL } from "../config";
 
 const ItemDetail = () => {
   const [item, setItem] = useState({});
-  const [qty, setQty] = useState(1);
+  const [qty] = useState(1);
 
   const { id } = useParams();
 
-  const { cart, updateCart, qtyCart, updateQtyCart } = useContext(MyContext);
+  const { cart, updateCart, qtyCart, updateQtyCart, updateShopping } = useContext(MyContext);
   const navigate = useNavigate();
 
   const promo = Math.ceil(item.price * (1 - item.discount));
-  const percent = item.discount * 100;
-
-  const addProduct = (num) => {
-    setQty(qty + num);
-  };
+  
 
   const addToCart = () => {
     alert(`Comprando ${qty} unidades de ${item.name}`);
@@ -48,7 +44,8 @@ const ItemDetail = () => {
 
   const buyNow = () => {
     addToCart();
-    navigate("/cart");
+    updateShopping(true);
+    navigate("/checkout");
   };
 
   useEffect(() => {
@@ -74,7 +71,7 @@ const ItemDetail = () => {
         </div>
 
         <div className=" w-[409px] h-[531px] bg-white flex flex-col items-center rounded-xl px-6">
-          <div className="h-[400px]">
+          <div className="h-[250px] mb-5 ">
             <div className="font-semibold text-gray-800 w-[365px] h-[18px] text-xl mt-8 mb-4">
               {item.name}
             </div>
@@ -87,60 +84,27 @@ const ItemDetail = () => {
             </div>
           </div>
 
-          {/* <div className="flex h-[100px] place-content-center flex-wrap p-2">
-          <div className="flex gap-2 items-center mb-2">
-            <span
-              className={
-                item.discount == 0 ? "text-lg font-bold text-blue-950" : ""
-              }
-            >{`$ ${item.price}`}</span>
-            <span
-              className={
-                item.discount != 0 ? "bg-red-500 p-1 font-extrabold " : "hidden"
-              }
-            >{`${percent} % Off`}</span>
-          </div>
-          <div>
-            <span
-              className={item.discount != 0 ? "text-lg" : "hidden"}
-            >{`Promo: $`}</span>
-            <span
-              className={
-                item.discount != 0
-                  ? "text-lg font-bold text-blue-950"
-                  : "hidden"
-              }
-            >
-              {" "}
-              {`${promo}`}
-            </span>
-          </div>
-        </div>
-       
+          
 
-        <div className="flex place-content-center">
-          <div className="w-[175px] h-[36px] border border-black flex place-content-center items-center">
-            <button
-              className=" h-6 bg-slate-500 border border-black text-center leading-5 font-bold w-5"
-              onClick={() => addProduct(-1)}
-              disabled={qty == 1}
-            >
-              -
-            </button>
-            <span className="w-[30px] text-center font-extrabold">{qty}</span>
-            <button
-              className=" h-6 bg-slate-500 border border-black text-center leading-5 font-bold w-5"
-              onClick={() => addProduct(+1)}
-            >
-              +
-            </button>
-            <span className="w-[68px] pl-2">
-              {qty > 1 ? "unidades" : "unidad"}
-            </span>
-          </div>
-        </div> */}
+         <div className="flex flex-col gap-2 mb-2">
+           <div className=" flex flex-col  text-left text-lg text-gray-800 w-[365px] h-[48px] ">
+             <div>{`$ ` + new Intl.NumberFormat().format(item.price)}</div>
+             <div>Precio Normal</div>
+           </div>
+          
+           <div
+             className={
+               item.discount != 0
+                 ? "flex flex-col  text-left text-lg  text-blue-600 w-[365px] h-[55px]"
+                 : "hidden"
+             }
+           >
+             <div className=" font-semibold text-2xl">{`$ ` + new Intl.NumberFormat().format(promo)}</div>
+             <div className="text">Precio Oferta</div>
+           </div>
+         </div>
 
-          <div className=" h-[110px] w-[380px]">
+          <div className=" h-[130px] w-[380px] flex flex-col mt-3">
             <div
               className="h-[42px] w-[360px] p-1 m-2 flex  place-content-center rounded-lg border border-blue-600 text-xl font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
               onClick={() => addToCart()}

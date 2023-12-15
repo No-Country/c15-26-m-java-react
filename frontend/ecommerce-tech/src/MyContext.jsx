@@ -58,6 +58,16 @@ const MyContextProvider = ({ children }) => {
   const updateLastFilterType = (newValue) => {
     setLastFilterType(newValue);
   };
+
+  const [guestConfirmed, setGuestConfirmed] = useState(false)
+  const updateGuestConfirmed = (newValue) => {
+    setGuestConfirmed(newValue);
+  };
+
+  const [shopping, setShopping] = useState(false)
+  const updateShopping = (newValue) => {
+    setShopping(newValue);
+  };
   return (
     <MyContext.Provider
       value={{
@@ -78,7 +88,11 @@ const MyContextProvider = ({ children }) => {
         selectedBrands,
         updateSelectedBrands,
         lastFilterType,
-        updateLastFilterType
+        updateLastFilterType,
+        guestConfirmed,
+        updateGuestConfirmed,
+        shopping,
+        updateShopping
       }}
     >
       {children}
