@@ -1,12 +1,12 @@
 import { useFormik } from "formik";
 import { useContext } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { MyContext } from "../MyContext";
 import axios from "axios";
 import { API_URL } from "../config";
 
-const LoginForm = () => {
+const LoginForm = ({ goCheckout = false }) => {
   const navigate = useNavigate();
   const { customer, updateCustomer } = useContext(MyContext);
 
@@ -36,7 +36,7 @@ const LoginForm = () => {
       .then((res) => {
         localStorage.setItem("customer", JSON.stringify(res.data.user));
         updateCustomer(JSON.parse(localStorage.getItem("customer")));
-        navigate("/");
+        navigate(goCheckout ? "/checkout" : "/");
       })
       .catch((error) => {
         alert("ocurrió un error");
@@ -57,78 +57,78 @@ const LoginForm = () => {
       {customer.id !== 0 ? (
         <Navigate to={"/"} />
       ) : (
-        <div className="flex flex-col w-[412px] h-[546px]  gap-3 px-4 bg-white rounded">
-          <h1 className="mt-7 text-2xl w-[372px] h-[28px] font-semibold ">
-            Iniciar Sesión
-          </h1>
+        <div className="flex flex-col place-content-center">
+          <div className="flex flex-col w-[412px] h-[546px]  gap-3 px-4 bg-white rounded">
+            <h1 className="mt-7 text-2xl w-[372px] h-[28px] font-semibold ">
+              Iniciar Sesión
+            </h1>
 
-          <form
-            onSubmit={handleSubmit}
-          >
-            <div className="w-[380px] h-[104px] p-1">
-              <label
-                className="text-gray-800 text-sm font-semibold"
-                htmlFor="name"
+            <form onSubmit={handleSubmit}>
+              <div className="w-[380px] h-[104px] p-1">
+                <label
+                  className="text-gray-800 text-sm font-semibold"
+                  htmlFor="name"
+                >
+                  Email:
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+                {touched.email && errors.email ? (
+                  <div className="text-gray-800 text-sm">{errors.email}</div>
+                ) : null}
+              </div>
+
+              <div className="w-[380px] h-[104px] p-1">
+                <label
+                  className="text-gray-800 text-sm font-semibold"
+                  htmlFor="name"
+                >
+                  Contraseña:
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+                {touched.password && errors.password ? (
+                  <div className="text-gray-800 text-sm">{errors.password}</div>
+                ) : null}
+              </div>
+
+              <div
+                className="w-[367px] h-[14px] p-1 text-sm text-center underline text-blue-700 hover:text-blue-800"
+                onClick={resetPassword()}
               >
-                Email:
-              </label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-              {touched.email && errors.email ? (
-                <div className="text-gray-800 text-sm">{errors.email}</div>
-              ) : null}
-            </div>
+                Olvidé mi contraseña
+              </div>
 
-            <div className="w-[380px] h-[104px] p-1">
-              <label
-                className="text-gray-800 text-sm font-semibold"
-                htmlFor="name"
+              <div className="mt-4 flex items-center">
+                <button
+                  className="w-[360px] h-[42px] bg-blue-700 text-white font-bold py-2 px-4 rounded mt-16 ml-3 hover:bg-white hover:text-blue-700 hover:border-blue-700  hover:border  focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Iniciar Sesión
+                </button>
+              </div>
+              <div
+                className="w-[367px] h-[14px] p-1 mt-16 text-sm text-center underline text-blue-700  hover:text-blue-800"
+                onClick={() => navigate("/register")}
               >
-                Contraseña:
-              </label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-              {touched.password && errors.password ? (
-                <div className="text-gray-800 text-sm">{errors.password}</div>
-              ) : null}
-            </div>
-
-            <div
-              className="w-[367px] h-[14px] p-1 text-sm text-center underline text-blue-700 hover:text-blue-800"
-              onClick={resetPassword()}
-            >
-              Olvidé mi contraseña
-            </div>
-
-            <div className="mt-4 flex items-center">
-              <button
-                className="w-[360px] h-[42px] bg-blue-700 text-white font-bold py-2 px-4 rounded mt-16 ml-3 hover:bg-white hover:text-blue-700 hover:border-blue-700  hover:border  focus:outline-none focus:shadow-outline"
-                type="submit"
-              >
-                Iniciar Sesión
-              </button>
-            </div>
-            <div
-              className="w-[367px] h-[14px] p-1 mt-16 text-sm text-center underline text-blue-700  hover:text-blue-800"
-              onClick={()=>navigate("/register")}
-            >
-              ¿No tienes una cuenta? ¡Créala aquí!
-            </div>
-          </form>
+                ¿No tienes una cuenta? ¡Créala aquí!
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </>
