@@ -12,9 +12,13 @@ public class CustomerDTO {
 
     private String name;
 
-    private String surname;
-
     private String email;
 
     private long phone;
+
+    private String address;
+
+    // private String city;
+
+    // private String state;
 }

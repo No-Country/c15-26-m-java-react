@@ -18,8 +18,6 @@ public class OrderDTO {
 
     private boolean pending;
 
-    private String country;
-
     private String credit_card_number;
 
     private String credit_card_type;

@@ -23,9 +23,6 @@ public class Order extends BaseEntidad{
     @Column(name =  "pending", length = 50, nullable = false)
     private boolean pending;
 
-    @Column(name =  "country", length = 50, nullable = false)
-    private String country;
-
     @Column(name =  "credit_card_number", length = 50, nullable = false)
     private String credit_card_number;
 

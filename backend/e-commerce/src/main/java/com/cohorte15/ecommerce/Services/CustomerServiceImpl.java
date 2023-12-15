@@ -31,9 +31,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
 
             customerDTO.setId(customer.getId());
             customerDTO.setName(customer.getName());
-            customerDTO.setSurname(customer.getSurname());
             customerDTO.setEmail(customer.getEmail());
             customerDTO.setPhone(customer.getPhone());
+            customerDTO.setAddress(customer.getAddress());
 
             customerDTOs.add(customerDTO);
         }
@@ -49,9 +49,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
 
         customerDTO.setId(customer.getId());
         customerDTO.setName(customer.getName());
-        customerDTO.setSurname(customer.getSurname());
         customerDTO.setEmail(customer.getEmail());
         customerDTO.setPhone(customer.getPhone());
+        customerDTO.setAddress(customer.getAddress());
 
         return customerDTO;
     }
@@ -68,16 +68,16 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
 
         customerDTO.setId(customer.getId());
         customerDTO.setName(customer.getName());
-        customerDTO.setSurname(customer.getSurname());
         customerDTO.setEmail(customer.getEmail());
         customerDTO.setPhone(customer.getPhone());
+        customerDTO.setAddress(customer.getAddress());
 
         return customerDTO;
     }
 
     @Override
-    public void registerCustomer(String name, String surname, String email, String password, long phone) {
-        customerRepository.registerCustomer(name, surname, email, password, phone);
+    public void registerCustomer(String name, String email, String password, long phone, String address) {
+        customerRepository.registerCustomer(name, email, password, phone, address);
     }
 
     @Override
