@@ -18,8 +18,6 @@ public class OrderAloneDTO {
 
     private boolean pending;
 
-    private String country;
-
     private int customer_id;
 
     private Date order_date;

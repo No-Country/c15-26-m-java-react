@@ -25,13 +25,13 @@ public interface CustomerRepository extends BaseRepository<Customer, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO customer (name, surname, email, password, phone) VALUES (:name, :surname, :email, :password, :phone)", nativeQuery = true)
+    @Query(value = "INSERT INTO customer (name, email, password, phone, address) VALUES (:name, :email, :password, :phone, :address)", nativeQuery = true)
     void registerCustomer(
             @Param("name")String name,
-            @Param("surname")String surname,
             @Param("email")String email,
             @Param("password")String password,
-            @Param("phone")long phone);
+            @Param("phone")long phone,
+            @Param("address")String address);
 
     @Query(value = "SELECT LAST_INSERT_ID() AS id", nativeQuery = true)
     Long getLastInsertedCustomerId();

@@ -39,10 +39,10 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
     public ResponseEntity<?> registerCustomer(@RequestBody Customer customer) {
         try {
             String name = customer.getName();
-            String surname = customer.getSurname();
             String email = customer.getEmail();
             String password = customer.getPassword();
             long phone = customer.getPhone();
+            String address = customer.getAddress();
 
             if (customerService.getCustomerByEmail(email) != null) {
                 RegisterCustomerDTO registerCustomerDTO = new RegisterCustomerDTO();
@@ -54,7 +54,7 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
                 return ResponseEntity.status(400).body(registerCustomerDTO);
             }
 
-            customerService.registerCustomer(name, surname, email, password, phone);
+            customerService.registerCustomer(name, email, password, phone, address);
 
             Long user_id = customerService.getLastInsertedCustomerId();
 
@@ -62,9 +62,9 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
 
             customerDTO.setId(user_id);
             customerDTO.setName(name);
-            customerDTO.setSurname(surname);
             customerDTO.setEmail(email);
             customerDTO.setPhone(phone);
+            customerDTO.setAddress(address);
 
 
             RegisterCustomerDTO registerCustomerDTO = new RegisterCustomerDTO();
@@ -98,9 +98,9 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
 
             customerDTO.setId(customerLogin.getId());
             customerDTO.setName(customerLogin.getName());
-            customerDTO.setSurname(customerLogin.getSurname());
             customerDTO.setEmail(customerLogin.getEmail());
             customerDTO.setPhone(customerLogin.getPhone());
+            customerDTO.setAddress(customerLogin.getAddress());
 
 
             RegisterCustomerDTO registerCustomerDTO = new RegisterCustomerDTO();
