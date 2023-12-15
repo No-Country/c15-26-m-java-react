@@ -23,7 +23,6 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
             @Param("customer_id")int customer_id,
             @Param("address")String address,
             @Param("city")String city,
-            @Param("country")String country,
             @Param("credit_card_number")String credit_card_number,
             @Param("credit_card_type")String credit_card_type,
             @Param("cvv")String cvv,
@@ -57,7 +56,6 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
             "customer_id, " +
             "address, " +
             "city, " +
-            "country, " +
             //"credit_card_number, " +
             //"credit_card_type, " +
             //"cvv, " +

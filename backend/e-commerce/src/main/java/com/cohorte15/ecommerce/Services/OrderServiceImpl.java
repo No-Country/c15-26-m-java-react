@@ -32,7 +32,6 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
             int customer_id = orderDTO.getCustomer_id();
             String address = orderDTO.getAddress();
             String city = orderDTO.getCity();
-            String country = orderDTO.getCountry();
             String credit_card_number = orderDTO.getCredit_card_number();
             String credit_card_type = orderDTO.getCredit_card_type();
             String cvv = orderDTO.getCvv();
@@ -44,8 +43,8 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
                     pending,
                     order_date,
                     customer_id,
-                    address, city,
-                    country,
+                    address,
+                    city,
                     credit_card_number,
                     credit_card_type,
                     cvv,
@@ -58,7 +57,6 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
                     .address(address)
                     .city(city)
                     .pending(pending)
-                    .country(country)
                     .credit_card_number(credit_card_number)
                     .credit_card_type(credit_card_type)
                     .customer_id(customer_id)
@@ -131,7 +129,6 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
         orderAloneDTO.setCustomer_id(Integer.parseInt(order.get(0)[3].toString()));
         orderAloneDTO.setAddress(order.get(0)[4].toString());
         orderAloneDTO.setCity(order.get(0)[5].toString());
-        orderAloneDTO.setCountry(order.get(0)[6].toString());
         orderAloneDTO.setShipment_date(Date.valueOf(order.get(0)[7].toString()));
         orderAloneDTO.setState(order.get(0)[8].toString());
         orderAloneDTO.setZip_code(order.get(0)[9].toString());
