@@ -60,6 +60,10 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
     public CustomerDTO getCustomerByEmail(String email) {
         Customer customer = customerRepository.getCustomerByEmail(email);
 
+        if (customer == null) {
+            return null;
+        }
+
         CustomerDTO customerDTO = new CustomerDTO();
 
         customerDTO.setId(customer.getId());
