@@ -23,7 +23,6 @@ const RegisterForm = () => {
 
   const initialValues = {
     name: "",
-    surname:"apellido",
     phone: "",
     email: "",
     address: "",
@@ -55,9 +54,7 @@ const RegisterForm = () => {
   });
 
   const onSubmit = () => {
-    console.log(values);
     const endPoint = API_URL + "customer/register";
-    console.log(values);
     axios
       .post(endPoint, values)
       .then((res) => {
@@ -86,14 +83,13 @@ const RegisterForm = () => {
       .catch((error) => {
         Swal.fire({
           title: "Ocurrió un error",
-          // text: "Te llegará un correo para que verifiques tu cuenta y sea segura. ¡Disfruta de comprar en nuestra tienda!",
           icon: "error",
         });
         console.log(error);
       });
   };
 
-  const { handleSubmit, handleChange, handleBlur, values, touched, errors, isSubmitting, isValid } =
+  const { handleSubmit, handleChange, handleBlur, values, touched, errors, isSubmitting } =
     useFormik({
       initialValues,
       validationSchema,
