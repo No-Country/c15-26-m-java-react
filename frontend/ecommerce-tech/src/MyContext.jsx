@@ -59,11 +59,6 @@ const MyContextProvider = ({ children }) => {
     setLastFilterType(newValue);
   };
 
-  const [guestConfirmed, setGuestConfirmed] = useState(false)
-  const updateGuestConfirmed = (newValue) => {
-    setGuestConfirmed(newValue);
-  };
-
   const [shopping, setShopping] = useState(false)
   const updateShopping = (newValue) => {
     setShopping(newValue);
@@ -89,8 +84,6 @@ const MyContextProvider = ({ children }) => {
         updateSelectedBrands,
         lastFilterType,
         updateLastFilterType,
-        guestConfirmed,
-        updateGuestConfirmed,
         shopping,
         updateShopping
       }}

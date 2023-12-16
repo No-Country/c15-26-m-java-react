@@ -2,10 +2,9 @@ import { useContext } from "react";
 import { MyContext } from "../MyContext";
 
 const GuestAdvice = () => {
-  const { updateGuestConfirmed, updateCustomer } = useContext(MyContext);
+  const { updateCustomer } = useContext(MyContext);
 
   const buyAsGuest = () => {
-    updateGuestConfirmed(true);
     const guestBuyer = {
       id: -1,
     };

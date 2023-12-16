@@ -78,7 +78,8 @@ const CartDetail = () => {
         </div>
       </div>
     </div>
-  );
+
+  )
 };
 
 export default CartDetail;

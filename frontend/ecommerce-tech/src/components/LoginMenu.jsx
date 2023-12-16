@@ -23,8 +23,8 @@ const LoginMenu = () => {
   
   return (
       <div className="flex place-content-around items-center gap-2">
-        <NavLink className="w-[110px] h-8 px-2 py-1 text-center text-sm rounded-2xl border border-blue-600 transition-all text-blue-600 bg-white hover:text-white hover:bg-blue-600 hover:shadow" to={"/login"}>Inicia sesión</NavLink>
-        <NavLink  className="w-[144px] h-8 px-1 py-1 text-white bg-blue-600 text-center text-sm rounded-2xl border border-blue-600 transition-all hover:text-blue-600 hover:bg-white hover:shadow" to={"/register"}>¡Regístrate aquí!</NavLink>
+        <NavLink className="w-[110px] h-8 px-2 py-1 text-center text-sm rounded-2xl border border-blue-600 transition-all text-blue-600 bg-white hover:opacity-50" to={"/login"}>Inicia sesión</NavLink>
+        <NavLink  className="w-[144px] h-8 px-1 py-1 text-white bg-blue-600 text-center text-sm rounded-2xl border border-blue-600 transition-all hover:opacity-50" to={"/register"}>¡Regístrate aquí!</NavLink>
       </div>
   );
 };
