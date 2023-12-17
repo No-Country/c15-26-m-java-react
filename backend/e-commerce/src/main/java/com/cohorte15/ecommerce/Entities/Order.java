@@ -23,11 +23,17 @@ public class Order extends BaseEntidad{
     @Column(name =  "pending", length = 50, nullable = false)
     private boolean pending;
 
-    @Column(name =  "credit_card_number", length = 50, nullable = false)
-    private String credit_card_number;
+    @Column(name =  "card_number", length = 50, nullable = false)
+    private String card_number;
 
-    @Column(name =  "credit_card_type", length = 50, nullable = false)
-    private String credit_card_type;
+    @Column(name =  "card_type", length = 50, nullable = false)
+    private String card_type;
+
+    @Column(name =  "card_owner", length = 50, nullable = false)
+    private String card_owner;
+
+    @Column(name =  "owner_dni", length = 50, nullable = false)
+    private int owner_dni;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -40,13 +46,10 @@ public class Order extends BaseEntidad{
     @Column(name =  "order_date", length = 50, nullable = false)
     private Date order_date;
 
-    @Column(name =  "shipment_date", length = 50, nullable = false)
-    private Date shipment_date;
+    @Column(name =  "expiration_date", length = 50, nullable = false)
+    private Date expiration_date;
 
     @Column(name =  "state", length = 50, nullable = false)
     private String state;
-
-    @Column(name =  "zip_code", length = 50, nullable = false)
-    private String zip_code;
 
 }

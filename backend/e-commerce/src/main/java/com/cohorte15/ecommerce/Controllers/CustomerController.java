@@ -39,10 +39,14 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
     public ResponseEntity<?> registerCustomer(@RequestBody Customer customer) {
         try {
             String name = customer.getName();
-            String email = customer.getEmail();
-            String password = customer.getPassword();
             long phone = customer.getPhone();
+            String email = customer.getEmail();
             String address = customer.getAddress();
+            String city = customer.getCity();
+            String state = customer.getState();
+            String password = customer.getPassword();
+            String confirm = customer.getConfirm();
+
 
             if (customerService.getCustomerByEmail(email) != null) {
                 RegisterCustomerDTO registerCustomerDTO = new RegisterCustomerDTO();
@@ -54,7 +58,7 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
                 return ResponseEntity.status(400).body(registerCustomerDTO);
             }
 
-            customerService.registerCustomer(name, email, password, phone, address);
+            customerService.registerCustomer(name, phone, email, address, city, state, password, confirm);
 
             Long user_id = customerService.getLastInsertedCustomerId();
 
@@ -65,6 +69,8 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
             customerDTO.setEmail(email);
             customerDTO.setPhone(phone);
             customerDTO.setAddress(address);
+            customerDTO.setCity(city);
+            customerDTO.setState(state);
 
 
             RegisterCustomerDTO registerCustomerDTO = new RegisterCustomerDTO();
@@ -82,7 +88,7 @@ public class CustomerController extends BaseControllerImpl<Customer, CustomerSer
             registerCustomerDTO.setMessage("Customer not registered.");
             registerCustomerDTO.setUser(null);
 
-            return ResponseEntity.status(400).body(registerCustomerDTO);
+            return ResponseEntity.status(400).body(e.getMessage());
         }
     }
 

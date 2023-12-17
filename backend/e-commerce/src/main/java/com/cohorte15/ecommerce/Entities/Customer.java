@@ -15,16 +15,25 @@ public class Customer extends BaseEntidad {
     @Column(name =  "name", length = 50, nullable = false)
     private String name;
 
+    @Column(name =  "phone", length = 50, nullable = false)
+    private long phone;
+
     @Column(name =  "email", length = 50, nullable = false)
     private String email;
+
+    @Column(name =  "address", length = 50, nullable = false)
+    private String address;
+
+    @Column(name =  "city", length = 50, nullable = false)
+    private String city;
+
+    @Column(name =  "state", length = 50, nullable = false)
+    private String state;
 
     @Column(name =  "password", length = 50, nullable = false)
     private String password;
 
-    @Column(name =  "phone", length = 50, nullable = false)
-    private long phone;
-
-    @Column(name =  "address", length = 50, nullable = false)
-    private String address;
+    @Column(name =  "confirm", length = 50, nullable = false)
+    private String confirm;
 
 }

@@ -25,46 +25,50 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
     }
 
     @Override
-    public OrderDTO create(OrderDTO orderDTO) {
+    public ResponseOrderDTO create(OrderDTO orderDTO) {
 
-            boolean pending = orderDTO.isPending();
             Date order_date = orderDTO.getOrder_date();
-            int customer_id = orderDTO.getCustomer_id();
+            boolean pending = orderDTO.isPending();
+            Long customer_id = orderDTO.getCustomer_id();
             String address = orderDTO.getAddress();
             String city = orderDTO.getCity();
-            String credit_card_number = orderDTO.getCredit_card_number();
-            String credit_card_type = orderDTO.getCredit_card_type();
-            String cvv = orderDTO.getCvv();
-            Date shipment_date = orderDTO.getShipment_date();
             String state = orderDTO.getState();
-            String zip_code = orderDTO.getZip_code();
+            String card_owner = orderDTO.getCard_owner();
+            int owner_dni = orderDTO.getOwner_dni();
+            String card_type = orderDTO.getCard_type();
+            String card_number = orderDTO.getCard_number();
+            Date expiration_date = orderDTO.getExpiration_date();
+            String cvv = orderDTO.getCvv();
 
             orderRepository.create(
-                    pending,
                     order_date,
+                    pending,
                     customer_id,
                     address,
                     city,
-                    credit_card_number,
-                    credit_card_type,
-                    cvv,
-                    shipment_date,
                     state,
-                    zip_code);
+                    card_owner,
+                    owner_dni,
+                    card_type,
+                    card_number,
+                    expiration_date,
+                    cvv
+            );
 
-            OrderDTO responseOrderDTO = OrderDTO.builder()
+            ResponseOrderDTO responseOrderDTO = ResponseOrderDTO.builder()
                     .order_id(orderRepository.getLastInsertedOrderId())
+                    .order_date(order_date)
+                    .pending(pending)
+                    .customer_id(customer_id)
                     .address(address)
                     .city(city)
-                    .pending(pending)
-                    .credit_card_number(credit_card_number)
-                    .credit_card_type(credit_card_type)
-                    .customer_id(customer_id)
-                    .cvv(cvv)
-                    .order_date(order_date)
-                    .shipment_date(shipment_date)
                     .state(state)
-                    .zip_code(zip_code)
+                    .card_owner(card_owner)
+                    .owner_dni(owner_dni)
+                    .card_type(card_type)
+                    .card_number(card_number)
+                    .expiration_date(expiration_date)
+                    .cvv(cvv)
                     .build();
 
             return responseOrderDTO;
