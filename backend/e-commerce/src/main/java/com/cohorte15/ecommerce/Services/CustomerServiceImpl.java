@@ -76,8 +76,8 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
     }
 
     @Override
-    public void registerCustomer(String name, String email, String password, long phone, String address) {
-        customerRepository.registerCustomer(name, email, password, phone, address);
+    public void registerCustomer(String name, long phone, String email, String address, String city, String state, String password, String confirm) {
+        customerRepository.registerCustomer(name, phone, email, address, city, state, password, confirm);
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface CustomerService extends BaseService<Customer, Long> {
 
     CustomerDTO getCustomerByEmail(String email);
 
-    void registerCustomer(String name, String email, String password, long phone, String address);
+    void registerCustomer(String name, long phone, String email, String address, String city, String state, String password, String confirm);
 
     Long getLastInsertedCustomerId();
 

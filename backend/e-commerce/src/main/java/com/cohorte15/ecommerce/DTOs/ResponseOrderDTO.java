@@ -1,7 +1,5 @@
 package com.cohorte15.ecommerce.DTOs;
 
-import com.cohorte15.ecommerce.Entities.Customer;
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
@@ -10,7 +8,9 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-public class OrderDTO {
+public class ResponseOrderDTO {
+
+    private Long order_id;
 
     private String address;
 
@@ -35,5 +35,4 @@ public class OrderDTO {
     private Date expiration_date;
 
     private String state;
-
 }

@@ -15,20 +15,21 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO `order` (pending, order_date, customer_id, address, city, country, credit_card_number, credit_card_type, cvv, shipment_date, state, zip_code) " +
-            "VALUES (:pending, :order_date, :customer_id, :address, :city, :country, :credit_card_number, :credit_card_type, :cvv, :shipment_date, :state, :zip_code)", nativeQuery = true)
+    @Query(value = "INSERT INTO `order` (order_date, pending, customer_id, address, city, state, card_owner, owner_dni, card_type, card_number, expiration_date, cvv) " +
+            "VALUES (:order_date, :pending, :customer_id, :address, :city, :state, :card_owner, :owner_dni, :card_type, :card_number, :expiration_date, :cvv)", nativeQuery = true)
     void create(
-            @Param("pending")boolean pending,
             @Param("order_date") Date order_date,
-            @Param("customer_id")int customer_id,
+            @Param("pending")boolean pending,
+            @Param("customer_id")Long customer_id,
             @Param("address")String address,
             @Param("city")String city,
-            @Param("credit_card_number")String credit_card_number,
-            @Param("credit_card_type")String credit_card_type,
-            @Param("cvv")String cvv,
-            @Param("shipment_date")Date shipment_date,
             @Param("state")String state,
-            @Param("zip_code")String zip_code);
+            @Param("card_owner")String card_owner,
+            @Param("owner_dni")int owner_dni,
+            @Param("card_type")String card_type,
+            @Param("card_number")String card_number,
+            @Param("expiration_date")Date expiration_date,
+            @Param("cvv")String cvv);
 
     // Delete order by id
     @Modifying
