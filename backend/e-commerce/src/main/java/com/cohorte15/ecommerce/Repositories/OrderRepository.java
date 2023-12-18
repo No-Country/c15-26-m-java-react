@@ -50,20 +50,17 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
     Long[] getOrdersIdByCustomerId(@Param("customer_id")Long customer_id);
 
     // Get order by id
-    @Query(value = "SELECT " +
-            "id, " +
-            "pending, " +
-            "order_date, " +
-            "customer_id, " +
-            "address, " +
-            "city, " +
-            //"credit_card_number, " +
-            //"credit_card_type, " +
-            //"cvv, " +
-            "shipment_date, " +
-            "state, " +
-            "zip_code " +
-            "FROM `order` " +
-            "WHERE id = :order_id", nativeQuery = true)
+    @Query(value = "SELECT `order`.id AS order_id,\n" +
+            "       `order`.pending,\n" +
+            "       `order`.order_date,\n" +
+            "       `order`.address,\n" +
+            "       `order`.city,\n" +
+            "       `order`.state,\n" +
+            "       `order`.customer_id,\n" +
+            "       customer.name AS customer_name,\n" +
+            "       customer.email\n" +
+            "FROM `order`\n" +
+            "JOIN customer ON `order`.customer_id = customer.id\n" +
+            "WHERE `order`.id = :order_id", nativeQuery = true)
     List<Object[]> getOrderById(@Param("order_id")Long order_id);
 }
