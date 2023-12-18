@@ -37,7 +37,7 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
             int owner_dni = orderDTO.getOwner_dni();
             String card_type = orderDTO.getCard_type();
             String card_number = orderDTO.getCard_number();
-            Date expiration_date = orderDTO.getExpiration_date();
+            String expiration_date = orderDTO.getExpiration_date();
             String cvv = orderDTO.getCvv();
 
             orderRepository.create(

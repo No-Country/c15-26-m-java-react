@@ -32,7 +32,7 @@ public class OrderDTO {
 
     private Date order_date;
 
-    private Date expiration_date;
+    private String expiration_date;
 
     private String state;
 
