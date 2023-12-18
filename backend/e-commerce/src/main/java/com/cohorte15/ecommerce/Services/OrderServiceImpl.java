@@ -130,12 +130,14 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
         orderAloneDTO.setOrder_id(Long.parseLong(order.get(0)[0].toString()));
         orderAloneDTO.setPending(Boolean.parseBoolean(order.get(0)[1].toString()));
         orderAloneDTO.setOrder_date(Date.valueOf(order.get(0)[2].toString()));
-        orderAloneDTO.setCustomer_id(Integer.parseInt(order.get(0)[3].toString()));
-        orderAloneDTO.setAddress(order.get(0)[4].toString());
-        orderAloneDTO.setCity(order.get(0)[5].toString());
-        orderAloneDTO.setShipment_date(Date.valueOf(order.get(0)[7].toString()));
-        orderAloneDTO.setState(order.get(0)[8].toString());
-        orderAloneDTO.setZip_code(order.get(0)[9].toString());
+        orderAloneDTO.setAddress(order.get(0)[3].toString());
+        orderAloneDTO.setCity(order.get(0)[4].toString());
+        orderAloneDTO.setState(order.get(0)[5].toString());
+        orderAloneDTO.setCustomer(new CustomerReducedDTO(
+                Long.parseLong(order.get(0)[6].toString()),
+                order.get(0)[7].toString(),
+                order.get(0)[8].toString()
+        ));
 
         return orderAloneDTO;
     }
