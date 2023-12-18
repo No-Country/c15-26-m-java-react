@@ -28,7 +28,7 @@ public interface OrderRepository extends BaseRepository<Order, Long>{
             @Param("owner_dni")int owner_dni,
             @Param("card_type")String card_type,
             @Param("card_number")String card_number,
-            @Param("expiration_date")Date expiration_date,
+            @Param("expiration_date")String expiration_date,
             @Param("cvv")String cvv);
 
     // Delete order by id

@@ -47,7 +47,7 @@ public class Order extends BaseEntidad{
     private Date order_date;
 
     @Column(name =  "expiration_date", length = 50, nullable = false)
-    private Date expiration_date;
+    private String expiration_date;
 
     @Column(name =  "state", length = 50, nullable = false)
     private String state;
