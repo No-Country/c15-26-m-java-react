@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { MyContext } from "../MyContext";
 import axios from "axios";
 import { API_URL } from "../config";
+import ActionButton from "./ActionButton";
 
 const LoginForm = ({ goCheckout = false }) => {
   const navigate = useNavigate();
@@ -114,12 +115,13 @@ const LoginForm = ({ goCheckout = false }) => {
               </div>
 
               <div className="mt-4 flex items-center">
-                <button
+                {/* <button
                   className="w-[360px] h-[42px] bg-blue-700 text-white font-bold py-2 px-4 rounded mt-16 ml-3 hover:bg-white hover:text-blue-700 hover:border-blue-700  hover:border  focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
                   Iniciar Sesión
-                </button>
+                </button> */}
+                <ActionButton text="Iniciar sesión" type="submit" />
               </div>
               <div
                 className="w-[367px] h-[14px] p-1 mt-16 text-sm text-center underline text-blue-700  hover:text-blue-800"

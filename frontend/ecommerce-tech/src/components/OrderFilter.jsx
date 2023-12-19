@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { MyContext } from "../MyContext";
 import { Radio } from "@material-tailwind/react";
+import order_icon from '../assets/order_icon.svg'
 
 const OrderFilter = () => {
   const { priceOrderAsc, updatePriceOrderAsc } = useContext(MyContext);
@@ -11,7 +12,10 @@ const OrderFilter = () => {
 
   return (
     <div className="flex w-[190px] p-2 flex-col place-content-center">
-      <h2 className="font-bold cursor-pointer text-blue-600" onClick={handleClick}>Ordenar por precio</h2>
+      <div className="flex cursor-pointer" onClick={handleClick}>
+        <img src={order_icon} className="h-6 w-6 mr-1" />
+        <h2 className="font-bold  text-blue-600">Ordenar por precio</h2>
+      </div>
       <form className={visible?"":"hidden"}>
         <div>
         <Radio

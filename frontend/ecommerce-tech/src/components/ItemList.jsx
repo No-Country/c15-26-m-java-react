@@ -107,15 +107,15 @@ const ItemList = () => {
   }, [items]);
 
   return (
-    <main className="flex flex-grow place-content-center min-h-screen">
-      <div className="w-[227px] h-[1018px] mt-16">
+    <main className="flex place-content-center gap-2 min-h-screen">
+      <div className=" sm:w-[227px] sm:h-[1018px] sm:mt-16">
         <Filters />
       </div>
-      <div className="flex flex-col  w-[994px] ">
+      <div className="w-[250px]  flex flex-col md:w-[495px] lg:w-[740px] xl:w-[994px] ">
         <div className="flex justify-end">
           <OrderFilter />
         </div>
-        <section className=" bg-transparent flex-grow place-content-center items-center">
+        <section className=" bg-transparent place-content-center items-center">
           <div className="p-2.5 flex flex-wrap gap-4 place-content-center">
             {lastFilterType === "category" &&
               items?.map((i) => {

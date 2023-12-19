@@ -4,11 +4,11 @@ import { useContext } from "react";
 import { MyContext } from "../MyContext";
 import axios from "axios";
 import { API_URL } from "../config";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
+import ActionButton from "./ActionButton";
 
 const OrderFormStep4 = ({ orderData, setOrderData }) => {
-
   const { cart, updateCart, updateQtyCart } = useContext(MyContext);
 
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const OrderFormStep4 = ({ orderData, setOrderData }) => {
       .post(endPoint, orderData)
       .then((res) => {
         let order_id = res.data.order_id;
-        alert("Confirmado");
+        console.log("orden creada!");
 
         let orderProducts = {
           order_id,
@@ -59,9 +59,26 @@ const OrderFormStep4 = ({ orderData, setOrderData }) => {
         const endPoint = API_URL + "orderDetail/save";
         axios
           .post(endPoint, orderProducts)
-          .then((res) => console.log(res.data))
+          .then((res) => {
+            Alert(
+              "¡Tu pago se realizó con éxito!",
+              "Tu compra llegará en la semana. Estos datos se enviarán a tu correo y puedes dar seguimiento desde nuestro sitio.",
+              "",
+              "success",
+              "Ver compra"
+            );
+
+            console.log("detalles guardados");
+            console.log(res);
+          })
           .catch((error) => {
-            alert("ocurrió un error");
+            Alert(
+              "¡Lo sentimos! Tu pago no se realizó.",
+              "",
+              `<p>Tuvimos una interrupción al momento de procesar tus datos. Por favor, inténtalo de nuevo.</p><p >Comprueba que tus datos sean correctos. Ante cualquier duda envía un mail a <u>soporte@bluedragonstone.com</u></p> `,
+              "error",
+              "Volver a intentar"
+            );
             console.log(error);
           });
 
@@ -71,7 +88,13 @@ const OrderFormStep4 = ({ orderData, setOrderData }) => {
         navigate(`/order/${order_id}`);
       })
       .catch((error) => {
-        alert("Ocurrió un error!");
+        Alert(
+          "¡Lo sentimos! Tu pago no se realizó.",
+          "",
+          `<p>Tuvimos una interrupción al momento de procesar tus datos. Por favor, inténtalo de nuevo.</p><p >Comprueba que tus datos sean correctos. Ante cualquier duda envía un mail a <u>soporte@bluedragonstone.com</u></p> `,
+          "error",
+          "Volver a intentar"
+        );
         console.log(error);
       });
   };
@@ -153,12 +176,13 @@ const OrderFormStep4 = ({ orderData, setOrderData }) => {
       </div>
 
       <div className="w-[376px] h-[58px] p-2">
-        <button
+        {/* <button
           className="w-[360px] h-[42px] rounded-lg bg-blue-700 text-white text-xl font-semibold hover:opacity-50"
           type="submit"
         >
           Pagar
-        </button>
+        </button> */}
+        <ActionButton text="Pagar" type="submit" />
       </div>
     </form>
   );

@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import { MyContext } from "../MyContext";
+import step0 from "../assets/step0.svg";
 import step1 from "../assets/step1.svg";
 import step2 from "../assets/step2.svg";
 import step3 from "../assets/step3.svg";
 import step4 from "../assets/step4.svg";
 
+import OrderFormStep0 from "./OrderFormStep0";
 import OrderFormStep1 from "./OrderFormStep1";
 import OrderFormStep2 from "./OrderFormStep2";
 import OrderFormStep3 from "./OrderFormStep3";
@@ -38,7 +40,7 @@ const OrderForm = () => {
     cvv: "",
   });
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(customer.id === -1? 0 : 1);
 
   return (
     <div className="flex flex-col place-content-center">
@@ -47,6 +49,8 @@ const OrderForm = () => {
           <div className="w-[376px] h-5">
             <img
               src={
+                step === 0 ?
+                step0 :
                 step === 1
                   ? step1
                   : step === 2
@@ -58,6 +62,10 @@ const OrderForm = () => {
               alt="pasos"
             />
           </div>
+          {step === 0 && (
+            <OrderFormStep0 setStep={setStep} />
+          )}
+
           {step === 1 && (
             <OrderFormStep1 setStep={setStep} setOrderData={setOrderData} />
           )}
