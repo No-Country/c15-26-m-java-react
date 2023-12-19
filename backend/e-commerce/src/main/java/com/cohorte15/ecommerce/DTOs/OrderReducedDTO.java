@@ -16,5 +16,4 @@ public class OrderReducedDTO {
 
     private Date order_date;
 
-    private Date shipment_date;
 }

@@ -108,7 +108,6 @@ public class OrderServiceImpl extends BaseServiceImpl<Order, Long> implements Or
 
             orderReducedDTO.setPending(Boolean.parseBoolean(order.get(0)[1].toString()));
             orderReducedDTO.setOrder_date(Date.valueOf(order.get(0)[2].toString()));
-            orderReducedDTO.setShipment_date(Date.valueOf(order.get(0)[7].toString()));
 
             orderWithDetailDTO.setOrder(orderReducedDTO);
 
