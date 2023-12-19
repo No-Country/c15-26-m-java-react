@@ -12,12 +12,12 @@ import next from "../assets/next.svg";
 import back from "../assets/back.svg";
 import back_disabled from "../assets/back_disabled.svg";
 import create from "../assets/create.svg";
-import Swal from 'sweetalert2'
+import Alert from "./Alert";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
 
-  const { customer, updateCustomer , shopping} = useContext(MyContext);
+  const { customer, updateCustomer, shopping } = useContext(MyContext);
 
   const [step, setStep] = useState(1);
 
@@ -34,7 +34,7 @@ const RegisterForm = () => {
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Este campo es obligatorio"),
-    phone: Yup.string().required("Este campo es obligatorio"),
+    phone: Yup.string().matches(/^[0-9]*$/, "Número de teléfono inválido").required("Este campo es obligatorio"),
     email: Yup.string()
       .email("email electrónico no válido")
       .required("Este campo es obligatorio"),
@@ -60,48 +60,53 @@ const RegisterForm = () => {
       .then((res) => {
         localStorage.setItem("customer", JSON.stringify(res.data.user));
         updateCustomer(JSON.parse(localStorage.getItem("customer")));
-        if(shopping){
-          Swal.fire({
-            title: "Tu cuenta se creó con éxito",
-            text: "Te llegará un correo para que verifiques tu cuenta y sea segura. ¡Disfruta de comprar en nuestra tienda!",
-            icon: "success",
-            confirmButtonText : "Continuar con el pago",
-            confirmButtonColor: "#333BF4"
-          });
-          navigate('/checkout')
-        }else{
-          Swal.fire({
-            title: "Tu cuenta se creó con éxito",
-            text: "Te llegará un correo para que verifiques tu cuenta y sea segura. ¡Disfruta de comprar en nuestra tienda!",
-            icon: "success",
-          });
-          navigate("/"); 
-        }
+        if (shopping) {
+          Alert(
+            "Tu cuenta se creó con éxito",
+            "Te llegará un correo para que verifiques tu cuenta y sea segura. ¡Disfruta de comprar en nuestra tienda!",
+            "",
+            "success",
+            "Continuar con el pago"
+          );
 
-        
+          navigate("/checkout");
+        } else {
+          Alert(
+            "Tu cuenta se creó con éxito",
+            "Te llegará un correo para que verifiques tu cuenta y sea segura. ¡Disfruta de comprar en nuestra tienda!",
+            "",
+            "success",
+            "OK"
+          );
+          navigate("/");
+        }
       })
       .catch((error) => {
-        Swal.fire({
-          title: "Ocurrió un error",
-          icon: "error",
-        });
+        Alert("Ocurrió un error", "", "", "error", "OK");
         console.log(error);
       });
   };
 
-  const { handleSubmit, handleChange, handleBlur, values, touched, errors, isSubmitting } =
-    useFormik({
-      initialValues,
-      validationSchema,
-      onSubmit,
-    });
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    touched,
+    errors,
+    isSubmitting,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
 
   return (
     <>
-      {customer.id !== 0 ? (
+      {customer.id > 0 ? (
         <Navigate to={"/"} />
       ) : (
-        <div className="flex flex-col place-content-center"> 
+        <div className="flex flex-col place-content-center">
           <div className=" w-[412px] h-[596px] bg-white rounded-lg ">
             <div className="w-full">
               <form
@@ -170,7 +175,7 @@ const RegisterForm = () => {
                           {errors.email}
                         </div>
                       ) : null}
-                    </div> 
+                    </div>
 
                     <div className="mb-10">
                       <label
@@ -362,7 +367,6 @@ const RegisterForm = () => {
                     </div>
                   </div>
                 )}
-
               </form>
             </div>
           </div>

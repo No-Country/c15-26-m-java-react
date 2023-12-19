@@ -23,11 +23,11 @@ const OrderList = () => {
 
   return (
     <>
-      {customer.id === 0 || customerId != customer.id ? (
+      {customer.id <= 0 || customerId != customer.id ? (
         <Navigate to={"/"} />
       ) : (
         <div>
-          <div className="border border-slate-700 border-b-0 h-10 w-full mt-10 text-center font-medium leading-10">{`Listado de Pedidos de ${customer.name} ${customer.surname}`}</div>
+          <div className="border border-slate-700 border-b-0 h-10 w-full mt-10 text-center font-medium leading-10">{`Listado de Pedidos de ${customer.name}`}</div>
 
           <table className="border border-slate-700 border-t-0 w-full">
             <thead className="p-4 bg-slate-400 h-14">

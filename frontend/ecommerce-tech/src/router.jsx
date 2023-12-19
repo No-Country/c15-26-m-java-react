@@ -10,6 +10,7 @@ import OrderDetail from "./components/OrderDetail.jsx";
 import OrderList from "./components/OrderList.jsx";
 import CustomerProfile from "./components/CustomerProfile.jsx";
 import Cart from "./components/Cart.jsx";
+import Help from "./components/Help.jsx";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <CustomerProfile />,
+      },
+      {
+        path: "help",
+        element: <Help />,
       },
     ],
   },

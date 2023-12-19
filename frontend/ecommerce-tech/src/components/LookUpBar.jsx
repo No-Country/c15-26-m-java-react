@@ -20,14 +20,14 @@ export const LookUpBar = () => {
 
   return (
     <form
-      className="flex flex-wrap place-content-center border  border-gray-500 rounded-lg h-10 w-[450px] items-center"
+      className="flex flex-wrap place-content-center border  border-gray-500 rounded-lg h-10 w-[289px] items-center"
       onSubmit={submitHandler}
     >
       <button type="submit" className="ml-2 mr-4" >
         <img src={lupa} />
       </button>
       <input
-        className="w-[370px] pl-2 h-8 text-s"
+        className="w-[237px] pl-2 h-7 text-s"
         type="text"
         name="keyword"
         placeholder="Busca los mejores productos"

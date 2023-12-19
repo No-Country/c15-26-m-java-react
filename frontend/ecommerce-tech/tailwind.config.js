@@ -34,11 +34,20 @@ export default withMT({
           900:"#252525"  //Black 1
         },
         blue:{
+          500: "#6468C4", //Selected
           600: "#5259FF", //Blue 1
-          700:"#333BF4"  //BlueCTA
+          700:"#333BF4" , //BlueCTA
+          800: "#5F66FD" , //Blue 2
+          900: "#7075f5",   //Blue 3
         },
         red:{
           600: "#ff5252" //Red Alert
+        },
+        yellow: {
+          600: "#FFAF52" //Yellow Alert
+        },
+        green: {
+          600: "#6AE157" //Green Success
         }
 
       }

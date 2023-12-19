@@ -2,6 +2,7 @@ import { Option, Select } from "@material-tailwind/react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import payments from "../assets/payments.svg";
+import ActionButton from "./ActionButton";
 const OrderFormStep2 = ({ setStep, setOrderData }) => {
   const initialValues = {
     card_type: "débito",
@@ -58,12 +59,13 @@ const OrderFormStep2 = ({ setStep, setOrderData }) => {
         ) : null}
       </div>
       <div className="w-[376px] h-[58px] p-2 mt-20">
-        <button
+        {/* <button
           className="w-[360px] h-[42px] rounded-lg bg-blue-700 text-white text-xl font-semibold hover:opacity-50"
           type="submit"
         >
           Ir a pagar
-        </button>
+        </button> */}
+        <ActionButton text="Ir a pagar" type="submit" />
       </div>
     </form>
   );

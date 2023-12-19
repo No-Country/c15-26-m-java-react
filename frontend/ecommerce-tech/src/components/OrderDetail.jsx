@@ -17,7 +17,7 @@ const OrderDetail = () => {
       .get(endPoint)
       .then((response) => setDetail(response.data))
       .catch((error) => {
-        alert("Ocurrió un error");
+        alert("Error al traer los detalles de la orden");
         console.log(error);
       });
   }, [id]);
