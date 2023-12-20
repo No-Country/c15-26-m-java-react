@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../MyContext";
 import axios from "axios";
 import { API_URL } from "../config";
-import home from '../assets/home.svg'
+import home from '../assets/Home.svg'
 
 const OrderDetail = () => {
   const { id } = useParams();
