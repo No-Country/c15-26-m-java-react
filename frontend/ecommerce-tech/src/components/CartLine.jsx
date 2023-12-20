@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { MyContext } from "../MyContext";
-import trash from "../assets/trash.svg";
+import trash from "../assets/Trash.svg";
 
 const CartLine = ({
   id,
