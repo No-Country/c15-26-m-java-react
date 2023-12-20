@@ -8,7 +8,7 @@ const Cart = () => {
   
 
   return cart.length > 0 ? (
-    <div className="flex flex-col">
+    <div className="flex items-center">
        <CartDetail />
     </div>
   ) : (

@@ -8,6 +8,7 @@ import addProductIcon from "../assets/Shopping Card Add.svg";
 import { API_URL } from "../config";
 import { Spinner } from "@material-tailwind/react";
 import Swal from 'sweetalert2'
+import ActionButton from "./ActionButton";
 
 const ItemDetail = () => {
   const [item, setItem] = useState({});
@@ -138,9 +139,9 @@ const ItemDetail = () => {
             )}
           
 
-          <div className=" h-[130px] w-[380px] flex flex-col mt-3">
+          <div className=" h-[120px] w-[380px] flex flex-col gap-3 place-content-center items-center mt-3 ">
             <div
-              className="h-[42px] w-[360px] p-1 m-2 flex  place-content-center rounded-lg border border-blue-600 text-xl font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
+              className="h-[42px] w-[360px] p-2  flex  place-content-center rounded-lg border border-blue-600 text-xl font-semibold text-blue-600 hover:text-blue-500 hover:border-blue-500"
               onClick={() => addToCart()}
             >
               <img
@@ -152,17 +153,19 @@ const ItemDetail = () => {
                 Agregar unidad al carrito
               </div>
             </div>
+            <ActionButton text="Comprar ahora" action={buyNow} />
 
-            <div
+            {/* <div
               className="h-[42px] w-[360px] p-1 m-2 flex  place-content-center rounded-lg border border-blue-600 text-xl font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
               onClick={() => buyNow()}
             >
               Comprar ahora
-            </div>
+            </div> */}
+            
           </div>
         </div>
 
-        <div className="w-[774px] h-[1200px] bg-white rounded-xl"></div>
+        <div className="w-[774px] h-[1200px] bg-white rounded-xl "></div>
       </div>
     </section>
   );

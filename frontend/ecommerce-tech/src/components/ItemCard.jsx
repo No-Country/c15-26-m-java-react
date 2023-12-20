@@ -11,7 +11,7 @@ const ItemCard = ({ id, name, brand, model, price, discount, images }) => {
 
   return (
     <div
-      className="w-[227px] h-[385px] px-2 flex flex-col gap-2 place-content-center border transition-all border-gray-100 rounded-xl bg-white cursor-pointer hover:shadow-lg"
+      className="w:[190px] sm:w-[227px] h-[385px] px-2 flex flex-col gap-2 place-content-center border transition-all border-gray-100 rounded-xl bg-white cursor-pointer hover:shadow-lg"
       onClick={() => goToDetail(id)}
     >
       <div className="overflow-hidden place-content-center flex items-center">

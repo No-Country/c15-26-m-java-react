@@ -58,7 +58,7 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink className={getClassName}>Seguimiento</NavLink>
+              <NavLink to={'/tracking'} className={getClassName}>Seguimiento</NavLink>
             </li>
             <li>
               <NavLink to={'/help'} className={getClassName}>Soporte</NavLink>

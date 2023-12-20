@@ -96,7 +96,7 @@ const OrderFormStep1 = ({ setStep }) => {
         ) : null}
       </div>
 
-      <div className="w-[376px] h-[58px] p-2">
+      <div className="w-[376px] h-[58px] place-content-center items-center">
         {/* <button
           className="w-[360px] h-[42px] rounded-lg bg-blue-700 text-white text-xl font-semibold hover:opaemail-50"
           type="submit"

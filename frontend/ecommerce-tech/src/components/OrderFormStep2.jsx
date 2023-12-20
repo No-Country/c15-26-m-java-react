@@ -58,7 +58,7 @@ const OrderFormStep2 = ({ setStep, setOrderData }) => {
           <div className="text-gray-800 text-sm ">{errors.card_type}</div>
         ) : null}
       </div>
-      <div className="w-[376px] h-[58px] p-2 mt-20">
+      <div className="w-[376px] h-[58px] mt-12">
         {/* <button
           className="w-[360px] h-[42px] rounded-lg bg-blue-700 text-white text-xl font-semibold hover:opacity-50"
           type="submit"
