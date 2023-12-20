@@ -115,7 +115,7 @@ const ItemList = () => {
         <div className="flex justify-end">
           <OrderFilter />
         </div>
-        <section className=" bg-transparent place-content-center items-center">
+        <section className=" bg-transparent place-content-center items-center relative -top-32  z-0 ">
           <div className="p-2.5 flex flex-wrap gap-4 place-content-center">
             {lastFilterType === "category" &&
               items?.map((i) => {
