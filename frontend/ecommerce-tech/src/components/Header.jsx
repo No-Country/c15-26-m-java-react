@@ -6,6 +6,7 @@ import UserIcon from "./UserIcon.jsx";
 import { LookUpBar } from "./LookUpBar.jsx";
 import CartIcon from "./CartIcon.jsx";
 import logo from "../assets/Logo.svg";
+import logo2 from "../assets/Logo2.svg";
 import iso from "../assets/Isotype.svg";
 import BurgerMenu from "./BurgerMenu.jsx";
 
@@ -29,15 +30,15 @@ const Header = () => {
     }
   };
   return (
-    <header className=" bg-transparent  h-28 flex flex-col ">
+    <header className=" bg-transparent  h-28 flex flex-col  ">
       <div className="flex place-content-between sm:place-content-evenly items-center h-24 bg-white">
         <BurgerMenu/>
-        <div className="flex cursor-pointer" onClick={goToHome}>
+        <div className="flex gap-3 cursor-pointer" onClick={goToHome}>
           <div className="h-[46px] w-[46px]">
             <img src={iso} />
           </div>
-           <div className="sm:block md:hidden lg:block">
-             <img src={logo} className="h-10 w-[191px]" />
+           <div >
+             <img src={window.innerWidth > 768  ? logo : logo2} className="h-10 w-[191px]" />
            </div>
         </div>
 
@@ -51,9 +52,9 @@ const Header = () => {
       </div>
       <div className="hidden md:block">
         <nav>
-          <ul className="flex place-content-start w-1/2 gap-8 ml-32 ">
-            <li onClick={goToHome}>
-              <NavLink to={`/`} className={getClassName}>
+          <ul className="flex place-content-start gap-8 ml-24 ">
+            <li>
+              <NavLink to={`/products`} className={getClassName}>
                 Productos
               </NavLink>
             </li>
@@ -66,7 +67,7 @@ const Header = () => {
           
         
             {customer.id > 0 && (
-              <>
+              <div className="flex gap-8 lg:hidden">
                 <li>
                   <NavLink className={getClassName} to="/profile">
                     Perfil
@@ -80,7 +81,7 @@ const Header = () => {
                 <li className="text-blue-600  transition-all hover:font-bold ">
                   <button onClick={() => logout()}>Cerrar sesión</button>
                 </li>
-              </>
+              </div>
             )}
             
           </ul>

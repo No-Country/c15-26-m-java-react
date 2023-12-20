@@ -42,7 +42,10 @@ const BurgerMenu = () => {
             <ul >
               <div className="flex flex-col content-start gap-2 mt-2 px-4 ">
                 <li className="text-gray-800 text-semibold text-lg  transition-all hover:font-bold"
-                onClick={goToHome} >
+                onClick={()=>{
+                  setIsOpen(false)
+                  navigate('/products')
+                }} >
                     Productos
                 </li>
                 <li  className="text-gray-800 text-semibold text-lg  transition-all hover:font-bold"

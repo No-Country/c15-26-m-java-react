@@ -27,7 +27,7 @@ export const LookUpBar = () => {
         <img src={lupa} />
       </button>
       <input
-        className="w-[237px] pl-2 h-7 text-s"
+        className="w-[237px] pl-2 h-7 text-s outline-0"
         type="text"
         name="keyword"
         placeholder="Busca los mejores productos"

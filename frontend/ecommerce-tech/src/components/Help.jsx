@@ -11,21 +11,21 @@ const Help = () => {
 
   return (
     <div className="flex items-center">
-      <div className="w-[714px] mb-6 ">
-        <div className="w-[592px] rounded-xl bg-white p-4">
-          <div className="w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
+      <div className="w-[714px] mb-6 flex  flex-wrap place-content-center">
+        <div className="w-[400px] sm:w-[592px] rounded-xl bg-white p-4">
+          <div className="w-[400px] sm:w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
             Soporte
           </div>
-          <div className="w-[558px] mt-4 text-gray-800 ">
+          <div className="w-[400px] sm:w-[558px] mt-4 text-gray-800   text-sm sm:text-base ">
            {` Estamos aquí para ayudarte a resolver cualquier duda que tengas. Si
             no encuentras alguna respuesta que buscas, envíanos un mail a
             bluedragon@tecnologystore.com`}
           </div>
         </div>
 
-        <div className="w-[592px] mt-4 rounded-xl bg-white p-4">
+        <div className="w-[400px] sm:w-[592px] mt-4 rounded-xl bg-white p-4">
           <div className="flex place-content-between">
-            <div className="w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
+            <div className="w-[400px] sm:w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
               Cuenta
             </div>
             <img
@@ -35,18 +35,18 @@ const Help = () => {
           </div>
           {visible && (
             <>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Tengo que registrarme para comprar?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Ofrecemos la opción de comprar como invitado. Puedes utilizar el
                 carrito y hacer seguimiento de tu pedido. Tus datos se
                 mantendrán confidenciales y no serás registrado.{" "}
               </div>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 Quiero cambiar de mail
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Al ingresar a tu cuenta puedes editar cualquier datos que
                 necesites, por ejemplo tu dirección. Se te notificará por mail
                 para confirmar las modificaciones por cuestiones de seguridad.
@@ -55,9 +55,9 @@ const Help = () => {
           )}
         </div>
 
-        <div className="w-[592px] mt-4 rounded-xl bg-white p-4">
+        <div className="w-[400px] sm:w-[592px] mt-4 rounded-xl bg-white p-4">
           <div className="flex place-content-between">
-            <div className="w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
+            <div className="w-[400px] sm:w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
               Envíos
             </div>
             <img
@@ -67,29 +67,29 @@ const Help = () => {
           </div>
           {visible2 && (
             <>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Puedo seguir mi pedido?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Sí, una vez que haya sido enviado, recibirás un número de
                 seguimiento por mail. Puedes utilizar este número para dar
                 seguimiento al estado de tu compra a través de nuestra
                 plataforma.
               </div>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Cuál es el tiempo de entrega estimado?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 El tiempo de entrega puede variar según la ubicación y el método
                 de envío seleccionado. Por lo general, nuestros envíos se
                 entregan dentro de 5 días hábiles. Sin embargo, es importante
                 tener en cuenta que pueden haber retrasos debido a
                 circunstancias imprevistas.
               </div>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Ofrecen envío internacional?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Sí, ofrecemos envío a varios países. Puedes verificar la
                 disponibilidad y los costos de envío en la página de checkout al
                 ingresar tu dirección.
@@ -98,9 +98,9 @@ const Help = () => {
           )}
         </div>
 
-        <div className="w-[592px] mt-4 rounded-xl bg-white p-4">
+        <div className="w-[400px] sm:w-[592px] mt-4 rounded-xl bg-white p-4">
           <div className="flex place-content-between">
-            <div className="w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
+            <div className="w-[400px] sm:w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
               Pago
             </div>
             <img
@@ -110,10 +110,10 @@ const Help = () => {
           </div>
           {visible3 && (
             <>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Cuáles son las opciones de pago disponibles?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Aceptamos diversas formas de pago.
                 <div className="pl-5">
                   <ul className="list-disc">
@@ -128,9 +128,9 @@ const Help = () => {
           )}
         </div>
 
-        <div className="w-[592px] mt-4 rounded-xl bg-white p-4">
+        <div className="w-[400px] sm:w-[592px] mt-4 rounded-xl bg-white p-4">
           <div className="flex place-content-between">
-            <div className="w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
+            <div className="w-[400px] sm:w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
               Productos
             </div>
             <img
@@ -140,41 +140,41 @@ const Help = () => {
           </div>
           {visible4 && (
             <>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Cuál es la diferencia entre las variedades de modelos de un
                 mismo producto?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Cada modelo de producto puede tener características y
                 especificaciones ligeramente diferentes. Te recomendamos revisar
                 la descripción detallada de cada modelo para comprender mejor
                 las diferencias y elegir el que mejor se adapte a tus
                 necesidades.
               </div>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Tienen garantía en sus productos?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Sí, todos nuestros productos tienen una garantía estándar de 12
                 meses. Esta garantía cubre defectos de fabricación y mal
                 funcionamiento. Si experimentas algún problema con tu producto
                 dentro del período de garantía, estaremos disponibles para
                 ayudarte a solucionarlo.
               </div>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Cuál es la política de devoluciones y reembolsos?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Tenemos una política de devoluciones que te permite devolver el
                 producto dentro de 30 días después de la entrega, siempre y
                 cuando cumpla con nuestras condiciones de devolución. Una vez
                 que recibamos el producto, procesaremos tu reembolso según
                 nuestra política.
               </div>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Ofrecen servicios de instalación o configuración?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Actualmente no contamos con con servicio de instalación o
                 configuración. Sin embargo, proporcionamos instrucciones
                 detalladas y soporte técnico para ayudarte en el proceso de
@@ -184,9 +184,9 @@ const Help = () => {
           )}
         </div>
 
-        <div className="w-[592px] mt-4 rounded-xl bg-white p-4">
+        <div className="w-[400px] sm:w-[592px] mt-4 rounded-xl bg-white p-4">
           <div className="flex place-content-between">
-            <div className="w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
+            <div className="w-[400px] sm:w-[558px] mt-4 text-2xl text-blue-600 font-semibold">
               Seguridad
             </div>
             <img
@@ -196,11 +196,11 @@ const Help = () => {
           </div>
           {visible5 && (
             <>
-              <div className="w-[558px] mt-4 font-semibold text-gray-900">
+              <div className="w-[400px] sm:w-[558px] mt-4 font-semibold text-gray-900">
                 ¿Cuáles son las medidas de seguridad para proteger los datos
                 personales y financieros de los clientes?
               </div>
-              <div className="w-[558px] mt-2 text-gray-800 ">
+              <div className="w-[400px] sm:w-[558px] mt-2 text-gray-800   text-sm sm:text-base ">
                 Nos tomamos muy en serio la seguridad de los datos de nuestros
                 clientes. Utilizamos medidas de seguridad avanzadas para
                 proteger la información personal y financiera que nos

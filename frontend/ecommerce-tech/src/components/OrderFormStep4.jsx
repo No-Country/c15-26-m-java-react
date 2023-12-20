@@ -68,8 +68,10 @@ const OrderFormStep4 = ({ orderData, setOrderData }) => {
               "Ver compra"
             );
 
-            console.log("detalles guardados");
-            console.log(res);
+            updateCart([]);
+            updateQtyCart(0);
+            localStorage.removeItem("cart");
+            navigate(`/order/${order_id}`);
           })
           .catch((error) => {
             Alert(
@@ -82,10 +84,7 @@ const OrderFormStep4 = ({ orderData, setOrderData }) => {
             console.log(error);
           });
 
-        updateCart([]);
-        updateQtyCart(0);
-        localStorage.removeItem("cart");
-        navigate(`/order/${order_id}`);
+       
       })
       .catch((error) => {
         Alert(

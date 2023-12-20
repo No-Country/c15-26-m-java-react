@@ -12,6 +12,7 @@ import CustomerProfile from "./components/CustomerProfile.jsx";
 import Cart from "./components/Cart.jsx";
 import Help from "./components/Help.jsx";
 import OrderTracking from "./components/OrderTracking.jsx";
+import Home from "./components/Home.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/products",
         element: <ItemList />,
       },
       {

@@ -9,10 +9,10 @@ const CartIcon = () => {
   
   return (
     <>
-      <div className=" w-9 h-9 flex flex-col border rounded cursor-pointer" onClick={()=>navigate("/cart")}>
-        <div className="h-6 w-6"><img src={cart} alt="carrito" /></div>
+      <div className=" w-12 h-12 flex flex-col border rounded cursor-pointer" onClick={()=>navigate("/cart")}>
+        <div className="h-6 w-6 ml-2 mt-2"><img src={cart} alt="carrito" /></div>
         
-        <div className="h-4 w-4 rounded-full text-white text-sm leading-4 text-center bg-red-600 relative -top-3 -right-3">
+        <div className="h-4 w-4 rounded-full text-white text-sm leading-4 text-center bg-red-600 relative -top-2 left-7">
         {qtyCart}
         </div>
       </div>

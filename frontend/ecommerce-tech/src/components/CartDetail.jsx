@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../MyContext";
 import CartLine from "./CartLine";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ const calcTotalCart = (cart) => {
 const CartDetail = () => {
   const { cart, updateShopping } = useContext(MyContext);
   const [totalCart, setTotalCart] = useState(calcTotalCart(cart));
+  const [wrap, setWrap] = useState(false)
   const navigate = useNavigate();
   let shippingCost = 0;
 
@@ -21,6 +22,11 @@ const CartDetail = () => {
     updateShopping(true);
     navigate("/checkout");
   };
+
+  useEffect(() => {
+    setWrap( window.innerWidth<500 ? true : false)
+  })
+  
 
   return (
     <div className="flex flex-wrap gap-5">
@@ -38,7 +44,7 @@ const CartDetail = () => {
                 qty={item.qty}
                 setTotalCart={setTotalCart}
                 calcTotalCart={calcTotalCart}
-                wrap={window.innerWidth<500 ? true : false}
+                wrap={wrap}
               />
             ))}
           </div>
