@@ -48,6 +48,7 @@ const BurgerMenu = () => {
                 <li  className="text-gray-800 text-semibold text-lg  transition-all hover:font-bold"
                 onClick={()=>{
                   setIsOpen(false)
+                  navigate('/tracking')
                 }}>
                   Seguimiento
                 </li>

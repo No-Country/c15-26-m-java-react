@@ -24,22 +24,48 @@ const OrderHeader = ({ id }) => {
   }, [id]);
 
   return (
-    <div>
-      <div className="mt-10 font-extrabold h-10 place-items-center flex place-content-center bg-slate-100 border border-slate-700">{`Orden Nro: ${order.order_id}`}</div>
+    <div className="w-[400px] h-[352px] lg:w-[956px] lg:h-[276px] pt-8 px-10 ">
+      <div className="h-10 text-lg font-semibold texgray-900 ">Orden de compra</div>
+      <div className="w-[400px] lg:w-[820px] h-[140px] flex flex-wrap  place-content-between ">
+        <div className="w-[320px] h-[140px] flex flex-col gap-2 p-2 ">
+          <div className="w-[320px] h-[25px] ">
+            <span className="text-sm font-semibold text-gray-800: ">Número de orden: </span>
+            <span className="text-sm text-gray-800: ">{order.order_id}</span>
+          </div>
+          <div className="w-[320px] h-[25px] ">
+            <span className="text-sm font-semibold text-gray-800: ">Nombre de cliente: </span>
+            <span className="text-sm text-gray-800: ">{customer.id > 0? customer.name : "invitado"}</span>
+          </div>
+          <div className="w-[320px] h-[25px] ">
+            <span className="text-sm font-semibold text-gray-800: ">Email: </span>
+            <span className="text-sm text-gray-800: ">{customer.id > 0? customer.email : "n/d"}</span>
+          </div>
+          <div className="w-[320px] h-[25px] ">
+            <span className="text-sm font-semibold text-gray-800: ">Teléfono: </span>
+            <span className="text-sm text-gray-800: ">{customer.id > 0? customer.phone : "n/d"}</span>
+          </div>
+        </div>
 
-      <div className="flex flex-wrap place-content-around bg-slate-300 h-10 items-center p-2 border border-slate-700 border-t-0 font-bold gap-3">
-        <div>Cliente: {order.customer_id > 0? order.customer_name : "invitado"}</div>
-        {order.customer_id > 0 && <div>Correo electrónico: {order.customer_email}</div>}
-      </div>
-
-      <div className="flex flex-wrap bg-blue-400 gap-3 border border-slate-700 border-t-0">
-        <div className="w-full text-center font-bold">Datos de envío</div>
-        <div className="w-full flex place-content-around mb-2">
-          <div className="font-medium">{`Dirección: ${order.address}`}</div>
-          <div className="font-medium">{`Ciudad: ${order.city}`}</div>
-          <div className="font-medium">{`Estado/Provincia: ${order.state}`}</div>
+        <div className="w-[320px] h-[140px] flex flex-col gap-2 p-2">
+          <div className="w-[320px] h-[25px] ">
+            <span className="text-sm font-semibold text-gray-800: ">Dirección: </span>
+            <span className="text-sm text-gray-800: ">{order.address}</span>
+          </div>
+          <div className="w-[320px] h-[25px] ">
+            <span className="text-sm font-semibold text-gray-800: ">Ciudad: </span>
+            <span className="text-sm text-gray-800: ">{order.city}</span>
+          </div>
+          <div className="w-[320px] h-[25px] ">
+            <span className="text-sm font-semibold text-gray-800: ">Provincia: </span>
+            <span className="text-sm text-gray-800: ">{order.state}</span>
+          </div>
         </div>
       </div>
+      
+
+    
+
+      
     </div>
   );
 };

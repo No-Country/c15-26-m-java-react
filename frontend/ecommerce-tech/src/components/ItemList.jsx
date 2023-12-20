@@ -107,8 +107,8 @@ const ItemList = () => {
   }, [items]);
 
   return (
-    <main className="flex place-content-center gap-2 min-h-screen">
-      <div className=" sm:w-[227px] sm:h-[1018px] sm:mt-16">
+    <main className="flex mt-10 place-content-center gap-1 min-h-screen">
+      <div >
         <Filters />
       </div>
       <div className="w-[250px]  flex flex-col md:w-[495px] lg:w-[740px] xl:w-[994px] ">

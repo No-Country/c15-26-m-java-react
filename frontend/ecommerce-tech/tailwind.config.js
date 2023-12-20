@@ -34,7 +34,7 @@ export default withMT({
           900:"#252525"  //Black 1
         },
         blue:{
-          500: "#6468C4", //Selected
+          500: "#121BDC", //Selected
           600: "#5259FF", //Blue 1
           700:"#333BF4" , //BlueCTA
           800: "#5F66FD" , //Blue 2

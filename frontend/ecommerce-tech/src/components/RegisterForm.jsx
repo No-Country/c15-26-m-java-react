@@ -200,10 +200,10 @@ const RegisterForm = () => {
                       ) : null}
                     </div>
 
-                    <div className="h-[56px] flex p-2 mt-20 gap-6">
+                    <div className="h-[56px] flex p-2 mt-16 gap-6">
                       <img src={back_disabled} alt="previo" />
                       <img
-                        className="hover:opacity-50 cursor-pointer"
+                        className="opacity-90 hover:opacity-100 cursor-pointer"
                         src={next}
                         alt="next"
                         onClick={() => setStep(2)}
@@ -283,15 +283,15 @@ const RegisterForm = () => {
                       ) : null}
                     </div>
 
-                    <div className="h-[56px] flex mt-20 p-2 gap-6">
+                    <div className="h-[56px] flex mt-16 p-2 gap-6">
                       <img
-                        className="hover:opacity-50 cursor-pointer"
+                        className="opacity-90 hover:opacity-100 cursor-pointer"
                         src={back}
                         alt="previo"
                         onClick={() => setStep(1)}
                       />
                       <img
-                        className="hover:opacity-50 cursor-pointer"
+                        className="opacity-90 hover:opacity-100 cursor-pointer"
                         src={next}
                         alt="next"
                         onClick={() => setStep(3)}
@@ -349,16 +349,16 @@ const RegisterForm = () => {
                       ) : null}
                     </div>
 
-                    <div className="h-[56px] flex mt-44 p-2 gap-6">
+                    <div className="h-[56px] flex mt-40 p-2 gap-6">
                       <img
-                        className="hover:opacity-50 cursor-pointer"
+                        className="opacity-90 hover:opacity-100 cursor-pointer"
                         src={back}
                         alt="previo"
                         onClick={() => setStep(2)}
                       />
                       <button type="submit">
                         <img
-                          className="hover:opacity-50 cursor-pointer"
+                          className="opacity-90 hover:opacity-100 cursor-pointer"
                           src={create}
                           alt="crear cuenta"
                           disabled={isSubmitting}

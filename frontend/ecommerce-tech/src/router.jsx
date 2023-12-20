@@ -11,6 +11,7 @@ import OrderList from "./components/OrderList.jsx";
 import CustomerProfile from "./components/CustomerProfile.jsx";
 import Cart from "./components/Cart.jsx";
 import Help from "./components/Help.jsx";
+import OrderTracking from "./components/OrderTracking.jsx";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "help",
         element: <Help />,
+      },
+      {
+        path: "tracking",
+        element: <OrderTracking />,
       },
     ],
   },

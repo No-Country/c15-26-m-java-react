@@ -38,12 +38,13 @@ const OrderFormStep1 = ({ setStep, setOrderData }) => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3 px-4">
       <div className="font-semibold text-2xl">
-        Confirma la dirección de envío
+        {customer.id !== -1 ? "Confirma la dirección de envío" : "Comprando como invitado"}
       </div>
 
       <div className="text-sm px-1 py-2">
-        Tu producto será enviado a la siguiente dirección, puedes modificar los
-        campos en caso de que necesites enviarlo a otro domicilio.
+      {customer.id !== -1 ? `Tu producto será enviado a la siguiente dirección, puedes modificar los
+        campos en caso de que necesites enviarlo a otro domicilio.` : "Tu producto será enviado a la siguiente dirección, por favor completa los campos correspondientes."}
+        
       </div>
 
       <div className="mt-2 mb-6">
@@ -102,7 +103,7 @@ const OrderFormStep1 = ({ setStep, setOrderData }) => {
         ) : null}
       </div>
 
-      <div className="w-[376px] h-[58px] p-2">
+      <div className="w-[376px] h-[58px]">
         {/* <button
           className="w-[360px] h-[42px] rounded-lg bg-blue-700 text-white text-xl font-semibold hover:opacity-50"
           type="submit"

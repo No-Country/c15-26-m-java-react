@@ -1,7 +1,17 @@
 import { useContext, useState } from "react";
 import { MyContext } from "../MyContext";
+import trash from "../assets/trash.svg";
 
-const CartLine = ({ id, name, qty, price, setTotalCart, calcTotalCart }) => {
+const CartLine = ({
+  id,
+  image,
+  name,
+  qty,
+  price,
+  setTotalCart,
+  calcTotalCart,
+  wrap
+}) => {
   const { cart, updateCart, qtyCart, updateQtyCart } = useContext(MyContext);
 
   const [cant, setCant] = useState(qty);
@@ -31,37 +41,50 @@ const CartLine = ({ id, name, qty, price, setTotalCart, calcTotalCart }) => {
     localStorage.setItem("cart", JSON.stringify(newCart));
     setTotalCart(calcTotalCart(newCart));
   };
-
+  const flex = wrap ? "flex-wrap" : "flex-grow"
   return (
-    <tr className="p-4 w-12">
-      <td className="text-center w-[350px]">{name}</td>
-      <td className="w-[190px]flex place-content-center">
-          <div className="w-[175px] h-[36px] flex place-content-center items-center">
-            <button
-              className=" h-6 bg-slate-500 border border-black text-center leading-5 font-bold w-5"
-              onClick={() => removeUnit()}
-              disabled={cant == 1}
-            >
-              -
-            </button>
-            <span className="w-[30px] text-center font-extrabold">{cant}</span>
-            <button
-              className=" h-6 bg-slate-500 border border-black text-center leading-5 font-bold w-5"
-              onClick={() => addUnit()}
-            >
-              +
-            </button>
-            <span className="w-[68px] pl-2">
-              {qty > 1 ? "unidades" : "unidad"}
-            </span>
+    <div className={`flex ${flex} `}>
+      <div className="flex h-[68px] w-[372px] items-center  gap-3">
+        <div className="w-[50px] h-[50px] ml-4">
+          <img
+            src={image}
+            className="h-full w-full object-contain object-center"
+            alt="image"
+          />
+        </div>
+        <div className="w-[292px] h-[46px] flex flex-col gap-1 p-1">
+          <div className="text-sm font-semibold">{name}</div>
+          <div className="text-sm ">
+            {`$ ` + new Intl.NumberFormat().format(price)}
           </div>
-      </td>
-      <td className="w-[150px] text-center">{price}</td>
-      <td className="w-[150px] text-center">{cant * price}</td>
-      <td className="w-[100px]">
-        <button className="bg-red-500 rounded-md text-white p-1 " onClick={removeItem}>x</button>
-      </td>
-    </tr>
+        </div>
+      </div>
+
+      <div className="flex w-[372px] h-[68px] items-center place-content-between px-2">
+
+        <div className="w-[102px] h-10 flex place-content-center items-center border p-2 rounded-lg border-gray-200">
+          <div className="w-[175px] h-[36px] flex place-content-center items-center">
+            <button onClick={() => removeUnit()} disabled={cant == 1}>
+              <span className="h-6 w-6 font-semibold text-blue-600">-</span>
+            </button>
+            <span className="w-[38px] h-4 text-center text-sm font-semibold">
+              {cant}
+            </span>
+            <button onClick={() => addUnit()}>
+              <span className="h-6 w-6 font-semibold text-blue-600">+</span>
+            </button>
+          </div>
+        </div>
+
+        <div
+          className="w-[140px] h-7 flex items-center place-content-between cursor-pointer"
+          onClick={removeItem}
+        >
+          <span className="text-sm text-blue-700 ">Eliminar producto</span>
+          <img className="h-6 w-6" src={trash} alt="" />
+        </div>
+      </div>
+    </div>
   );
 };
 

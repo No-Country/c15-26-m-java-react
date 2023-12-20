@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../MyContext";
 import axios from "axios";
 import { API_URL } from "../config";
+import home from '../assets/home.svg'
 
 const OrderDetail = () => {
   const { id } = useParams();
@@ -28,60 +29,65 @@ const OrderDetail = () => {
     return total;
   };
   return (
-    <div>
-      <OrderHeader id={id} />
-      <table className="border border-slate-700 border-t-0 w-full">
-        <thead className="p-4 bg-slate-400 h-14">
-          <tr>
-            <th className="w-[350px]">Producto</th>
-            <th className="w-[150px]">Marca</th>
-            <th className="w-[150px]">Modelo</th>
-            <th className="w-[150px]">Cantidad</th>
-            <th className="w-[150px]">Precio Unitario</th>
-            <th className="w-[150px]">Precio Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {detail.length > 0 ?
-          detail.map((line) => (
-            <OrderLine
-              key={line.order_detail_id}
-              name={line.product.name}
-              brand={line.product.brand}
-              model={line.product.model}
-              qty={line.product_quantity}
-              price={line.price}
-            />
-          )):
-          <tr>
-            <td className="text-center h-10 font-bold" colSpan="6">NO HAY DETALLES A MOSTRAR</td>
-          </tr>
-          }
-        </tbody>
-        <tfoot>
-          <tr className="p-4 bg-blue-400 h-10">
-            <td className="text-end font-bold" colSpan="5">
-              Total
-            </td>
-            <td className="w-150px font-bold text-center">
-              {calcTotalOrder()}
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-
-      <div className="w-full gap-5 m-5 flex place-content-center">
-        <div className="p-2 bg-slate-300 hover:bg-blue-950 hover:text-yellow-200">
-          <Link to={"/"}>Home</Link>
-        </div>
-        <div
-          className={
-            customer.id === 0
-              ? "opacity-0"
-              : "opacity-100 p-2 bg-slate-300 hover:bg-blue-950 hover:text-yellow-200"
-          }
-        >
-          <Link to={`/orders/${customer.id}`}>Historial de Pedidos</Link>
+    <div className="flex flex-col place-content-center">
+      <div className="flex flex-col bg-white rounded-xl">
+        <OrderHeader id={id} />
+        <table className=" w-full">
+          <thead className="bg-blue-800 text-sm text-white h-4">
+            <tr>
+              <th className="w-[60px]">#NR</th>
+              <th className="w-[170px]">Producto</th>
+              <th className="w-[99px]">Marca</th>
+              <th className="w-[185px]">Modelo</th>
+              <th className="w-[78px]">Cantidad</th>
+              <th className="w-[148px]">Precio Unitario</th>
+              <th className="w-[157px]">Precio Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {detail.length > 0 ? (
+              detail.map((line, index) => (
+                <OrderLine
+                  key={line.order_detail_id}
+                  nr={index + 1}
+                  name={line.product.name}
+                  brand={line.product.brand}
+                  model={line.product.model}
+                  qty={line.product_quantity}
+                  price={line.price}
+                />
+              ))
+            ) : (
+              <tr>
+                <td className="text-center h-10 font-bold" colSpan="6">
+                  NO HAY DETALLES A MOSTRAR
+                </td>
+              </tr>
+            )}
+          </tbody>
+          <tfoot>
+            <tr className="w-[957px] h-[72px] ">
+              <td className="text-lg text-end" colSpan="2">
+                Total
+              </td>
+              <td className="pl-8 text-lg font-semibold" colSpan="6">
+                {`$ ` + new Intl.NumberFormat().format(calcTotalOrder())}
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div className="w-full flex gap-10 place-content-center my-10 ">
+        <div className=" flex items-center place-content-around bg-white text-blue-600 text-xs sm:text-sm font-semibold p-4 border border-blue-600 h-10 w-[133px] rounded  hover:text-blue-700 hover:border-blue-700">
+            <Link className="flex items-center place-content-around" to={"/"}><img className="h-6 w-6" src={home}/>
+              <span className="ml-2">Ir a inicio</span></Link>
+          </div>
+          <div>
+          <div
+            className=" flex bg-blue-600 text-white text-xs sm:text-sm font-semibold p-4 border border-blue-600 h-10 w-[138px] rounded items-center place-content-around hover:bg-blue-700 hover:border-blue-700"
+          >
+            <Link to={`/tracking`}>Ver seguimiento</Link>
+          </div>
         </div>
       </div>
     </div>

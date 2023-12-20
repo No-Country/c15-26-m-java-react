@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { MyContext } from "../MyContext";
 import CartLine from "./CartLine";
 import { useNavigate } from "react-router-dom";
+import ActionButton from "./ActionButton";
+import truck from "../assets/truck.svg";
 
 const calcTotalCart = (cart) => {
   let total = 0;
@@ -13,6 +15,7 @@ const CartDetail = () => {
   const { cart, updateShopping } = useContext(MyContext);
   const [totalCart, setTotalCart] = useState(calcTotalCart(cart));
   const navigate = useNavigate();
+  let shippingCost = 0;
 
   const endShopping = () => {
     updateShopping(true);
@@ -20,66 +23,64 @@ const CartDetail = () => {
   };
 
   return (
-    <div className="flex p-8 place-self-center w-full flex-col place-content-center">
-      <h1 className="text-center font-bold text-2xl mb-8 ">
-        Detalle del Carrito
-      </h1>
-      <table className="border border-black w-full">
-        <thead>
-          <tr className="p-4 bg-slate-400 h-14">
-            <th className="w-[350px]">Producto</th>
-            <th className="w-[190px]">Cantidad</th>
-            <th className="w-[150px]">Precio Unitario</th>
-            <th className="w-[150px]">Precio Total</th>
-            <th className="w-[100px]"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {cart.length > 0 ? (
-            cart.map((item) => (
+    <div className="flex flex-wrap gap-5">
+      <div className="flex p-6 md:w-[714px] w-[400px] h-[420px] flex-col  bg-white rounded-xl">
+        <h1 className=" font-bold text-2xl my-8 ">Mi carrito</h1>
+        <div className="flex flex-col gap-3">
+          <div className="w-[682px]">
+            {cart.map((item) => (
               <CartLine
                 key={item.id}
                 id={item.id}
+                image={item.image}
                 name={item.name}
-                qty={item.qty}
                 price={item.price}
+                qty={item.qty}
                 setTotalCart={setTotalCart}
                 calcTotalCart={calcTotalCart}
+                wrap={window.innerWidth<500 ? true : false}
               />
-            ))
-          ) : (
-            <tr>
-              <td className="text-center h-10 font-bold" colSpan="5">
-                NO HAY PRODUCTOS EN SU CARRITO
-              </td>
-            </tr>
-          )}
-        </tbody>
-        <tfoot>
-          <tr className="p-4 bg-blue-400 h-10">
-            <td className="text-end font-bold" colSpan="3">
-              Total
-            </td>
-            <td className="w-150px font-bold text-center">{totalCart}</td>
-            <td></td>
-          </tr>
-        </tfoot>
-      </table>
+            ))}
+          </div>
+          {/* <div className="w-[372px] h-[68px]  px-3 py-2 flex gap-3  ">
+          <div className="w-[50px] h-[50px] flex items-center place-content-center">
+            <img
+              src={truck}
+              className="h-6 w-6 object-contain object-center "
+              alt="image"
+            />
+          </div>
+          <div className="w-[292px] h-[46px] flex flex-col gap-1 p-1">
+            <div className="text-sm font-semibold">Envío</div>
+            <div className="text-sm ">
+              {shippingCost === 0
+                ? "A calcular"
+                : `$ ` + new Intl.NumberFormat().format(shippingCost)}
+            </div>
+          </div>
+        </div> */}
+        </div>
+      </div>
 
-      <div className="w-full m-5 flex place-content-center">
-        <div
-          className={
-            cart.length
-              ? "opacity-100 p-2 bg-slate-300 hover:bg-blue-950 hover:text-yellow-200"
-              : "opacity-0"
-          }
-        >
-          <button onClick={endShopping}>Finalizar Compra</button>
+      <div className="w-[409px] h-[357px] p-4  bg-white rounded-xl">
+        <span className="text-2xl font-semibold">Total de la compra</span>
+        <div className="underline text-sm text-blue-700 mt-10">
+          <a href="#">Tengo un cupón de descuento</a>
+        </div>
+
+        <div className="mt-10">
+          <h1 className="text-lg">Total a pagar</h1>
+          <div className="text-2xl font-semibold">
+            {`$ ` + new Intl.NumberFormat().format(totalCart)}
+          </div>
+        </div>
+
+        <div className="w-full flex place-content-center mt-16">
+          <ActionButton text="Comprar ahora" action={endShopping} />
         </div>
       </div>
     </div>
-
-  )
+  );
 };
 
 export default CartDetail;
