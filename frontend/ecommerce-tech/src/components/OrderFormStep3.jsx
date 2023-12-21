@@ -88,12 +88,6 @@ const OrderFormStep3 = ({setStep, setOrderData}) => {
                 </div>
 
                 <div className="w-[376px] h-[58px] pt-2 mt-20">
-                  {/* <button
-                    className="w-[360px] h-[42px] rounded-lg bg-blue-700 text-white text-xl font-semibold hover:opacity-50"
-                    type="submit"
-                  >
-                    Continuar
-                  </button> */}
                   <ActionButton text="Continuar" type="submit" />
                 </div>
            

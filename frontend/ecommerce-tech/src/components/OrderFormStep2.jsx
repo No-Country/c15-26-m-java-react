@@ -59,12 +59,6 @@ const OrderFormStep2 = ({ setStep, setOrderData }) => {
         ) : null}
       </div>
       <div className="w-[376px] h-[58px] mt-12">
-        {/* <button
-          className="w-[360px] h-[42px] rounded-lg bg-blue-700 text-white text-xl font-semibold hover:opacity-50"
-          type="submit"
-        >
-          Ir a pagar
-        </button> */}
         <ActionButton text="Ir a pagar" type="submit" />
       </div>
     </form>

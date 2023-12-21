@@ -25,12 +25,6 @@ const GuestAdvice = () => {
         </p>
       </div>
       <div className="mt-[117px] flex place-content-center ">
-        {/* <button
-          className="w-[360px] h-[42px] bg-blue-700 text-white font-bold py-2 px-4 rounded mt-16 ml-3 hover:bg-white hover:text-blue-700 hover:border-blue-700  hover:border  focus:outline-none focus:shadow-outline"
-          onClick={buyAsGuest}
-        >
-          Comprar como invitado
-        </button> */}
         <ActionButton text="Comprar como invitado" action={buyAsGuest}/>
       </div>
     </div>
