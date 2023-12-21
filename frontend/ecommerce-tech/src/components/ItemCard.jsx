@@ -6,7 +6,7 @@ const ItemCard = ({ id, name, brand, model, price, discount, images }) => {
   const promo = Math.ceil(price * (1 - discount));
 
   const goToDetail = (id) => {
-    navigate(`item/${id}`);
+    navigate(`/item/${id}`);
   };
 
   return (
