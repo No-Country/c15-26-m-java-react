@@ -158,7 +158,7 @@ const ItemDetail = () => {
           </div>
         </div>
 
-        <div className="w-[774px] h-[1200px] bg-white rounded-xl "></div>
+        {/* <div className="w-[774px] h-[1200px] bg-white rounded-xl "></div> */}
       </div>
     </section>
   );
