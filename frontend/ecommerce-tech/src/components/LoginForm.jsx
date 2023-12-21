@@ -40,7 +40,6 @@ const LoginForm = ({ goCheckout = false }) => {
         navigate(goCheckout ? "/checkout" : "/");
       })
       .catch((error) => {
-        alert("ocurrió un error");
         console.log(error);
       });
   };

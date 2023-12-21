@@ -7,6 +7,7 @@ import { API_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 import ActionButton from "./ActionButton";
+import Swal from 'sweetalert2'
 
 const OrderFormStep4 = ({ orderData, setOrderData }) => {
   const { cart, updateCart, updateQtyCart } = useContext(MyContext);
@@ -33,7 +34,6 @@ const OrderFormStep4 = ({ orderData, setOrderData }) => {
       cvv: values.cvv,
     }));
 
-    // console.log("datos de la orden", orderData);
 
     const endPoint = API_URL + "order/create";
 
@@ -60,6 +60,13 @@ const OrderFormStep4 = ({ orderData, setOrderData }) => {
         axios
           .post(endPoint, orderProducts)
           .then((res) => {
+            Swal.fire({
+              title: "Tu pago está en proceso ",
+              text: "Estamos confirmando tus datos. Tomará un momento.",
+              icon: "info",
+              showConfirmButton: false,
+              timer: 1000
+            });
             Alert(
               "¡Tu pago se realizó con éxito!",
               "Tu compra llegará en la semana. Estos datos se enviarán a tu correo y puedes dar seguimiento desde nuestro sitio.",

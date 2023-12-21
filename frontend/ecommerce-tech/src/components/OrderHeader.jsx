@@ -17,7 +17,6 @@ const OrderHeader = ({ id }) => {
         setOrder(response.data);
       })
       .catch((error) => {
-        alert("Error al traer los datos de la Orden");
         console.log(error);
       });
 
