@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { MyContext } from "../MyContext";
 import lupa from "../assets/iconamoon_search-light.svg";
+import Swal from 'sweetalert2'
 
 export const LookUpBar = () => {
   const { updateSearch } = useContext(MyContext);
@@ -8,11 +9,16 @@ export const LookUpBar = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const keyword = e.target.keyword.value.trim();
-    if (keyword.length === 0) {
-      alert("Tienes que ingresar una palabra clave!");
-    } else if (keyword.length < 4) {
-      alert("Tienes que ingresar al menos 4 caracteres!");
-    } else {
+    if (keyword.length < 4) {
+      Swal.fire({
+        position: "top-end",
+        title: "Tienes que ingresar al menos 4 caracteres!",
+        showConfirmButton: false,
+        animation: false,
+        toast: true,
+        timer: 1500
+      });
+    }  else {
       e.target.keyword.value = "";
       updateSearch(keyword);
     }

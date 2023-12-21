@@ -70,7 +70,6 @@ const ItemDetail = () => {
       })
       .catch((error) => {
         console.log(error);
-        alert("ocurrió un error");
       });
   }, [id]);
 

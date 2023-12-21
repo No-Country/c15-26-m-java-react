@@ -19,10 +19,8 @@ const OrderDetail = () => {
       .then((response) => {
         setDetail(response.data)
         setIsLoading(false)
-        console.log("deberia mostrar los detalles");
       })
       .catch((error) => {
-        alert("Error al traer los detalles de la orden");
         console.log(error);
       });
   }, [id]);

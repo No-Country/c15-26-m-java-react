@@ -15,7 +15,6 @@ const OrderList = () => {
       .get(endPoint)
       .then((response) => setHistorial(response.data))
       .catch((error) => {
-        alert("Ocurrió un error");
         console.log(error);
       });
 

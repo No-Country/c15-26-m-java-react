@@ -6,6 +6,7 @@ import axios from "axios";
 import { API_URL } from "../config";
 import { Spinner } from "@material-tailwind/react";
 import OrderFilter from "./OrderFilter";
+import Alert from "./Alert";
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
@@ -44,7 +45,6 @@ const ItemList = () => {
               setItems((prev) => [...new Set(prev.concat(newItems))]);
             })
             .catch((error) => {
-              alert("Hubo errores, intenta más tarde...");
               console.log(error);
             });
         }
@@ -57,7 +57,6 @@ const ItemList = () => {
           setItems(response.data);
         })
         .catch((error) => {
-          alert("Hubo errores, intenta más tarde...");
           console.log(error);
         });
     }
@@ -75,7 +74,7 @@ const ItemList = () => {
         })
         .catch((error) => {
           if(error.message === "Request failed with status code 404")
-          alert(`No se encontraron productos con el término de búsqueda: ${search}`);
+          Alert('Oops!',`No encontramos productos con el término: ${search}`,"","error","Intentar con otro término");
           console.log(error);
         });
     }
