@@ -116,12 +116,6 @@ const LoginForm = ({ goCheckout = false }) => {
                </div>
         
                <div className="mt-20 flex place-content-center items-center">
-                 {/* <button
-                   className="w-[360px] h-[42px] bg-blue-700 text-white font-bold py-2 px-4 rounded mt-16 ml-3 hover:bg-white hover:text-blue-700 hover:border-blue-700  hover:border  focus:outline-none focus:shadow-outline"
-                   type="submit"
-                 >
-                   Iniciar Sesión
-                 </button> */}
                  <ActionButton text="Iniciar sesión" type="submit" />
                </div>
                <div

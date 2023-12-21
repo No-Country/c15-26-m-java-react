@@ -104,12 +104,6 @@ const OrderFormStep1 = ({ setStep, setOrderData }) => {
       </div>
 
       <div className="w-[376px] h-[58px]">
-        {/* <button
-          className="w-[360px] h-[42px] rounded-lg bg-blue-700 text-white text-xl font-semibold hover:opacity-50"
-          type="submit"
-        >
-          Confirmar dirección
-        </button> */}
         <ActionButton text='Confirmar dirección' type="submit" />
       </div>
     </form>

@@ -75,9 +75,9 @@ const ItemDetail = () => {
   }, [id]);
 
   return (
-    <section className="flex flex-grow place-content-center">
-      <div className=" w-[1200px] flex flex-wrap items-center gap-4">
-        <div className=" w-[774px] h-[531px] bg-white rounded-xl">
+    <section className="flex place-content-center">
+      <div className=" flex flex-wrap place-content-center items-center gap-4">
+        <div className="w-[409px] lg:w-[774px] h-[531px] bg-white rounded-xl">
           {isLoading ? (
             <div className="flex place-content-center items-center h-full">
               <Spinner className="h-72 w-72 text-blue-600" />
@@ -154,13 +154,6 @@ const ItemDetail = () => {
               </div>
             </div>
             <ActionButton text="Comprar ahora" action={buyNow} />
-
-            {/* <div
-              className="h-[42px] w-[360px] p-1 m-2 flex  place-content-center rounded-lg border border-blue-600 text-xl font-semibold text-blue-600 hover:bg-blue-600 hover:text-white"
-              onClick={() => buyNow()}
-            >
-              Comprar ahora
-            </div> */}
             
           </div>
         </div>
